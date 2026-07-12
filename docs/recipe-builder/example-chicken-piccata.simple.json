@@ -1,0 +1,158 @@
+{
+  "schemaVersion": "1.0",
+  "source": "chatgpt-project-web-research",
+  "createdAt": "2026-06-30",
+  "recipes": [
+    {
+      "id": "family-weeknight-chicken-piccata",
+      "title": "Family Weeknight Chicken Piccata",
+      "overview": "Thin chicken cutlets with a lemon-caper-butter pan sauce. Serve over pasta, rice, potatoes, or with a simple vegetable.",
+      "minutes": 35,
+      "servings": 5,
+      "base": "Protein, Starch, Vegetable",
+      "protein": "Chicken",
+      "tags": ["weeknight", "chicken", "lemon", "skillet", "kid flexible"],
+      "kidFlex": "Keep a few plain chicken cutlets aside before adding them back to the lemon-caper sauce. Serve sauce on the side with buttered pasta, rice, or broccoli.",
+      "ingredients": [
+        {
+          "original": "2 to 2.25 lb thin-sliced boneless skinless chicken breast cutlets",
+          "genericIngredient": "Chicken breast cutlets",
+          "quantity": "2 to 2.25",
+          "unit": "lb",
+          "section": "Protein",
+          "preferences": ["boneless", "skinless", "thin-sliced"],
+          "productSearchTerms": ["thin sliced chicken breast cutlets", "chicken cutlets"],
+          "needsReview": false
+        },
+        {
+          "original": "Kosher salt and black pepper",
+          "genericIngredient": "Salt and black pepper",
+          "quantity": null,
+          "unit": "",
+          "section": "Dry Goods",
+          "preferences": ["kosher salt", "black pepper"],
+          "productSearchTerms": ["kosher salt", "black pepper"],
+          "needsReview": false
+        },
+        {
+          "original": "3/4 cup all-purpose flour",
+          "genericIngredient": "All-purpose flour",
+          "quantity": 0.75,
+          "unit": "cup",
+          "section": "Dry Goods",
+          "preferences": ["all-purpose"],
+          "productSearchTerms": ["all purpose flour"],
+          "needsReview": false
+        },
+        {
+          "original": "2 tablespoons olive oil, plus more as needed",
+          "genericIngredient": "Olive oil",
+          "quantity": 2,
+          "unit": "tbsp",
+          "section": "Dry Goods",
+          "preferences": ["cooking oil"],
+          "productSearchTerms": ["olive oil"],
+          "needsReview": false
+        },
+        {
+          "original": "5 tablespoons butter, divided",
+          "genericIngredient": "Butter",
+          "quantity": 5,
+          "unit": "tbsp",
+          "section": "Dairy",
+          "preferences": ["unsalted preferred"],
+          "productSearchTerms": ["unsalted butter", "butter sticks"],
+          "needsReview": false
+        },
+        {
+          "original": "2 cloves garlic, thinly sliced or minced",
+          "genericIngredient": "Garlic",
+          "quantity": 2,
+          "unit": "cloves",
+          "section": "Produce",
+          "preferences": ["fresh"],
+          "productSearchTerms": ["fresh garlic", "garlic bulb"],
+          "needsReview": false
+        },
+        {
+          "original": "1/2 cup dry white wine, or extra chicken broth",
+          "genericIngredient": "Dry white wine",
+          "quantity": 0.5,
+          "unit": "cup",
+          "section": "Beverages",
+          "preferences": ["dry", "optional", "can substitute chicken broth"],
+          "productSearchTerms": ["dry white wine for cooking", "pinot grigio"],
+          "needsReview": true
+        },
+        {
+          "original": "1 cup low-sodium chicken broth",
+          "genericIngredient": "Chicken broth",
+          "quantity": 1,
+          "unit": "cup",
+          "section": "Dry Goods",
+          "preferences": ["low-sodium"],
+          "productSearchTerms": ["low sodium chicken broth", "chicken stock"],
+          "needsReview": false
+        },
+        {
+          "original": "1/3 cup fresh lemon juice, about 2 lemons",
+          "genericIngredient": "Lemons",
+          "quantity": 2,
+          "unit": "count",
+          "section": "Produce",
+          "preferences": ["fresh", "for juice"],
+          "productSearchTerms": ["fresh lemons", "lemons"],
+          "needsReview": false
+        },
+        {
+          "original": "3 tablespoons capers, drained",
+          "genericIngredient": "Capers",
+          "quantity": 3,
+          "unit": "tbsp",
+          "section": "Dry Goods",
+          "preferences": ["brined"],
+          "productSearchTerms": ["capers", "brined capers"],
+          "needsReview": false
+        },
+        {
+          "original": "2 tablespoons chopped parsley",
+          "genericIngredient": "Parsley",
+          "quantity": 2,
+          "unit": "tbsp",
+          "section": "Produce",
+          "preferences": ["fresh"],
+          "productSearchTerms": ["fresh parsley", "flat leaf parsley"],
+          "needsReview": false
+        }
+      ],
+      "steps": [
+        "Pat the chicken cutlets dry. If any pieces are thick, pound them to about 1/4 inch so they cook quickly and evenly.",
+        "Season both sides with salt and pepper. Put the flour in a shallow bowl and lightly coat each cutlet, shaking off the excess.",
+        "Heat olive oil and 1 tablespoon butter in a large skillet over medium-high heat until the butter foams.",
+        "Sear the chicken in batches, about 2 to 3 minutes per side, until golden and just cooked through. Move cooked chicken to a plate.",
+        "Lower the heat to medium. Add garlic and cook for about 30 seconds, just until fragrant.",
+        "Add wine, if using, and scrape up the browned bits from the pan. Let it reduce for 1 to 2 minutes.",
+        "Add chicken broth, lemon juice, and capers. Simmer for 3 to 5 minutes, until the sauce reduces slightly.",
+        "Lower the heat and whisk in the cold butter a few pieces at a time until the sauce looks glossy.",
+        "Return the chicken to the skillet and spoon sauce over it for 1 to 2 minutes.",
+        "Finish with parsley and serve over pasta, rice, potatoes, or with a vegetable."
+      ],
+      "sourceLinks": [
+        {
+          "title": "Food Network - Chicken Piccata",
+          "url": "https://www.foodnetwork.com/recipes/giada-de-laurentiis/chicken-piccata-recipe2-1913809"
+        },
+        {
+          "title": "Serious Eats - Chicken Piccata",
+          "url": "https://www.seriouseats.com/chicken-piccata-italian-fried-cutlet-recipe"
+        },
+        {
+          "title": "The Modern Proper - Chicken Piccata",
+          "url": "https://themodernproper.com/chicken-piccata"
+        }
+      ],
+      "needsReview": true,
+      "notes": "Review whether wine should be included or replaced with extra chicken broth. Optional lemon garnish was omitted from the grocery list."
+    }
+  ]
+}

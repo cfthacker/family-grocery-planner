@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Rowta</title>
+    <link rel="icon" type="image/png" href="assets/rowta-mark.png">
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="header-shell">
+        <a class="brand" href="#planner" aria-label="Rowta home">
+          <img class="brand-logo" src="assets/rowta-logo.png" alt="Rowta">
+        </a>
+
+        <nav class="utility-nav" aria-label="Global navigation">
+          <button type="button" data-view-button="pantry"><span class="tab-icon pantry-icon" aria-hidden="true"></span>Pantry</button>
+          <button id="printBtn" type="button"><span class="tab-icon print-icon" aria-hidden="true"></span>Print</button>
+        </nav>
+      </div>
+    </header>
+
+    <main class="app-shell">
+      <section class="week-bar" aria-label="Planning weeks">
+        <div class="week-toolbar">
+          <div>
+            <h1 id="weekTitle" class="sr-only">Rowta planning calendar</h1>
+            <p class="eyebrow">Planning calendar</p>
+          </div>
+          <div class="summary-pills" id="weekStats"></div>
+        </div>
+        <div class="week-strip" aria-label="Week navigation">
+          <button type="button" class="week-arrow" data-week-shift="-1" aria-label="Previous week">&lt;</button>
+          <div id="weekTabs" class="week-tabs" role="tablist" aria-label="Week choices"></div>
+          <button type="button" class="week-arrow" data-week-shift="1" aria-label="Next week">&gt;</button>
+        </div>
+        <nav class="app-nav" aria-label="Selected week sections">
+          <button type="button" class="active" data-view-button="planner"><span class="tab-icon calendar-icon" aria-hidden="true"></span>Week</button>
+          <button type="button" data-view-button="recipes"><span class="tab-icon book-icon" aria-hidden="true"></span>Recipes</button>
+          <button type="button" data-view-button="groceries"><span class="tab-icon basket-icon" aria-hidden="true"></span>Groceries</button>
+        </nav>
+      </section>
+
+      <section id="plannerView" class="app-view active" data-view="planner">
+        <div class="planner-layout">
+          <section class="planner-main" aria-label="Weekly dinner plan">
+            <div class="section-heading">
+              <div>
+                <p class="eyebrow">Weekly agenda</p>
+              </div>
+            </div>
+
+            <div id="unscheduledTray" class="unscheduled-tray"></div>
+            <div id="daySlots" class="day-slots"></div>
+          </section>
+
+          <aside class="planner-side" aria-label="Generated grocery summary">
+            <div class="side-panel">
+              <p class="eyebrow">Generated from recipes</p>
+              <h2>Delivery split</h2>
+              <p id="deliverySummary" class="muted-copy"></p>
+              <div id="deliveryPreview" class="delivery-preview"></div>
+              <button type="button" class="primary-action" data-view-jump="groceries">Review groceries</button>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section id="recipesView" class="app-view" data-view="recipes">
+        <section class="recommendation-section" aria-label="Recommended recipes">
+          <div class="section-heading compact-heading">
+            <div>
+              <h2>Recommended for this week</h2>
+            </div>
+          </div>
+          <div id="recommendedGrid" class="recommended-grid"></div>
+        </section>
+
+        <section class="catalog-panel" aria-label="Browse all recipes">
+          <div class="catalog-panel-head">
+            <div>
+              <h2>Browse all recipes</h2>
+            </div>
+            <div class="catalog-actions">
+              <div class="view-toggle" aria-label="Recipe view">
+                <button type="button" class="active" data-recipe-view="list">List</button>
+                <button type="button" data-recipe-view="grid">Grid</button>
+              </div>
+            </div>
+          </div>
+
+          <div id="recipeGrid" class="recipe-grid"></div>
+          <button type="button" id="loadMoreRecipes" class="secondary-action load-more-action">Load more recipes</button>
+        </section>
+      </section>
+
+      <section id="groceriesView" class="app-view" data-view="groceries">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Groceries</p>
+            <h2 id="groceryHeading">Shopping list</h2>
+          </div>
+          <div class="filter-row compact" aria-label="Grocery section filter">
+            <button type="button" class="active" data-section-filter="all">All</button>
+            <button type="button" data-section-filter="Protein">Protein</button>
+            <button type="button" data-section-filter="Produce">Produce</button>
+            <button type="button" data-section-filter="Dairy">Dairy</button>
+            <button type="button" data-section-filter="Dry Goods">Pantry</button>
+          </div>
+        </div>
+
+        <div id="groceryDeliveries" class="grocery-deliveries"></div>
+      </section>
+
+      <section id="pantryView" class="app-view" data-view="pantry">
+        <div class="pantry-layout">
+          <section>
+            <div class="section-heading">
+              <div>
+                <p class="eyebrow">Ingredient catalog</p>
+                <h2>Planning ingredients</h2>
+              </div>
+            </div>
+            <div id="ingredientCatalog" class="catalog-table-wrap"></div>
+          </section>
+
+          <aside class="side-panel">
+            <p class="eyebrow">Household defaults</p>
+            <h2>Pantry staples</h2>
+            <div id="pantryTags" class="tag-cloud"></div>
+          </aside>
+        </div>
+      </section>
+    </main>
+
+    <script src="data/grocery-products.js"></script>
+    <script src="data/recipes.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>

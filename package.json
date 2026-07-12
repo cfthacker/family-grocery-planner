@@ -1,0 +1,10 @@
+{
+  "name": "family-grocery-planner",
+  "version": "0.1.0",
+  "private": true,
+  "description": "A static family grocery and meal planning app.",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  }
+}

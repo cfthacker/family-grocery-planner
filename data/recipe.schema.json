@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Weeknight Table Recipe",
+  "type": "object",
+  "required": [
+    "title",
+    "timeBand",
+    "minutes",
+    "protein",
+    "base",
+    "ingredients",
+    "tags",
+    "planningValue",
+    "overview"
+  ],
+  "properties": {
+    "title": { "type": "string" },
+    "timeBand": { "enum": ["15min", "20min", "30min", "45min", "60+"] },
+    "minutes": { "type": "number" },
+    "protein": { "type": "string" },
+    "base": { "type": "string" },
+    "ingredients": { "type": "array", "items": { "type": "string" } },
+    "tags": { "type": "array", "items": { "type": "string" } },
+    "planningValue": { "enum": ["single-use", "shared ingredient", "leftover path", "staple", "backup"] },
+    "reusePotential": { "type": "array", "items": { "type": "string" } },
+    "overview": { "type": "string" }
+  }
+}

@@ -1,0 +1,91 @@
+{
+  "schemaVersion": "1.0",
+  "source": "chatgpt-project-manual-import",
+  "createdAt": "2026-06-29",
+  "recipes": [
+    {
+      "id": "beef-tacos",
+      "title": "Beef Tacos",
+      "overview": "A simple family taco night with beef, rice, cheese, sour cream, romaine, and hard or soft shells.",
+      "minutes": 20,
+      "servings": 5,
+      "base": "Tacos",
+      "protein": "Beef",
+      "tags": ["weeknight", "kid friendly", "taco night"],
+      "kidFlex": "Serve everything separately so kids can choose hard shell, soft tortilla, rice bowl, or plain beef and cheese.",
+      "ingredients": [
+        {
+          "original": "Taco Kit (hard & soft shells)",
+          "genericIngredient": "Taco kit",
+          "quantity": 1,
+          "unit": "kit",
+          "section": "Dry Goods",
+          "preferences": ["hard shells", "soft shells", "seasoning included"],
+          "productSearchTerms": ["taco dinner kit hard and soft shells", "taco kit"],
+          "needsReview": true
+        },
+        {
+          "original": "1lb ground beef (85% lean)",
+          "genericIngredient": "Ground beef",
+          "quantity": 1,
+          "unit": "lb",
+          "section": "Protein",
+          "preferences": ["85% lean"],
+          "productSearchTerms": ["85% lean ground beef", "ground beef 1 lb"],
+          "needsReview": false
+        },
+        {
+          "original": "1 pack yellow rice",
+          "genericIngredient": "Yellow rice",
+          "quantity": 1,
+          "unit": "pack",
+          "section": "Dry Goods",
+          "preferences": ["seasoned yellow rice"],
+          "productSearchTerms": ["yellow rice mix", "seasoned yellow rice packet"],
+          "needsReview": true
+        },
+        {
+          "original": "1 Shredded mexican cheese pack",
+          "genericIngredient": "Shredded Mexican cheese",
+          "quantity": 1,
+          "unit": "pack",
+          "section": "Dairy",
+          "preferences": ["shredded", "Mexican blend"],
+          "productSearchTerms": ["shredded Mexican cheese", "Mexican blend shredded cheese"],
+          "needsReview": false
+        },
+        {
+          "original": "1 cup sour cream",
+          "genericIngredient": "Sour cream",
+          "quantity": 1,
+          "unit": "cup",
+          "section": "Dairy",
+          "preferences": ["plain", "tub"],
+          "productSearchTerms": ["sour cream 16 oz", "plain sour cream"],
+          "needsReview": false
+        },
+        {
+          "original": "Shredded romaine lettuce",
+          "genericIngredient": "Romaine lettuce",
+          "quantity": 1,
+          "unit": "bag",
+          "section": "Produce",
+          "preferences": ["shredded", "washed if available"],
+          "productSearchTerms": ["shredded romaine lettuce", "romaine lettuce"],
+          "needsReview": true
+        }
+      ],
+      "steps": [
+        "Start the yellow rice first and cook it according to the package directions, since it will usually take longer than the taco filling.",
+        "While the rice cooks, heat a large skillet over medium-high heat. Add the ground beef and break it up with a spatula.",
+        "Cook the beef until no pink remains, about 6 to 8 minutes. Drain excess fat if needed.",
+        "Add the taco seasoning from the kit and the amount of water called for on the package. Simmer until the beef is saucy but not watery.",
+        "Warm the hard shells and soft tortillas according to the taco kit directions.",
+        "Set out the beef, rice, shredded cheese, sour cream, and romaine separately so everyone can build tacos, rice bowls, or plain components."
+      ],
+      "sourceLinks": [],
+      "needsReview": true,
+      "notes": "Review taco kit format, yellow rice package size, and romaine quantity."
+    }
+  ]
+}

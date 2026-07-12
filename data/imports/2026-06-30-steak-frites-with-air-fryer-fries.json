@@ -1,0 +1,247 @@
+{
+    "schemaVersion":  "1.0",
+    "source":  "chatgpt-web-research",
+    "createdAt":  "2026-06-30",
+    "recipes":  [
+                    {
+                        "id":  "steak-frites-with-air-fryer-fries",
+                        "title":  "Steak Frites with Air-Fryer Fries",
+                        "overview":  "A practical family steak frites dinner with pan-seared steak, crispy air-fryer frozen fries, and a quick pan sauce made from the steak drippings. It gives the feel of steakhouse fries without deep frying or making potatoes from scratch.",
+                        "minutes":  30,
+                        "servings":  4,
+                        "base":  "Fries",
+                        "protein":  "Steak",
+                        "tags":  [
+                                     "steak",
+                                     "air fryer",
+                                     "frozen fries",
+                                     "skillet",
+                                     "pan sauce",
+                                     "kid flexible"
+                                 ],
+                        "kidFlex":  "Slice steak before serving so kids can take smaller plain pieces. Keep the pan sauce on the side, and serve fries separately so kids can eat steak, fries, and any vegetable or dipping sauce in familiar components.",
+                        "ingredients":  [
+                                            {
+                                                "original":  "1.5 to 1.75 lb steak, such as New York strip, sirloin, ribeye, hanger steak, or skirt steak",
+                                                "genericIngredient":  "Steak",
+                                                "quantity":  "1.5 to 1.75",
+                                                "unit":  "lb",
+                                                "section":  "Protein",
+                                                "preferences":  [
+                                                                    "New York strip, sirloin, ribeye, hanger steak, or skirt steak",
+                                                                    "boneless preferred",
+                                                                    "1 to 1.25 inches thick for strip, sirloin, or ribeye",
+                                                                    "skirt steak or hanger steak will cook faster and should be sliced against the grain",
+                                                                    "choose a cut that can sear well in a skillet"
+                                                                ],
+                                                "productSearchTerms":  [
+                                                                           "New York strip steak",
+                                                                           "top sirloin steak",
+                                                                           "boneless ribeye steak",
+                                                                           "hanger steak",
+                                                                           "skirt steak",
+                                                                           "steak for pan searing"
+                                                                       ],
+                                                "needsReview":  true
+                                            },
+                                            {
+                                                "original":  "1 bag frozen French fries, about 28 to 32 oz",
+                                                "genericIngredient":  "Frozen French fries",
+                                                "quantity":  1,
+                                                "unit":  "bag",
+                                                "section":  "Frozen",
+                                                "preferences":  [
+                                                                    "regular, shoestring, or crinkle-cut fries",
+                                                                    "air-fryer friendly",
+                                                                    "avoid heavily seasoned fries if serving kids"
+                                                                ],
+                                                "productSearchTerms":  [
+                                                                           "frozen french fries",
+                                                                           "air fryer french fries",
+                                                                           "frozen shoestring fries",
+                                                                           "frozen crinkle cut fries"
+                                                                       ],
+                                                "needsReview":  true
+                                            },
+                                            {
+                                                "original":  "2 tablespoons neutral oil, divided",
+                                                "genericIngredient":  "Neutral cooking oil",
+                                                "quantity":  2,
+                                                "unit":  "tbsp",
+                                                "section":  "Dry Goods",
+                                                "preferences":  [
+                                                                    "high-heat oil",
+                                                                    "vegetable, canola, avocado, or similar"
+                                                                ],
+                                                "productSearchTerms":  [
+                                                                           "neutral cooking oil",
+                                                                           "canola oil",
+                                                                           "avocado oil"
+                                                                       ],
+                                                "needsReview":  false
+                                            },
+                                            {
+                                                "original":  "3 tablespoons unsalted butter, divided",
+                                                "genericIngredient":  "Butter",
+                                                "quantity":  3,
+                                                "unit":  "tbsp",
+                                                "section":  "Dairy",
+                                                "preferences":  [
+                                                                    "unsalted preferred",
+                                                                    "for finishing the pan sauce"
+                                                                ],
+                                                "productSearchTerms":  [
+                                                                           "unsalted butter",
+                                                                           "butter sticks"
+                                                                       ],
+                                                "needsReview":  false
+                                            },
+                                            {
+                                                "original":  "2 cloves garlic, minced",
+                                                "genericIngredient":  "Garlic",
+                                                "quantity":  2,
+                                                "unit":  "cloves",
+                                                "section":  "Produce",
+                                                "preferences":  [
+                                                                    "fresh",
+                                                                    "used for quick pan sauce"
+                                                                ],
+                                                "productSearchTerms":  [
+                                                                           "fresh garlic",
+                                                                           "garlic bulb"
+                                                                       ],
+                                                "needsReview":  false
+                                            },
+                                            {
+                                                "original":  "1/2 cup low-sodium beef broth, or water in a pinch",
+                                                "genericIngredient":  "Beef broth",
+                                                "quantity":  0.5,
+                                                "unit":  "cup",
+                                                "section":  "Dry Goods",
+                                                "preferences":  [
+                                                                    "low-sodium preferred",
+                                                                    "used to deglaze steak pan",
+                                                                    "water can work in a pinch but broth gives better flavor"
+                                                                ],
+                                                "productSearchTerms":  [
+                                                                           "low sodium beef broth",
+                                                                           "beef stock",
+                                                                           "beef broth carton"
+                                                                       ],
+                                                "needsReview":  true
+                                            },
+                                            {
+                                                "original":  "1 teaspoon Worcestershire sauce, optional",
+                                                "genericIngredient":  "Worcestershire sauce",
+                                                "quantity":  1,
+                                                "unit":  "tsp",
+                                                "section":  "Dry Goods",
+                                                "preferences":  [
+                                                                    "optional",
+                                                                    "adds steakhouse flavor to pan sauce",
+                                                                    "skip if keeping the sauce very simple"
+                                                                ],
+                                                "productSearchTerms":  [
+                                                                           "Worcestershire sauce"
+                                                                       ],
+                                                "needsReview":  true
+                                            },
+                                            {
+                                                "original":  "Premade steak rub, optional",
+                                                "genericIngredient":  "Steak seasoning",
+                                                "quantity":  null,
+                                                "unit":  "",
+                                                "section":  "Dry Goods",
+                                                "preferences":  [
+                                                                    "optional",
+                                                                    "steakhouse-style rub",
+                                                                    "avoid very spicy rubs if serving kids",
+                                                                    "use lightly because many rubs are salty"
+                                                                ],
+                                                "productSearchTerms":  [
+                                                                           "steak seasoning",
+                                                                           "steak rub",
+                                                                           "Montreal steak seasoning",
+                                                                           "steakhouse seasoning"
+                                                                       ],
+                                                "needsReview":  true
+                                            },
+                                            {
+                                                "original":  "Kosher salt and black pepper",
+                                                "genericIngredient":  "Salt and black pepper",
+                                                "quantity":  null,
+                                                "unit":  "",
+                                                "section":  "Dry Goods",
+                                                "preferences":  [
+                                                                    "kosher salt",
+                                                                    "black pepper",
+                                                                    "use less salt if using premade steak rub"
+                                                                ],
+                                                "productSearchTerms":  [
+                                                                           "kosher salt",
+                                                                           "black pepper"
+                                                                       ],
+                                                "needsReview":  false
+                                            },
+                                            {
+                                                "original":  "Ketchup for fries, optional",
+                                                "genericIngredient":  "Ketchup",
+                                                "quantity":  null,
+                                                "unit":  "",
+                                                "section":  "Dry Goods",
+                                                "preferences":  [
+                                                                    "optional",
+                                                                    "kid-friendly fry dipping sauce",
+                                                                    "serve on the side"
+                                                                ],
+                                                "productSearchTerms":  [
+                                                                           "ketchup"
+                                                                       ],
+                                                "needsReview":  true
+                                            }
+                                        ],
+                        "steps":  [
+                                      "Take the steak out of the refrigerator and let it sit while you start the fries, even 10 to 15 minutes helps. Pat the steak very dry with paper towels so it sears instead of steaming.",
+                                      "Preheat the air fryer to 400°F if your model recommends preheating. Add the frozen fries in as even a layer as possible and cook for 12 to 18 minutes total, shaking the basket halfway through and cooking in batches if crowded.",
+                                      "While the fries cook, season the steak with kosher salt and black pepper, or use a light coating of premade steak rub. Use less salt if the rub already contains salt.",
+                                      "Heat a cast-iron or heavy stainless skillet over medium-high to high heat until very hot. Add 1 tablespoon neutral oil, then lay in the steak without crowding the pan.",
+                                      "Sear the steak until a deep brown crust forms. For strip, sirloin, or ribeye, cook about 3 to 5 minutes per side; for skirt steak or hanger steak, start checking closer to 2 to 4 minutes per side because thinner cuts cook faster.",
+                                      "Move the steak to a cutting board and rest for 5 to 10 minutes. For medium-rare, pull around 125°F; for medium, pull around 135°F.",
+                                      "Lower the pan to medium heat. If the pan has burned bits, wipe out only the blackened spots, but keep the browned steak drippings if they look golden-brown.",
+                                      "Add 1 tablespoon butter and the garlic to the pan. Stir for about 30 seconds, then add beef broth and Worcestershire sauce if using, scraping up the browned bits from the bottom of the skillet.",
+                                      "Simmer the pan sauce for 2 to 4 minutes, until slightly reduced and glossy. Turn off the heat and swirl in the remaining butter until the sauce looks smooth.",
+                                      "Finish the fries while the steak rests, returning all fries to the air fryer for 2 to 3 minutes to re-crisp if needed. Slice the steak against the grain, especially for skirt or hanger steak, and serve with hot fries, pan sauce on the side or spooned lightly over the steak, and ketchup for fries if desired."
+                                  ],
+                        "sourceLinks":  [
+                                            {
+                                                "title":  "Serious Eats - Perfect Steak Frites",
+                                                "url":  "https://www.seriouseats.com/steak-frites-recipe-8729192"
+                                            },
+                                            {
+                                                "title":  "Epicurious - How to Pan Sear Steak Perfectly Every Time",
+                                                "url":  "https://www.epicurious.com/expert-advice/how-to-pan-sear-steak-step-by-step-article"
+                                            },
+                                            {
+                                                "title":  "Bon Appétit - Easy Steak With Pan Sauce",
+                                                "url":  "https://www.bonappetit.com/recipe/easy-steak-with-pan-sauce"
+                                            },
+                                            {
+                                                "title":  "Natasha\u0027s Kitchen - Pan Seared Steak",
+                                                "url":  "https://natashaskitchen.com/pan-seared-steak/"
+                                            },
+                                            {
+                                                "title":  "Spend With Pennies - Air Fryer Frozen French Fries",
+                                                "url":  "https://www.spendwithpennies.com/air-fryer-frozen-french-fries/"
+                                            },
+                                            {
+                                                "title":  "The Recipe Critic - Air Fryer Frozen French Fries",
+                                                "url":  "https://therecipecritic.com/air-fryer-frozen-french-fries/"
+                                            }
+                                        ],
+                        "needsReview":  true,
+                        "notes":  "Scaled for 2 adults plus 3 younger kids who together eat about 2 adult-size servings. Review steak cut, steak thickness, fry package size, and whether to use optional steak rub.",
+                        "image":  "assets/recipes/steak-frites-with-air-fryer-fries.png",
+                        "imageAlt":  "Sliced seared steak with pan sauce served beside golden fries on a plate."
+                    }
+                ]
+}

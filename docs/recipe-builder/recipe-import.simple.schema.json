@@ -1,0 +1,168 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://weeknight-table.local/schemas/recipe-import.simple.schema.json",
+  "title": "Weeknight Table Simple Recipe Import Batch",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "source", "recipes"],
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "const": "1.0"
+    },
+    "source": {
+      "type": "string"
+    },
+    "createdAt": {
+      "type": "string"
+    },
+    "recipes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/recipe"
+      }
+    }
+  },
+  "$defs": {
+    "recipe": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "title",
+        "overview",
+        "minutes",
+        "servings",
+        "base",
+        "protein",
+        "tags",
+        "kidFlex",
+        "ingredients",
+        "steps",
+        "sourceLinks",
+        "needsReview",
+        "notes"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "title": {
+          "type": "string"
+        },
+        "overview": {
+          "type": "string"
+        },
+        "minutes": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "servings": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "base": {
+          "type": "string"
+        },
+        "protein": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "image": {
+          "type": "string",
+          "description": "Optional relative path to a recipe image, such as assets/recipes/weeknight-chicken-fried-rice.png."
+        },
+        "imageAlt": {
+          "type": "string",
+          "description": "Optional accessible description of the recipe image."
+        },
+        "kidFlex": {
+          "type": "string"
+        },
+        "ingredients": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/ingredient"
+          }
+        },
+        "steps": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "sourceLinks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/sourceLink"
+          }
+        },
+        "needsReview": {
+          "type": "boolean"
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "ingredient": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "original",
+        "genericIngredient",
+        "quantity",
+        "unit",
+        "section",
+        "preferences",
+        "productSearchTerms",
+        "needsReview"
+      ],
+      "properties": {
+        "original": {
+          "type": "string"
+        },
+        "genericIngredient": {
+          "type": "string"
+        },
+        "quantity": {
+          "type": ["number", "string", "null"]
+        },
+        "unit": {
+          "type": "string"
+        },
+        "section": {
+          "enum": ["Protein", "Produce", "Dairy", "Bakery", "Dry Goods", "Frozen", "Beverages", "Snacks", "Household", "Other"]
+        },
+        "preferences": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "productSearchTerms": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "needsReview": {
+          "type": "boolean"
+        }
+      }
+    },
+    "sourceLink": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["title", "url"],
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

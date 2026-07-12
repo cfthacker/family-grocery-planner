@@ -1,0 +1,236 @@
+{
+    "schemaVersion":  "1.0",
+    "source":  "chatgpt-web-research",
+    "createdAt":  "2026-06-30",
+    "recipes":  [
+                    {
+                        "id":  "beef-tacos-with-yellow-rice",
+                        "title":  "Beef Tacos with Yellow Rice",
+                        "overview":  "A practical family taco night built around a hard-and-soft taco kit, seasoned ground beef, a small yellow rice packet, shredded cheese, lettuce, sour cream, and simple toppings. The kit keeps the meal fast while the rice makes it feel like a fuller dinner.",
+                        "minutes":  25,
+                        "servings":  4,
+                        "base":  "Tacos and Rice",
+                        "protein":  "Beef",
+                        "tags":  [
+                                     "weeknight",
+                                     "tacos",
+                                     "beef",
+                                     "taco kit",
+                                     "yellow rice",
+                                     "kid friendly",
+                                     "build your own",
+                                     "shortcut"
+                                 ],
+                        "kidFlex":  "Serve the taco components separately so kids can build a crunchy taco, soft taco, cheese-and-beef tortilla, rice bowl, or plain deconstructed plate. Keep lettuce, salsa, taco sauce, and sour cream on the side so each kid can choose their own level of mess and flavor.",
+                        "ingredients":  [
+                                            {
+                                                "original":  "1 hard-and-soft taco dinner kit",
+                                                "genericIngredient":  "Taco kit",
+                                                "quantity":  1,
+                                                "unit":  "kit",
+                                                "section":  "Dry Goods",
+                                                "preferences":  [
+                                                                    "hard-and-soft taco kit preferred",
+                                                                    "seasoning mix included",
+                                                                    "mild taco sauce included if available",
+                                                                    "enough shells or tortillas for about 10 to 12 tacos"
+                                                                ],
+                                                "productSearchTerms":  [
+                                                                           "hard and soft taco dinner kit",
+                                                                           "taco kit with seasoning",
+                                                                           "taco dinner kit",
+                                                                           "crunchy and soft taco kit"
+                                                                       ],
+                                                "needsReview":  true
+                                            },
+                                            {
+                                                "original":  "1 lb ground beef, 85% to 90% lean",
+                                                "genericIngredient":  "Ground beef",
+                                                "quantity":  1,
+                                                "unit":  "lb",
+                                                "section":  "Protein",
+                                                "preferences":  [
+                                                                    "85% to 90% lean",
+                                                                    "enough fat for flavor but not too greasy",
+                                                                    "ground turkey can substitute if preferred"
+                                                                ],
+                                                "productSearchTerms":  [
+                                                                           "ground beef 85 lean",
+                                                                           "ground beef 90 lean",
+                                                                           "ground beef 1 lb",
+                                                                           "lean ground beef"
+                                                                       ],
+                                                "needsReview":  false
+                                            },
+                                            {
+                                                "original":  "Water as called for by taco kit, usually about 2/3 to 3/4 cup",
+                                                "genericIngredient":  "Water",
+                                                "quantity":  "2/3 to 3/4",
+                                                "unit":  "cup",
+                                                "section":  "Other",
+                                                "preferences":  [
+                                                                    "follow taco kit directions",
+                                                                    "use slightly less water for thicker taco meat",
+                                                                    "add a splash more only if the filling dries out"
+                                                                ],
+                                                "productSearchTerms":  [
+                                                                           "water"
+                                                                       ],
+                                                "needsReview":  true
+                                            },
+                                            {
+                                                "original":  "1 small yellow rice packet",
+                                                "genericIngredient":  "Yellow rice",
+                                                "quantity":  1,
+                                                "unit":  "packet",
+                                                "section":  "Dry Goods",
+                                                "preferences":  [
+                                                                    "small packet",
+                                                                    "seasoned yellow rice",
+                                                                    "serve as a side or taco bowl base",
+                                                                    "microwave yellow rice can substitute for faster prep"
+                                                                ],
+                                                "productSearchTerms":  [
+                                                                           "small yellow rice packet",
+                                                                           "yellow rice mix",
+                                                                           "seasoned yellow rice packet",
+                                                                           "microwave yellow rice"
+                                                                       ],
+                                                "needsReview":  true
+                                            },
+                                            {
+                                                "original":  "1 bag shredded Mexican cheese",
+                                                "genericIngredient":  "Shredded Mexican cheese",
+                                                "quantity":  1,
+                                                "unit":  "bag",
+                                                "section":  "Dairy",
+                                                "preferences":  [
+                                                                    "shredded",
+                                                                    "Mexican blend, cheddar jack, or cheddar",
+                                                                    "easy taco topping"
+                                                                ],
+                                                "productSearchTerms":  [
+                                                                           "shredded Mexican cheese",
+                                                                           "Mexican blend shredded cheese",
+                                                                           "shredded cheddar jack cheese"
+                                                                       ],
+                                                "needsReview":  false
+                                            },
+                                            {
+                                                "original":  "1 bag shredded lettuce or shredded romaine",
+                                                "genericIngredient":  "Shredded lettuce",
+                                                "quantity":  1,
+                                                "unit":  "bag",
+                                                "section":  "Produce",
+                                                "preferences":  [
+                                                                    "shredded",
+                                                                    "washed if available",
+                                                                    "romaine or iceberg both work",
+                                                                    "optional for kids"
+                                                                ],
+                                                "productSearchTerms":  [
+                                                                           "shredded lettuce",
+                                                                           "shredded romaine",
+                                                                           "taco lettuce",
+                                                                           "iceberg lettuce"
+                                                                       ],
+                                                "needsReview":  true
+                                            },
+                                            {
+                                                "original":  "1 cup sour cream",
+                                                "genericIngredient":  "Sour cream",
+                                                "quantity":  1,
+                                                "unit":  "cup",
+                                                "section":  "Dairy",
+                                                "preferences":  [
+                                                                    "plain",
+                                                                    "tub",
+                                                                    "serve on the side"
+                                                                ],
+                                                "productSearchTerms":  [
+                                                                           "sour cream",
+                                                                           "plain sour cream",
+                                                                           "sour cream tub"
+                                                                       ],
+                                                "needsReview":  false
+                                            },
+                                            {
+                                                "original":  "Diced tomatoes or mild salsa, optional",
+                                                "genericIngredient":  "Tomatoes or salsa",
+                                                "quantity":  null,
+                                                "unit":  "",
+                                                "section":  "Produce",
+                                                "preferences":  [
+                                                                    "optional",
+                                                                    "diced tomatoes for fresh topping",
+                                                                    "mild salsa for easier grocery planning",
+                                                                    "serve on the side"
+                                                                ],
+                                                "productSearchTerms":  [
+                                                                           "diced tomatoes",
+                                                                           "grape tomatoes",
+                                                                           "mild salsa",
+                                                                           "taco salsa"
+                                                                       ],
+                                                "needsReview":  true
+                                            },
+                                            {
+                                                "original":  "Avocado or guacamole, optional",
+                                                "genericIngredient":  "Avocado or guacamole",
+                                                "quantity":  null,
+                                                "unit":  "",
+                                                "section":  "Produce",
+                                                "preferences":  [
+                                                                    "optional",
+                                                                    "avocado if making fresh slices",
+                                                                    "prepared guacamole if saving prep",
+                                                                    "serve on the side"
+                                                                ],
+                                                "productSearchTerms":  [
+                                                                           "avocado",
+                                                                           "guacamole",
+                                                                           "prepared guacamole"
+                                                                       ],
+                                                "needsReview":  true
+                                            }
+                                        ],
+                        "steps":  [
+                                      "Start the yellow rice first and cook it according to the packet directions, since it will usually take longer than the taco filling. If using microwave yellow rice, wait until the taco meat is almost done.",
+                                      "Set out the toppings before cooking the beef: shredded cheese, lettuce, sour cream, salsa or tomatoes, and avocado or guacamole if using. Taco night works best when the toppings are ready before the shells are hot.",
+                                      "Heat a large skillet over medium-high heat. Add the ground beef and cook for 5 to 7 minutes, breaking it into small crumbles, until no pink remains.",
+                                      "Drain excess fat if the skillet looks greasy. Leave a little moisture and browned flavor in the pan so the seasoning can coat the meat well.",
+                                      "Add the taco kit seasoning and the amount of water called for on the box, usually about 2/3 to 3/4 cup. Stir well, bring to a bubble, then reduce the heat.",
+                                      "Simmer the beef for 3 to 5 minutes, stirring often, until the sauce thickens and the beef looks glossy instead of watery.",
+                                      "Warm the hard shells and soft tortillas according to the taco kit directions. Keep an eye on hard shells because they can go from warm to cracked or overbrowned quickly.",
+                                      "Transfer the taco meat to a serving bowl and set out the shells, tortillas, yellow rice, cheese, lettuce, sour cream, taco sauce, and any optional toppings.",
+                                      "Let everyone build their own tacos, soft tacos, rice bowls, or deconstructed plates. For kids, start with plain beef, cheese, and rice, then add lettuce, sauce, or sour cream only if they want it."
+                                  ],
+                        "sourceLinks":  [
+                                            {
+                                                "title":  "Old El Paso - Classic Beef Tacos",
+                                                "url":  "https://www.oldelpaso.com/recipes/classic-beef-tacos"
+                                            },
+                                            {
+                                                "title":  "Old El Paso - Hard \u0026 Soft Taco Dinner Kit",
+                                                "url":  "https://www.oldelpaso.com/products/taco-dinner-kit-hard-and-soft-11-oz-box"
+                                            },
+                                            {
+                                                "title":  "Old El Paso - Stand N Stuff Taco Dinner Kit",
+                                                "url":  "https://www.oldelpaso.com/products/taco-dinner-kit-stand-n-stuff-8-oz-box"
+                                            },
+                                            {
+                                                "title":  "McCormick - Ground Beef Taco Recipe",
+                                                "url":  "https://www.mccormick.com/blogs/recipes/ground-beef-taco-recipe"
+                                            },
+                                            {
+                                                "title":  "McCormick - Mild Taco Seasoning Mix",
+                                                "url":  "https://www.mccormick.com/products/mccormick-r-mild-taco-seasoning-mix-1-oz"
+                                            }
+                                        ],
+                        "needsReview":  true,
+                        "notes":  "Scaled for 2 adults plus 3 younger kids who together eat about 2 adult-size servings. Yellow rice is included as an important side. Review taco kit format, yellow rice packet size, and preferred optional toppings.",
+                        "image":  "assets/recipes/beef-tacos-with-yellow-rice.png",
+                        "imageAlt":  "Beef tacos with yellow rice, shredded cheese, lettuce, sour cream, and taco toppings."
+                    }
+                ]
+}

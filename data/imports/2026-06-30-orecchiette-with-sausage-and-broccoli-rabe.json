@@ -1,0 +1,271 @@
+{
+    "schemaVersion":  "1.0",
+    "source":  "chatgpt-web-research",
+    "createdAt":  "2026-06-30",
+    "recipes":  [
+                    {
+                        "id":  "orecchiette-with-sausage-and-broccoli-rabe",
+                        "title":  "Orecchiette with Sausage and Broccoli Rabe",
+                        "overview":  "A practical family pasta with browned Italian sausage, broccoli rabe, orecchiette, and a buttery shallot pan sauce built from the pork fond. The pasta is cooked first, then the same boiling water is reused to blanch the broccoli rabe.",
+                        "minutes":  35,
+                        "servings":  4,
+                        "base":  "Pasta",
+                        "protein":  "Sausage",
+                        "tags":  [
+                                     "weeknight",
+                                     "pasta",
+                                     "sausage",
+                                     "broccoli rabe",
+                                     "skillet",
+                                     "Italian",
+                                     "pan sauce",
+                                     "kid flexible"
+                                 ],
+                        "kidFlex":  "Use mild Italian sausage by default and keep red pepper flakes on the side. Before adding the broccoli rabe, set aside some plain orecchiette and sausage for kids. If broccoli rabe is too bitter, use air-fried broccoli florets as a backup green and serve them separately or mixed into the adult portions.",
+                        "ingredients":  [
+                                            {
+                                                "original":  "12 oz orecchiette pasta",
+                                                "genericIngredient":  "Orecchiette pasta",
+                                                "quantity":  12,
+                                                "unit":  "oz",
+                                                "section":  "Dry Goods",
+                                                "preferences":  [
+                                                                    "dried orecchiette",
+                                                                    "short pasta that catches sausage, shallots, and greens",
+                                                                    "cavatelli, shells, or small pasta can substitute"
+                                                                ],
+                                                "productSearchTerms":  [
+                                                                           "orecchiette pasta",
+                                                                           "dried orecchiette",
+                                                                           "short Italian pasta",
+                                                                           "cavatelli pasta"
+                                                                       ],
+                                                "needsReview":  false
+                                            },
+                                            {
+                                                "original":  "1 lb mild Italian sausage, or spicy Italian sausage if preferred, casings removed if needed",
+                                                "genericIngredient":  "Italian sausage",
+                                                "quantity":  1,
+                                                "unit":  "lb",
+                                                "section":  "Protein",
+                                                "preferences":  [
+                                                                    "mild Italian sausage by default",
+                                                                    "spicy Italian sausage optional",
+                                                                    "pork sausage preferred for best fond and sauce flavor",
+                                                                    "bulk sausage is easiest",
+                                                                    "links are fine if casings are removed"
+                                                                ],
+                                                "productSearchTerms":  [
+                                                                           "mild Italian sausage",
+                                                                           "sweet Italian sausage",
+                                                                           "spicy Italian sausage",
+                                                                           "hot Italian sausage",
+                                                                           "bulk Italian sausage",
+                                                                           "Italian sausage links"
+                                                                       ],
+                                                "needsReview":  true
+                                            },
+                                            {
+                                                "original":  "1 large bunch broccoli rabe, trimmed and chopped",
+                                                "genericIngredient":  "Broccoli rabe",
+                                                "quantity":  1,
+                                                "unit":  "bunch",
+                                                "section":  "Produce",
+                                                "preferences":  [
+                                                                    "fresh broccoli rabe",
+                                                                    "trim tough lower stems",
+                                                                    "blanch to reduce bitterness",
+                                                                    "air-fried broccoli florets can substitute as a milder backup, but broccoli rabe is the first choice"
+                                                                ],
+                                                "productSearchTerms":  [
+                                                                           "broccoli rabe",
+                                                                           "rapini",
+                                                                           "fresh broccoli rabe bunch",
+                                                                           "broccoli florets"
+                                                                       ],
+                                                "needsReview":  true
+                                            },
+                                            {
+                                                "original":  "2 shallots, thinly sliced",
+                                                "genericIngredient":  "Shallots",
+                                                "quantity":  2,
+                                                "unit":  "count",
+                                                "section":  "Produce",
+                                                "preferences":  [
+                                                                    "fresh",
+                                                                    "thinly sliced",
+                                                                    "cooked in butter and sausage fond until softened and lightly caramelized"
+                                                                ],
+                                                "productSearchTerms":  [
+                                                                           "shallots",
+                                                                           "fresh shallots"
+                                                                       ],
+                                                "needsReview":  false
+                                            },
+                                            {
+                                                "original":  "3 cloves garlic, thinly sliced or minced",
+                                                "genericIngredient":  "Garlic",
+                                                "quantity":  3,
+                                                "unit":  "cloves",
+                                                "section":  "Produce",
+                                                "preferences":  [
+                                                                    "fresh",
+                                                                    "sliced for classic style or minced for easier prep",
+                                                                    "added after shallots so it does not burn"
+                                                                ],
+                                                "productSearchTerms":  [
+                                                                           "fresh garlic",
+                                                                           "garlic bulb"
+                                                                       ],
+                                                "needsReview":  false
+                                            },
+                                            {
+                                                "original":  "2 tablespoons butter",
+                                                "genericIngredient":  "Butter",
+                                                "quantity":  2,
+                                                "unit":  "tbsp",
+                                                "section":  "Dairy",
+                                                "preferences":  [
+                                                                    "unsalted preferred",
+                                                                    "used to cook shallots and build the pan sauce"
+                                                                ],
+                                                "productSearchTerms":  [
+                                                                           "unsalted butter",
+                                                                           "butter sticks"
+                                                                       ],
+                                                "needsReview":  false
+                                            },
+                                            {
+                                                "original":  "1 tablespoon olive oil, plus more if needed",
+                                                "genericIngredient":  "Olive oil",
+                                                "quantity":  1,
+                                                "unit":  "tbsp",
+                                                "section":  "Dry Goods",
+                                                "preferences":  [
+                                                                    "used to brown sausage",
+                                                                    "add more only if the pan looks dry"
+                                                                ],
+                                                "productSearchTerms":  [
+                                                                           "olive oil",
+                                                                           "extra virgin olive oil"
+                                                                       ],
+                                                "needsReview":  false
+                                            },
+                                            {
+                                                "original":  "1/2 cup grated Parmesan or Pecorino Romano, plus more for serving",
+                                                "genericIngredient":  "Grated Italian cheese",
+                                                "quantity":  0.5,
+                                                "unit":  "cup",
+                                                "section":  "Dairy",
+                                                "preferences":  [
+                                                                    "Parmesan for milder flavor",
+                                                                    "Pecorino Romano for sharper, saltier flavor",
+                                                                    "grated or shredded is fine for weeknight use"
+                                                                ],
+                                                "productSearchTerms":  [
+                                                                           "grated Parmesan cheese",
+                                                                           "Pecorino Romano cheese",
+                                                                           "shredded Parmesan",
+                                                                           "grated Italian cheese"
+                                                                       ],
+                                                "needsReview":  true
+                                            },
+                                            {
+                                                "original":  "1/4 teaspoon red pepper flakes, optional",
+                                                "genericIngredient":  "Red pepper flakes",
+                                                "quantity":  0.25,
+                                                "unit":  "tsp",
+                                                "section":  "Dry Goods",
+                                                "preferences":  [
+                                                                    "optional",
+                                                                    "keep on the side for adults",
+                                                                    "skip if using spicy sausage or serving kids"
+                                                                ],
+                                                "productSearchTerms":  [
+                                                                           "crushed red pepper flakes",
+                                                                           "red pepper flakes"
+                                                                       ],
+                                                "needsReview":  true
+                                            },
+                                            {
+                                                "original":  "1/4 cup low-sodium chicken broth, optional if pasta water is not enough",
+                                                "genericIngredient":  "Chicken broth",
+                                                "quantity":  0.25,
+                                                "unit":  "cup",
+                                                "section":  "Dry Goods",
+                                                "preferences":  [
+                                                                    "optional backup only",
+                                                                    "use reserved pasta water first",
+                                                                    "helpful if the pan sauce needs more body or volume"
+                                                                ],
+                                                "productSearchTerms":  [
+                                                                           "low sodium chicken broth",
+                                                                           "chicken stock",
+                                                                           "chicken broth carton"
+                                                                       ],
+                                                "needsReview":  true
+                                            },
+                                            {
+                                                "original":  "Kosher salt and black pepper",
+                                                "genericIngredient":  "Salt and black pepper",
+                                                "quantity":  null,
+                                                "unit":  "",
+                                                "section":  "Dry Goods",
+                                                "preferences":  [
+                                                                    "kosher salt",
+                                                                    "black pepper",
+                                                                    "salt pasta water generously",
+                                                                    "use less salt if sausage or cheese is very salty"
+                                                                ],
+                                                "productSearchTerms":  [
+                                                                           "kosher salt",
+                                                                           "black pepper"
+                                                                       ],
+                                                "needsReview":  false
+                                            }
+                                        ],
+                        "steps":  [
+                                      "Bring a large pot of salted water to a boil. While it heats, trim the tough lower stems from the broccoli rabe and cut the bunch into large pieces.",
+                                      "Add the orecchiette to the boiling water and cook until just shy of al dente. Before removing the pasta, reserve at least 1 cup of starchy pasta water for the sauce.",
+                                      "Use a spider, slotted spoon, or strainer to scoop the pasta out of the pot and set it aside. Keep the water boiling, then add the broccoli rabe and blanch for 2 to 3 minutes, until the stems are just tender and the greens look bright.",
+                                      "Drain the broccoli rabe, let it cool slightly, then roughly chop it into bite-size pieces. If using broccoli instead, skip the blanching and air fry florets with a little oil and salt until browned and tender.",
+                                      "While the pasta and broccoli rabe cook, heat olive oil in a large skillet over medium-high heat. Add the sausage and cook for 6 to 8 minutes, breaking it into small pieces, until browned and cooked through.",
+                                      "Move the sausage to a plate, leaving the browned pork fond and a little fat in the skillet. Lower the heat to medium and add the butter and sliced shallots.",
+                                      "Cook the shallots for 4 to 6 minutes, stirring often, until softened, lightly golden, and starting to caramelize in the sausage drippings. Add the garlic and red pepper flakes if using, and stir for 30 to 60 seconds until fragrant.",
+                                      "Add about 1/2 cup reserved pasta water to the skillet and scrape up the browned bits from the bottom. Simmer for 1 to 2 minutes, until the shallots look glossy and the liquid starts to pull together into a light sauce.",
+                                      "Return the sausage to the skillet, then add the chopped broccoli rabe and orecchiette. Toss over medium heat for 1 to 2 minutes, adding more pasta water a splash at a time if the pan looks dry.",
+                                      "Add the grated Parmesan or Pecorino and toss again until the pasta looks glossy and lightly coated. Taste and adjust with black pepper, more cheese, or a small splash of chicken broth only if the sauce needs more volume."
+                                  ],
+                        "sourceLinks":  [
+                                            {
+                                                "title":  "Serious Eats - Orecchiette With Sausage and Broccoli Rabe",
+                                                "url":  "https://www.seriouseats.com/orecchiette-broccoli-rabe-sausage"
+                                            },
+                                            {
+                                                "title":  "Panning the Globe - Orecchiette Pasta with Sausage and Broccoli Rabe",
+                                                "url":  "https://www.panningtheglobe.com/pasta-with-sausage-and-broccoli-rabe/"
+                                            },
+                                            {
+                                                "title":  "Skinnytaste - Orecchiette with Sausage and Broccoli Rabe",
+                                                "url":  "https://www.skinnytaste.com/orecchiette-with-chicken-sausage-and/"
+                                            },
+                                            {
+                                                "title":  "Sip and Feast - Orecchiette with Sausage and Broccoli Rabe",
+                                                "url":  "https://www.sipandfeast.com/orecchiette-sausage-broccoli-rabe/"
+                                            },
+                                            {
+                                                "title":  "Food Network - Orecchiette, Sausage and Broccoli Rabe",
+                                                "url":  "https://www.foodnetwork.com/recipes/orecchiette-sausage-and-broccoli-rabe-2109213"
+                                            },
+                                            {
+                                                "title":  "Coley Cooks - Orecchiette with Broccoli Rabe and Sausage",
+                                                "url":  "https://coleycooks.com/pasta-sausage-broccoli-rabe/"
+                                            }
+                                        ],
+                        "needsReview":  true,
+                        "notes":  "Scaled for 2 adults plus 3 younger kids who together eat about 2 adult-size servings. Review sausage heat level, broccoli rabe bitterness tolerance, and whether to use air-fried broccoli as a backup green.",
+                        "image":  "assets/recipes/orecchiette-with-sausage-and-broccoli-rabe.png",
+                        "imageAlt":  "Orecchiette pasta with browned sausage, broccoli rabe, and grated cheese in a shallow bowl."
+                    }
+                ]
+}

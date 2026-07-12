@@ -1,0 +1,307 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://weeknight-table.local/schemas/recipe-import.schema.json",
+  "title": "Weeknight Table Recipe Import Batch",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "source", "recipes"],
+  "properties": {
+    "schemaVersion": {
+      "type": "string",
+      "const": "1.0"
+    },
+    "source": {
+      "type": "string",
+      "description": "Where this batch came from, such as chatgpt-project-manual-import."
+    },
+    "createdAt": {
+      "type": "string",
+      "description": "Date created, preferably YYYY-MM-DD."
+    },
+    "notes": {
+      "type": "string"
+    },
+    "recipes": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "$ref": "#/$defs/recipe"
+      }
+    }
+  },
+  "$defs": {
+    "recipe": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "id",
+        "title",
+        "aliases",
+        "overview",
+        "minutes",
+        "timeBand",
+        "servings",
+        "mealType",
+        "base",
+        "protein",
+        "cuisine",
+        "difficulty",
+        "planningValue",
+        "tags",
+        "research",
+        "ingredients",
+        "steps",
+        "reusePotential",
+        "pairsWellWith",
+        "goodForDays",
+        "freshnessPriority",
+        "makeAhead",
+        "kidFlex",
+        "reviewStatus",
+        "notes"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+        },
+        "title": {
+          "type": "string",
+          "minLength": 1
+        },
+        "aliases": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "overview": {
+          "type": "string"
+        },
+        "minutes": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "timeBand": {
+          "enum": ["15min", "20min", "30min", "45min", "60+"]
+        },
+        "servings": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "mealType": {
+          "enum": ["breakfast", "lunch", "dinner", "snack", "prep", "side"]
+        },
+        "base": {
+          "type": "string"
+        },
+        "protein": {
+          "type": "string"
+        },
+        "cuisine": {
+          "type": "string"
+        },
+        "difficulty": {
+          "enum": ["easy", "medium", "involved"]
+        },
+        "planningValue": {
+          "enum": ["single-use", "shared ingredient", "leftover path", "staple", "backup", "family favorite"]
+        },
+        "tags": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "research": {
+          "$ref": "#/$defs/research"
+        },
+        "ingredients": {
+          "type": "array",
+          "minItems": 1,
+          "items": {
+            "$ref": "#/$defs/ingredient"
+          }
+        },
+        "steps": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "reusePotential": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "pairsWellWith": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "goodForDays": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "freshnessPriority": {
+          "enum": ["low", "medium", "high"]
+        },
+        "makeAhead": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "kidFlex": {
+          "type": "string"
+        },
+        "reviewStatus": {
+          "enum": ["draft", "needs ingredient review", "reviewed", "import-ready"]
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "research": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "mode",
+        "webResearchUsed",
+        "query",
+        "sourceLinks",
+        "commonPatterns",
+        "assumptions",
+        "copyrightNotes"
+      ],
+      "properties": {
+        "mode": {
+          "enum": ["none", "user-provided", "web-synthesis", "mixed"]
+        },
+        "webResearchUsed": {
+          "type": "boolean"
+        },
+        "query": {
+          "type": "string"
+        },
+        "sourceLinks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/$defs/sourceLink"
+          }
+        },
+        "commonPatterns": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "assumptions": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "copyrightNotes": {
+          "type": "string"
+        }
+      }
+    },
+    "sourceLink": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["title", "url", "notes"],
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "url": {
+          "type": "string"
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    },
+    "ingredient": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "original",
+        "displayName",
+        "genericIngredient",
+        "quantityText",
+        "quantityAmount",
+        "unit",
+        "preparation",
+        "preferences",
+        "optional",
+        "pantryItem",
+        "section",
+        "role",
+        "productSearchTerms",
+        "preferredProductTraits",
+        "avoidProducts",
+        "substitutions",
+        "quantityForShopping",
+        "confidence",
+        "needsReview",
+        "notes"
+      ],
+      "properties": {
+        "original": {
+          "type": "string"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "genericIngredient": {
+          "type": "string"
+        },
+        "quantityText": {
+          "type": "string"
+        },
+        "quantityAmount": {
+          "type": ["number", "null"]
+        },
+        "unit": {
+          "type": "string"
+        },
+        "preparation": {
+          "type": "string"
+        },
+        "preferences": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "optional": {
+          "type": "boolean"
+        },
+        "pantryItem": {
+          "type": "boolean"
+        },
+        "section": {
+          "enum": ["Protein", "Produce", "Dairy", "Bakery", "Dry Goods", "Frozen", "Beverages", "Snacks", "Household", "Other"]
+        },
+        "role": {
+          "type": "string"
+        },
+        "productSearchTerms": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "preferredProductTraits": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "avoidProducts": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "substitutions": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "quantityForShopping": {
+          "type": "string"
+        },
+        "confidence": {
+          "enum": ["high", "medium", "low"]
+        },
+        "needsReview": {
+          "type": "boolean"
+        },
+        "notes": {
+          "type": "string"
+        }
+      }
+    }
+  }
+}

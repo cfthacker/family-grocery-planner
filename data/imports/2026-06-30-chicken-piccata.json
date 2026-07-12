@@ -1,0 +1,285 @@
+{
+    "schemaVersion":  "1.0",
+    "source":  "chatgpt-web-research",
+    "createdAt":  "2026-06-30",
+    "recipes":  [
+                    {
+                        "id":  "chicken-piccata",
+                        "title":  "Chicken Piccata",
+                        "overview":  "A practical family chicken piccata dinner with thin chicken cutlets, a bright lemon-caper-butter pan sauce, and pasta to catch the sauce. Chicken broth is the default sauce base, with dry white wine optional if available.",
+                        "minutes":  35,
+                        "servings":  4,
+                        "base":  "Pasta",
+                        "protein":  "Chicken",
+                        "tags":  [
+                                     "weeknight",
+                                     "chicken",
+                                     "pasta",
+                                     "skillet",
+                                     "lemon",
+                                     "capers",
+                                     "pan sauce",
+                                     "kid flexible"
+                                 ],
+                        "kidFlex":  "Keep a few plain chicken cutlets aside before adding them back to the lemon-caper sauce. Serve pasta, chicken, and sauce separately for kids, with capers and extra lemony sauce on the side for adults.",
+                        "ingredients":  [
+                                            {
+                                                "original":  "1.5 lb thin-sliced boneless skinless chicken breast cutlets",
+                                                "genericIngredient":  "Chicken breast cutlets",
+                                                "quantity":  1.5,
+                                                "unit":  "lb",
+                                                "section":  "Protein",
+                                                "preferences":  [
+                                                                    "boneless",
+                                                                    "skinless",
+                                                                    "thin-sliced",
+                                                                    "about 1/4 inch thick if possible",
+                                                                    "regular chicken breasts can work if sliced and pounded thin"
+                                                                ],
+                                                "productSearchTerms":  [
+                                                                           "thin sliced chicken breast cutlets",
+                                                                           "boneless skinless chicken cutlets",
+                                                                           "chicken breast cutlets",
+                                                                           "thin sliced chicken breast"
+                                                                       ],
+                                                "needsReview":  false
+                                            },
+                                            {
+                                                "original":  "12 oz thin spaghetti, angel hair, or linguine",
+                                                "genericIngredient":  "Pasta",
+                                                "quantity":  12,
+                                                "unit":  "oz",
+                                                "section":  "Dry Goods",
+                                                "preferences":  [
+                                                                    "thin spaghetti, angel hair, or linguine",
+                                                                    "choose a pasta shape that works with lemon butter sauce",
+                                                                    "rice or potatoes can substitute if preferred"
+                                                                ],
+                                                "productSearchTerms":  [
+                                                                           "thin spaghetti",
+                                                                           "angel hair pasta",
+                                                                           "linguine",
+                                                                           "pasta for chicken piccata"
+                                                                       ],
+                                                "needsReview":  true
+                                            },
+                                            {
+                                                "original":  "1/2 cup all-purpose flour, for dredging",
+                                                "genericIngredient":  "All-purpose flour",
+                                                "quantity":  0.5,
+                                                "unit":  "cup",
+                                                "section":  "Dry Goods",
+                                                "preferences":  [
+                                                                    "all-purpose",
+                                                                    "used for a light coating, not heavy breading",
+                                                                    "shake off excess before searing"
+                                                                ],
+                                                "productSearchTerms":  [
+                                                                           "all purpose flour"
+                                                                       ],
+                                                "needsReview":  false
+                                            },
+                                            {
+                                                "original":  "2 tablespoons olive oil, plus more if needed",
+                                                "genericIngredient":  "Olive oil",
+                                                "quantity":  2,
+                                                "unit":  "tbsp",
+                                                "section":  "Dry Goods",
+                                                "preferences":  [
+                                                                    "used to sear chicken",
+                                                                    "add more only if the pan looks dry between batches"
+                                                                ],
+                                                "productSearchTerms":  [
+                                                                           "olive oil",
+                                                                           "extra virgin olive oil"
+                                                                       ],
+                                                "needsReview":  false
+                                            },
+                                            {
+                                                "original":  "4 tablespoons unsalted butter, divided",
+                                                "genericIngredient":  "Butter",
+                                                "quantity":  4,
+                                                "unit":  "tbsp",
+                                                "section":  "Dairy",
+                                                "preferences":  [
+                                                                    "unsalted preferred",
+                                                                    "used for searing and finishing the sauce",
+                                                                    "cold butter at the end helps the sauce look glossy"
+                                                                ],
+                                                "productSearchTerms":  [
+                                                                           "unsalted butter",
+                                                                           "butter sticks"
+                                                                       ],
+                                                "needsReview":  false
+                                            },
+                                            {
+                                                "original":  "2 cloves garlic, thinly sliced or minced",
+                                                "genericIngredient":  "Garlic",
+                                                "quantity":  2,
+                                                "unit":  "cloves",
+                                                "section":  "Produce",
+                                                "preferences":  [
+                                                                    "fresh",
+                                                                    "sliced for classic style or minced for easier prep",
+                                                                    "cook briefly so it does not burn"
+                                                                ],
+                                                "productSearchTerms":  [
+                                                                           "fresh garlic",
+                                                                           "garlic bulb"
+                                                                       ],
+                                                "needsReview":  false
+                                            },
+                                            {
+                                                "original":  "3/4 cup low-sodium chicken broth",
+                                                "genericIngredient":  "Chicken broth",
+                                                "quantity":  0.75,
+                                                "unit":  "cup",
+                                                "section":  "Dry Goods",
+                                                "preferences":  [
+                                                                    "low-sodium preferred",
+                                                                    "default sauce base",
+                                                                    "helps make enough sauce for pasta"
+                                                                ],
+                                                "productSearchTerms":  [
+                                                                           "low sodium chicken broth",
+                                                                           "chicken stock",
+                                                                           "chicken broth carton"
+                                                                       ],
+                                                "needsReview":  false
+                                            },
+                                            {
+                                                "original":  "1/4 cup dry white wine, optional if available, or use extra chicken broth",
+                                                "genericIngredient":  "Dry white wine",
+                                                "quantity":  0.25,
+                                                "unit":  "cup",
+                                                "section":  "Beverages",
+                                                "preferences":  [
+                                                                    "optional",
+                                                                    "use only if available",
+                                                                    "dry white wine such as Pinot Grigio or Sauvignon Blanc",
+                                                                    "use extra chicken broth if skipping wine"
+                                                                ],
+                                                "productSearchTerms":  [
+                                                                           "dry white wine for cooking",
+                                                                           "Pinot Grigio",
+                                                                           "Sauvignon Blanc"
+                                                                       ],
+                                                "needsReview":  true
+                                            },
+                                            {
+                                                "original":  "2 lemons, for about 1/3 cup fresh lemon juice",
+                                                "genericIngredient":  "Lemons",
+                                                "quantity":  2,
+                                                "unit":  "count",
+                                                "section":  "Produce",
+                                                "preferences":  [
+                                                                    "fresh lemons",
+                                                                    "avoid bottled lemon juice",
+                                                                    "start with less juice and adjust if kids prefer milder sauce"
+                                                                ],
+                                                "productSearchTerms":  [
+                                                                           "fresh lemons",
+                                                                           "lemons"
+                                                                       ],
+                                                "needsReview":  false
+                                            },
+                                            {
+                                                "original":  "2 tablespoons capers, drained",
+                                                "genericIngredient":  "Capers",
+                                                "quantity":  2,
+                                                "unit":  "tbsp",
+                                                "section":  "Dry Goods",
+                                                "preferences":  [
+                                                                    "brined capers",
+                                                                    "drained",
+                                                                    "use less for kids or keep mostly in adult portions",
+                                                                    "optional extra caper brine can boost sauce if not using wine"
+                                                                ],
+                                                "productSearchTerms":  [
+                                                                           "capers",
+                                                                           "brined capers",
+                                                                           "jarred capers"
+                                                                       ],
+                                                "needsReview":  true
+                                            },
+                                            {
+                                                "original":  "2 tablespoons chopped parsley, optional",
+                                                "genericIngredient":  "Parsley",
+                                                "quantity":  2,
+                                                "unit":  "tbsp",
+                                                "section":  "Produce",
+                                                "preferences":  [
+                                                                    "optional",
+                                                                    "fresh parsley adds color but is not essential",
+                                                                    "skip if simplifying groceries"
+                                                                ],
+                                                "productSearchTerms":  [
+                                                                           "fresh parsley",
+                                                                           "flat leaf parsley"
+                                                                       ],
+                                                "needsReview":  true
+                                            },
+                                            {
+                                                "original":  "Kosher salt and black pepper",
+                                                "genericIngredient":  "Salt and black pepper",
+                                                "quantity":  null,
+                                                "unit":  "",
+                                                "section":  "Dry Goods",
+                                                "preferences":  [
+                                                                    "kosher salt",
+                                                                    "black pepper",
+                                                                    "season chicken before dredging",
+                                                                    "taste before adding extra salt because capers are salty"
+                                                                ],
+                                                "productSearchTerms":  [
+                                                                           "kosher salt",
+                                                                           "black pepper"
+                                                                       ],
+                                                "needsReview":  false
+                                            }
+                                        ],
+                        "steps":  [
+                                      "Bring a large pot of salted water to a boil for the pasta. Cook the pasta until al dente, then reserve 1 cup pasta water before draining.",
+                                      "While the pasta cooks, pat the chicken cutlets dry. If any pieces are thicker than about 1/4 inch, pound them thinner so they cook quickly and evenly.",
+                                      "Season the chicken with salt and pepper. Put the flour in a shallow bowl, lightly coat each cutlet, and shake off the excess so the coating is thin, not cakey.",
+                                      "Heat 1 tablespoon olive oil and 1 tablespoon butter in a large skillet over medium-high heat. When the butter foams, add chicken in a single layer without crowding.",
+                                      "Sear the chicken in batches for about 2 to 3 minutes per side, until golden and just cooked through. Move cooked pieces to a plate and add a little more oil if the pan gets dry.",
+                                      "Lower the heat to medium. Add the garlic and stir for about 30 seconds, just until fragrant. Add the wine if using, scraping up browned bits, and simmer for 1 minute; otherwise go straight to chicken broth.",
+                                      "Add chicken broth, lemon juice, and capers. Simmer for 3 to 5 minutes, until the sauce reduces slightly and tastes bright but not harsh.",
+                                      "Lower the heat and whisk in the remaining butter a piece at a time until the sauce looks glossy. If serving with pasta and the sauce looks too tight, loosen it with a splash of reserved pasta water.",
+                                      "Return the chicken to the skillet and spoon sauce over it for 1 to 2 minutes. Keep a few cutlets plain or lightly sauced if needed for kids.",
+                                      "Toss the pasta with some of the sauce, or serve pasta plain with chicken and sauce on top. Finish with parsley if using and serve with extra sauce and capers on the side."
+                                  ],
+                        "sourceLinks":  [
+                                            {
+                                                "title":  "Serious Eats - Chicken Piccata",
+                                                "url":  "https://www.seriouseats.com/chicken-piccata-italian-fried-cutlet-recipe"
+                                            },
+                                            {
+                                                "title":  "Food Network - Giada De Laurentiis Chicken Piccata",
+                                                "url":  "https://www.foodnetwork.com/recipes/giada-de-laurentiis/chicken-piccata-recipe2-1913809"
+                                            },
+                                            {
+                                                "title":  "The Kitchn - Chicken Piccata Recipe",
+                                                "url":  "https://www.thekitchn.com/chicken-piccata-recipe-23635213"
+                                            },
+                                            {
+                                                "title":  "FoodieCrush - Easy 20-Minute Chicken Piccata",
+                                                "url":  "https://www.foodiecrush.com/easy-chicken-piccata/"
+                                            },
+                                            {
+                                                "title":  "Epicurious - Quick Chicken Piccata",
+                                                "url":  "https://www.epicurious.com/recipes/food/views/quick-chicken-piccata"
+                                            },
+                                            {
+                                                "title":  "RecipeTin Eats - Chicken Piccata",
+                                                "url":  "https://www.recipetineats.com/chicken-piccata/"
+                                            }
+                                        ],
+                        "needsReview":  true,
+                        "notes":  "Scaled for 2 adults plus 3 younger kids who together eat about 2 adult-size servings. Review pasta choice, caper tolerance, and whether wine is available.",
+                        "image":  "assets/recipes/chicken-piccata.png",
+                        "imageAlt":  "Chicken piccata with lemon caper sauce served over pasta."
+                    }
+                ]
+}
