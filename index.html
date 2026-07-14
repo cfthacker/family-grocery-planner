@@ -10,12 +10,12 @@
   <body>
     <header class="site-header">
       <div class="header-shell">
-        <a class="brand" href="#planner" aria-label="Rowta home">
+        <a class="brand" href="#planner" data-view-jump="planner" aria-label="Rowta home">
           <img class="brand-logo" src="assets/rowta-logo.png" alt="Rowta">
         </a>
 
         <nav class="utility-nav" aria-label="Global navigation">
-          <button type="button" data-view-button="pantry"><span class="tab-icon pantry-icon" aria-hidden="true"></span>Pantry</button>
+          <button type="button" data-view-button="pantry"><span class="tab-icon pantry-icon" aria-hidden="true"></span>Catalog</button>
           <button id="printBtn" type="button"><span class="tab-icon print-icon" aria-hidden="true"></span>Print</button>
         </nav>
       </div>
@@ -95,6 +95,10 @@
         </section>
       </section>
 
+      <section id="recipeDetailView" class="app-view" data-view="recipe-detail">
+        <div id="recipeDetail"></div>
+      </section>
+
       <section id="groceriesView" class="app-view" data-view="groceries">
         <div class="section-heading">
           <div>
@@ -106,7 +110,7 @@
             <button type="button" data-section-filter="Protein">Protein</button>
             <button type="button" data-section-filter="Produce">Produce</button>
             <button type="button" data-section-filter="Dairy">Dairy</button>
-            <button type="button" data-section-filter="Dry Goods">Pantry</button>
+            <button type="button" data-section-filter="Dry Goods">Dry goods</button>
           </div>
         </div>
 
@@ -118,16 +122,16 @@
           <section>
             <div class="section-heading">
               <div>
-                <p class="eyebrow">Ingredient catalog</p>
-                <h2>Planning ingredients</h2>
+                <p class="eyebrow">Household groceries</p>
+                <h2>Ingredient catalog</h2>
               </div>
             </div>
             <div id="ingredientCatalog" class="catalog-table-wrap"></div>
           </section>
 
           <aside class="side-panel">
-            <p class="eyebrow">Household defaults</p>
-            <h2>Pantry staples</h2>
+            <p class="eyebrow">Recipe assumptions</p>
+            <h2>Recipe pantry staples</h2>
             <div id="pantryTags" class="tag-cloud"></div>
           </aside>
         </div>
@@ -135,6 +139,7 @@
     </main>
 
     <script src="data/grocery-products.js"></script>
+    <script src="data/recipe-pantry.js"></script>
     <script src="data/recipes.js"></script>
     <script src="app.js"></script>
   </body>

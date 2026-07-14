@@ -5,6 +5,7 @@
   "description": "A static family grocery and meal planning app.",
   "scripts": {
     "start": "node server.js",
-    "dev": "node server.js"
+    "dev": "node server.js",
+    "validate:recipes": "node scripts/validate-recipes.mjs"
   }
 }

@@ -1,136 +1,13 @@
-const builtInRecipes = [
-  {
-    id: "beef-tacos-with-yellow-rice",
-    title: "Beef Tacos with Yellow Rice",
-    minutes: 25,
-    servings: 4,
-    protein: "Beef",
-    base: "Tacos and Rice",
-    image: "assets/recipes/beef-tacos-with-yellow-rice.jpg",
-    imageAlt: "Beef tacos with rice, shredded cheese, lettuce, sour cream, and taco toppings.",
-    tags: ["weeknight", "tacos", "kid-flex"],
-    overview: "A taco-kit dinner with ground beef, stovetop rice, cheese, lettuce, sour cream, and build-your-own kid flexibility.",
-    ingredients: ["Rice", "Taco kit", "Ground beef", "Shredded Mexican cheese", "Shredded lettuce", "Sour cream"],
-    ingredientDetails: [
-      ingredientDetail("Taco kit", 1, "kit", "Dry Goods"),
-      ingredientDetail("Ground beef", 1, "lb", "Protein"),
-      ingredientDetail("Rice", 1.5, "cup", "Dry Goods", ["uncooked", "cook on the stove"]),
-      ingredientDetail("Shredded Mexican cheese", 1, "bag", "Dairy"),
-      ingredientDetail("Shredded lettuce", 1, "bag", "Produce"),
-      ingredientDetail("Sour cream", 1, "tub", "Dairy")
-    ]
-  },
-  {
-    id: "chicken-piccata",
-    title: "Chicken Piccata",
-    minutes: 35,
-    servings: 4,
-    protein: "Chicken",
-    base: "Pasta",
-    image: "assets/recipes/chicken-piccata.jpg",
-    imageAlt: "Chicken piccata with lemon caper sauce served over pasta.",
-    tags: ["lemon", "pasta", "pan sauce"],
-    overview: "Thin chicken cutlets over pasta with a lemon-caper-butter pan sauce and kid-friendly sauce-on-the-side option.",
-    ingredients: ["Chicken breast cutlets", "Pasta", "All-purpose flour", "Lemons", "Capers", "Chicken broth", "Butter"],
-    ingredientDetails: [
-      ingredientDetail("Chicken breast cutlets", 1.5, "lb", "Protein"),
-      ingredientDetail("Pasta", 12, "oz", "Dry Goods"),
-      ingredientDetail("All-purpose flour", 0.5, "cup", "Dry Goods"),
-      ingredientDetail("Lemons", 2, "count", "Produce"),
-      ingredientDetail("Capers", 1, "jar", "Dry Goods"),
-      ingredientDetail("Chicken broth", 0.5, "cup", "Dry Goods"),
-      ingredientDetail("Butter", 2, "tbsp", "Dairy")
-    ]
-  },
-  {
-    id: "weeknight-chicken-fried-rice",
-    title: "Weeknight Chicken Fried Rice",
-    minutes: 25,
-    servings: 4,
-    protein: "Chicken",
-    base: "Rice",
-    image: "assets/recipes/weeknight-chicken-fried-rice.png",
-    imageAlt: "Chicken fried rice with peas, carrots, egg, and scallions in a shallow bowl.",
-    tags: ["fried rice", "shortcut", "frozen vegetables"],
-    overview: "A fast fried rice pattern built from cooked stovetop rice, chicken, eggs, frozen vegetables, and bottled sauce.",
-    ingredients: ["Rice", "Chicken breast", "Eggs", "Frozen peas and carrots", "Bottled stir-fry sauce", "Scallions"],
-    ingredientDetails: [
-      ingredientDetail("Rice", 1.5, "cup", "Dry Goods", ["uncooked", "cook on the stove", "day-old works best"]),
-      ingredientDetail("Chicken breast", 1.25, "lb", "Protein"),
-      ingredientDetail("Eggs", 3, "count", "Dairy"),
-      ingredientDetail("Frozen peas and carrots", 1, "bag", "Frozen"),
-      ingredientDetail("Bottled stir-fry sauce", 0.5, "cup", "Dry Goods"),
-      ingredientDetail("Scallions", 1, "bunch", "Produce")
-    ]
-  },
-  {
-    id: "orecchiette-with-sausage-and-broccoli-rabe",
-    title: "Orecchiette with Sausage and Broccoli Rabe",
-    minutes: 35,
-    servings: 4,
-    protein: "Sausage",
-    base: "Pasta",
-    image: "assets/recipes/orecchiette-with-sausage-and-broccoli-rabe.png",
-    imageAlt: "Orecchiette pasta with browned sausage, broccoli rabe, and grated cheese in a shallow bowl.",
-    tags: ["pasta", "sausage", "greens"],
-    overview: "A sausage and greens pasta with blanched broccoli rabe, shallots, butter, pasta water, and grated cheese.",
-    ingredients: ["Orecchiette pasta", "Italian sausage", "Broccoli rabe", "Shallots", "Grated Italian cheese", "Butter"],
-    ingredientDetails: [
-      ingredientDetail("Orecchiette pasta", 12, "oz", "Dry Goods"),
-      ingredientDetail("Italian sausage", 1, "lb", "Protein"),
-      ingredientDetail("Broccoli rabe", 1, "bunch", "Produce"),
-      ingredientDetail("Shallots", 2, "count", "Produce"),
-      ingredientDetail("Grated Italian cheese", 1, "tub", "Dairy"),
-      ingredientDetail("Butter", 2, "tbsp", "Dairy")
-    ]
-  },
-  {
-    id: "steak-frites-with-air-fryer-fries",
-    title: "Steak Frites with Air-Fryer Fries",
-    minutes: 30,
-    servings: 4,
-    protein: "Steak",
-    base: "Fries",
-    image: "assets/recipes/steak-frites-with-air-fryer-fries.jpg",
-    imageAlt: "Sliced seared steak with pan sauce served beside golden fries on a plate.",
-    tags: ["steak", "air fryer", "fries"],
-    overview: "A practical steak frites dinner with skillet steak, air-fryer frozen fries, and a quick pan sauce.",
-    ingredients: ["Steak", "Frozen French fries", "Beef broth", "Worcestershire sauce", "Steak seasoning"],
-    ingredientDetails: [
-      ingredientDetail("Steak", 1.5, "lb", "Protein"),
-      ingredientDetail("Frozen French fries", 1, "bag", "Frozen"),
-      ingredientDetail("Beef broth", 0.5, "cup", "Dry Goods"),
-      ingredientDetail("Worcestershire sauce", 1, "bottle", "Dry Goods"),
-      ingredientDetail("Steak seasoning", 1, "jar", "Dry Goods")
-    ]
-  }
-];
-
-const pantryStaples = [
-  "Salt and pepper",
-  "Kosher salt",
-  "Black pepper",
-  "Water",
-  "Reserved pasta water",
-  "Olive oil",
-  "Neutral oil",
-  "Neutral cooking oil",
-  "Butter",
-  "Garlic powder",
-  "Italian seasoning",
-  "Paprika",
-  "Sugar"
-];
+const recipePantryStaples = window.WeeknightTableData?.recipePantryStaples || [];
+const recipePantryStapleKeys = new Set(recipePantryStaples.map(normalKey));
 
 const sectionOrder = ["Protein", "Produce", "Dairy", "Bakery", "Dry Goods", "Frozen", "Baking", "Spices", "Deli", "Snacks", "Beverages", "Household", "Other"];
 const shelfStableSections = new Set(["Dry Goods", "Pantry", "Spices", "Baking", "Frozen", "Snacks", "Beverages", "Household"]);
 const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
-const recipeImages = Object.fromEntries(builtInRecipes.map((recipe) => [recipe.id, { image: recipe.image, imageAlt: recipe.imageAlt }]));
 const productCatalog = window.WeeknightTableData?.groceryProducts || [];
 const catalogByIngredient = new Map(productCatalog.map((product) => [normalKey(product.genericIngredient), product]));
 const storageKey = "weeknight-table-planner-v1";
-
-const recipeLibrary = mergeRecipes(builtInRecipes, window.WeeknightTableData?.recipes || []);
+const recipeLibrary = (window.WeeknightTableData?.recipes || []).map(normalizeRecipeRecord);
 const recipeById = new Map(recipeLibrary.map((recipe) => [recipe.id, recipe]));
 const weeks = buildWeeks();
 let state = loadState();
@@ -141,6 +18,11 @@ let recipeVisibleCount = 12;
 let recipeSortMode = "recommended";
 let recipeViewMode = "list";
 let activeRecipeCollection = "";
+let activeRecipeId = "";
+let recipeReturnView = "recipes";
+let recipeReturnScroll = 0;
+let recipeCanGoBack = false;
+let recipeReturnFocus = null;
 const recipeFacets = {
   time: "all",
   protein: "all",
@@ -174,6 +56,7 @@ const els = {
   recipeSort: document.querySelector("#recipeSort"),
   recipeGrid: document.querySelector("#recipeGrid"),
   loadMoreRecipes: document.querySelector("#loadMoreRecipes"),
+  recipeDetail: document.querySelector("#recipeDetail"),
   groceryHeading: document.querySelector("#groceryHeading"),
   groceryDeliveries: document.querySelector("#groceryDeliveries"),
   ingredientCatalog: document.querySelector("#ingredientCatalog"),
@@ -181,16 +64,22 @@ const els = {
 };
 
 renderAll();
+syncRecipeRoute({ initial: true });
 
 document.querySelector("#printBtn").addEventListener("click", () => window.print());
 
 document.querySelectorAll("[data-view-button]").forEach((button) => {
-  button.addEventListener("click", () => setView(button.dataset.viewButton));
+  button.addEventListener("click", () => navigateToView(button.dataset.viewButton));
 });
 
 document.querySelectorAll("[data-view-jump]").forEach((button) => {
-  button.addEventListener("click", () => setView(button.dataset.viewJump));
+  button.addEventListener("click", (event) => {
+    event.preventDefault();
+    navigateToView(button.dataset.viewJump);
+  });
 });
+
+window.addEventListener("popstate", () => syncRecipeRoute());
 
 els.recipeSearch?.addEventListener("input", () => {
   recipeSearchText = els.recipeSearch.value.trim().toLowerCase();
@@ -232,6 +121,12 @@ document.querySelectorAll("[data-section-filter]").forEach((button) => {
 });
 
 document.addEventListener("click", (event) => {
+  const ingredientToggle = event.target.closest("[data-toggle-recipe-ingredients]");
+  if (ingredientToggle) {
+    toggleRecipeIngredientOverview(ingredientToggle);
+    return;
+  }
+
   const weekButton = event.target.closest("[data-week-key]");
   if (weekButton) {
     state.activeWeek = weekButton.dataset.weekKey;
@@ -288,8 +183,18 @@ document.addEventListener("click", (event) => {
   const openRecipePickerButton = event.target.closest("[data-open-recipe-picker]");
   if (openRecipePickerButton) {
     recipePickDayIndex = Number(openRecipePickerButton.dataset.openRecipePicker);
-    setView("recipes");
+    navigateToView("recipes");
     renderRecipes();
+    return;
+  }
+
+  if (event.target.closest("[data-close-recipe]")) {
+    closeRecipeDetail();
+    return;
+  }
+
+  if (event.target.closest("[data-print-recipe]")) {
+    window.print();
     return;
   }
 
@@ -356,9 +261,87 @@ document.addEventListener("drop", (event) => {
 });
 
 function setView(viewName) {
-  if (viewName !== "recipes") recipePickDayIndex = null;
+  if (!['recipes', 'recipe-detail'].includes(viewName)) recipePickDayIndex = null;
   document.querySelectorAll("[data-view]").forEach((view) => view.classList.toggle("active", view.dataset.view === viewName));
   document.querySelectorAll("[data-view-button]").forEach((button) => button.classList.toggle("active", button.dataset.viewButton === viewName));
+}
+
+function navigateToView(viewName, options = {}) {
+  activeRecipeId = "";
+  recipeCanGoBack = false;
+  document.body.classList.remove("recipe-detail-open");
+  setView(viewName);
+  if (!options.fromHistory) {
+    history.pushState({ view: viewName }, "", `#${viewName}`);
+  }
+  if (!options.keepScroll) window.scrollTo({ top: 0, behavior: "auto" });
+}
+
+function openRecipeDetail(recipeId, options = {}) {
+  const recipe = recipeById.get(recipeId);
+  if (!recipe) {
+    navigateToView("recipes", { fromHistory: options.fromHistory });
+    return;
+  }
+
+  const currentView = document.querySelector("[data-view].active")?.dataset.view;
+  if (options.initial) {
+    recipeReturnView = "recipes";
+    recipeReturnScroll = 0;
+    recipeReturnFocus = null;
+  } else if (!activeRecipeId && currentView && currentView !== "recipe-detail") {
+    recipeReturnView = currentView;
+    recipeReturnScroll = window.scrollY;
+    recipeReturnFocus = document.activeElement;
+  }
+
+  activeRecipeId = recipeId;
+  recipeCanGoBack = Boolean(options.pushHistory || (options.fromHistory && !options.initial));
+  renderRecipeDetail(recipe);
+  setView("recipe-detail");
+  document.body.classList.add("recipe-detail-open");
+
+  if (options.pushHistory) {
+    history.pushState({ view: "recipe-detail", recipeId, returnView: recipeReturnView }, "", `#recipe/${encodeURIComponent(recipeId)}`);
+  } else if (options.initial) {
+    history.replaceState({ view: "recipe-detail", recipeId, returnView: "recipes" }, "", location.hash);
+  }
+
+  window.scrollTo({ top: 0, behavior: "auto" });
+  requestAnimationFrame(() => document.querySelector("#recipeDetailTitle")?.focus({ preventScroll: true }));
+}
+
+function closeRecipeDetail() {
+  if (recipeCanGoBack) {
+    history.back();
+    return;
+  }
+  navigateToView(recipeReturnView || "recipes");
+}
+
+function syncRecipeRoute(options = {}) {
+  const recipeMatch = location.hash.match(/^#recipe\/([^/?#]+)/);
+  if (recipeMatch) {
+    openRecipeDetail(decodeURIComponent(recipeMatch[1]), { fromHistory: true, initial: options.initial });
+    return;
+  }
+
+  const wasRecipeOpen = Boolean(activeRecipeId);
+  const returnView = history.state?.view && history.state.view !== "recipe-detail"
+    ? history.state.view
+    : (location.hash.replace("#", "") || recipeReturnView || "recipes");
+  activeRecipeId = "";
+  recipeCanGoBack = false;
+  document.body.classList.remove("recipe-detail-open");
+  setView(["planner", "recipes", "groceries", "pantry"].includes(returnView) ? returnView : "recipes");
+  if (wasRecipeOpen) {
+    requestAnimationFrame(() => {
+      window.scrollTo({ top: recipeReturnScroll, behavior: "auto" });
+      if (recipeReturnFocus instanceof HTMLElement && document.contains(recipeReturnFocus)) {
+        recipeReturnFocus.focus({ preventScroll: true });
+      }
+    });
+  }
 }
 
 function shiftWeek(delta) {
@@ -377,6 +360,7 @@ function renderAll() {
   renderRecipes();
   renderGroceries();
   renderPantry();
+  if (activeRecipeId) renderRecipeDetail(recipeById.get(activeRecipeId));
 }
 
 function renderWeekTabs() {
@@ -434,9 +418,11 @@ function renderSlotRecipe(recipe, index) {
   return `
     <div class="slot-recipe" draggable="true" data-drag-recipe="${escapeAttr(recipe.id)}" data-drag-day="${index}">
       <span class="drag-handle" aria-hidden="true"></span>
-      ${recipe.image ? `<img src="${escapeAttr(recipe.image)}" alt="${escapeAttr(recipe.imageAlt || recipe.title)}">` : `<div class="recipe-thumb">${initials(recipe.title)}</div>`}
+      <button type="button" class="recipe-thumb-button" data-view-recipe="${escapeAttr(recipe.id)}" aria-label="View ${escapeAttr(recipe.title)} recipe">
+        ${recipe.image ? `<img src="${escapeAttr(recipe.image)}" alt="">` : `<span class="recipe-thumb">${initials(recipe.title)}</span>`}
+      </button>
       <div>
-        <h3>${escapeHtml(recipe.title)}</h3>
+        <h3><button type="button" class="recipe-title-button" data-view-recipe="${escapeAttr(recipe.id)}">${escapeHtml(recipe.title)}</button></h3>
         <div class="slot-recipe-footer">
           <div class="meal-meta" aria-label="Meal details">
             <span>${recipe.totalMinutes} min</span>
@@ -475,9 +461,11 @@ function renderUnscheduledTray(plan) {
         ${items.map((recipe) => `
           <article class="unscheduled-meal" draggable="true" data-drag-recipe="${escapeAttr(recipe.id)}" data-drag-unscheduled="true">
             <span class="drag-handle" aria-hidden="true"></span>
-            ${recipe.image ? `<img src="${escapeAttr(recipe.image)}" alt="${escapeAttr(recipe.imageAlt || recipe.title)}">` : `<div class="recipe-thumb">${initials(recipe.title)}</div>`}
+            <button type="button" class="recipe-thumb-button" data-view-recipe="${escapeAttr(recipe.id)}" aria-label="View ${escapeAttr(recipe.title)} recipe">
+              ${recipe.image ? `<img src="${escapeAttr(recipe.image)}" alt="">` : `<span class="recipe-thumb">${initials(recipe.title)}</span>`}
+            </button>
             <div>
-              <strong>${escapeHtml(recipe.title)}</strong>
+              <strong><button type="button" class="recipe-title-button" data-view-recipe="${escapeAttr(recipe.id)}">${escapeHtml(recipe.title)}</button></strong>
               <span>${recipe.totalMinutes} min - ${escapeHtml(recipe.primaryProtein || "Flex")}</span>
             </div>
             <button type="button" data-remove-unscheduled="${escapeAttr(recipe.id)}" aria-label="Remove ${escapeAttr(recipe.title)}">⋯</button>
@@ -533,12 +521,14 @@ function renderRecipeCard(recipe, selectedIds, pickingDay, reason = "", context 
   const actionLabel = recipeActionLabel(recipe, selected, pickingDay);
   return `
     <article class="recipe-card ${selected ? "selected" : ""} ${context === "recommended" ? "recommendation-card" : ""}">
-      ${recipe.image ? `<img src="${escapeAttr(recipe.image)}" alt="${escapeAttr(recipe.imageAlt || recipe.title)}">` : recipePlaceholder(recipe)}
+      <button type="button" class="recipe-card-media" data-view-recipe="${escapeAttr(recipe.id)}" aria-label="View ${escapeAttr(recipe.title)} recipe">
+        ${recipe.image ? `<img src="${escapeAttr(recipe.image)}" alt="">` : recipePlaceholder(recipe)}
+      </button>
       <div class="recipe-card-body">
         ${reason ? `<p class="recommendation-reason">${escapeHtml(reason)}</p>` : ""}
         <div class="recipe-card-title">
           <div>
-            <h3>${escapeHtml(recipe.title)}</h3>
+            <h3><button type="button" class="recipe-title-button" data-view-recipe="${escapeAttr(recipe.id)}">${escapeHtml(recipe.title)}</button></h3>
             <p class="recipe-meta-line">${recipe.totalMinutes} min - ${escapeHtml(recipe.primaryProtein || "Flex")} - ${escapeHtml(recipe.format || compactBaseLabel(recipe.base))}</p>
           </div>
           <button type="button" class="recipe-action" data-add-recipe="${escapeAttr(recipe.id)}" aria-label="${escapeAttr(actionLabel.aria)}">${actionLabel.text}</button>
@@ -591,8 +581,10 @@ function renderRecipeList(recipes, selectedIds, pickingDay) {
         const actionLabel = recipeActionLabel(recipe, selected, pickingDay);
         return `
           <article class="recipe-list-row ${selected ? "selected" : ""}" role="row">
-            ${recipe.image ? `<img class="recipe-list-thumb" src="${escapeAttr(recipe.image)}" alt="${escapeAttr(recipe.imageAlt || recipe.title)}">` : `<div class="recipe-list-thumb recipe-thumb">${initials(recipe.title)}</div>`}
-            <strong>${escapeHtml(recipe.title)}</strong>
+            <button type="button" class="recipe-list-thumb-button" data-view-recipe="${escapeAttr(recipe.id)}" aria-label="View ${escapeAttr(recipe.title)} recipe">
+              ${recipe.image ? `<img class="recipe-list-thumb" src="${escapeAttr(recipe.image)}" alt="">` : `<span class="recipe-list-thumb recipe-thumb">${initials(recipe.title)}</span>`}
+            </button>
+            <strong><button type="button" class="recipe-title-button" data-view-recipe="${escapeAttr(recipe.id)}">${escapeHtml(recipe.title)}</button></strong>
             <span>${recipe.totalMinutes} min</span>
             <span>${escapeHtml(recipe.primaryProtein)}</span>
             <span>${escapeHtml(recipe.format)}</span>
@@ -604,6 +596,351 @@ function renderRecipeList(recipes, selectedIds, pickingDay) {
       }).join("")}
     </div>
   `;
+}
+
+function renderRecipeDetail(recipe) {
+  if (!els.recipeDetail || !recipe) return;
+  const plan = activePlan();
+  const selectedIds = plannedRecipeIds(plan);
+  const selected = selectedIds.has(recipe.id);
+  const pickingDay = recipePickDayIndex !== null ? plan.slots[recipePickDayIndex] : null;
+  const actionLabel = recipeActionLabel(recipe, selected, pickingDay);
+  const stages = buildRecipeStages(recipe);
+  const equipment = aggregateRecipeEquipment(stages);
+  const placement = recipePlacementLabel(recipe.id, plan);
+  const ingredients = recipe.ingredientDetails || [];
+  const returnLabel = recipeReturnView === "planner" ? "Back to week" : "Back to recipes";
+  const ingredientGroups = groupRecipeIngredients(ingredients, stages, recipe);
+
+  els.recipeDetail.innerHTML = `
+    <article class="recipe-detail-article">
+      <div class="recipe-detail-back-row">
+        <button type="button" class="recipe-back-button" data-close-recipe>
+          <span aria-hidden="true">←</span> ${returnLabel}
+        </button>
+        ${placement ? `<span class="recipe-planned-status">${escapeHtml(placement)}</span>` : ""}
+      </div>
+
+      <header class="recipe-detail-hero">
+        <div class="recipe-detail-image-wrap">
+          ${recipe.image
+            ? `<img src="${escapeAttr(recipe.image)}" alt="${escapeAttr(recipe.imageAlt || recipe.title)}">`
+            : `<div class="recipe-detail-placeholder" role="img" aria-label="No photo available for ${escapeAttr(recipe.title)}">
+                <span>${initials(recipe.title)}</span>
+                <small>${escapeHtml(recipe.format || compactBaseLabel(recipe.base))}</small>
+              </div>`}
+        </div>
+        <div class="recipe-detail-intro">
+          <h1 id="recipeDetailTitle" tabindex="-1">${escapeHtml(recipe.title)}</h1>
+          <p class="recipe-detail-overview">${escapeHtml(recipe.overview || recipe.description)}</p>
+          <dl class="recipe-detail-meta" aria-label="Recipe details">
+            <div><dt>Total</dt><dd>${recipe.totalMinutes} min</dd></div>
+            <div><dt>Active</dt><dd>${recipe.activeMinutes} min</dd></div>
+            <div><dt>Serves</dt><dd>${recipe.servings}</dd></div>
+            <div><dt>Effort</dt><dd>${escapeHtml(titleCase(recipe.difficulty))}</dd></div>
+          </dl>
+          <div class="recipe-detail-actions">
+            <button type="button" class="primary-action recipe-detail-primary" data-add-recipe="${escapeAttr(recipe.id)}" aria-label="${escapeAttr(actionLabel.aria)}">${escapeHtml(actionLabel.text)}</button>
+            <button type="button" class="recipe-print-button" data-print-recipe>Print recipe</button>
+          </div>
+        </div>
+      </header>
+
+      <section class="recipe-ingredient-overview" aria-labelledby="recipeIngredientsHeading">
+        ${renderCompleteIngredients(recipe, ingredientGroups, equipment, {
+          mode: "overview",
+          headingId: "recipeIngredientsHeading",
+          showHeader: true
+        })}
+      </section>
+
+      ${recipe.kidFlex ? `
+        <aside class="recipe-family-flexibility">
+          <p class="eyebrow">Family flexibility</p>
+          <p>${escapeHtml(recipe.kidFlex)}</p>
+        </aside>
+      ` : ""}
+
+      <section class="recipe-method" aria-label="Cooking method">
+        ${stages.map((stage, stageIndex) => renderRecipeStage(stage, stageIndex, stages.length, recipe)).join("")}
+      </section>
+    </article>
+  `;
+}
+
+function renderCompleteIngredients(recipe, ingredientGroups, equipment, options = {}) {
+  const headingId = options.headingId || "recipeIngredientsHeading";
+  const mainGroups = ingredientGroups.map((group) => ({
+    ...group,
+    items: group.items.filter((detail) => !isRecipePantryStaple(detail))
+  })).filter((group) => group.items.length);
+  const pantryStaples = ingredientGroups.flatMap((group) => group.items).filter(isRecipePantryStaple);
+  const previewItems = mainGroups.flatMap((group) => group.items).slice(0, 4);
+  const ingredientCount = mainGroups.reduce((total, group) => total + group.items.length, 0) + pantryStaples.length;
+  const remainingCount = Math.max(0, ingredientCount - previewItems.length);
+  const detailsId = "recipeIngredientDetails";
+  const renderGroup = (group) => `
+    <section class="recipe-ingredient-group ${mainGroups.length === 1 ? "is-single-group" : ""}">
+      <h3>${escapeHtml(group.name)}</h3>
+      <ul class="recipe-ingredient-list">
+        ${group.items.map((detail) => `
+          <li class="${detail.optional ? "optional" : ""}" data-recipe-ingredient-id="${escapeAttr(detail.id)}">
+            <span>${escapeHtml(displayIngredientInGroup(detail, group.name))}</span>
+          </li>
+        `).join("")}
+      </ul>
+    </section>
+  `;
+  const balancedColumns = balanceIngredientGroups(mainGroups);
+
+  return `
+    <div class="recipe-complete-ingredients mode-overview" data-ingredient-count="${ingredientCount}">
+      <div class="recipe-section-title-row">
+        <div>
+          <h2 id="${escapeAttr(headingId)}">Ingredients</h2>
+          <span>Serves ${recipe.servings}</span>
+        </div>
+      </div>
+      <div class="recipe-ingredient-preview" data-ingredient-preview>
+        <p>At a glance</p>
+        <ul>
+          ${previewItems.map((detail) => `<li>${escapeHtml(detail.original || ingredientDisplay(detail))}</li>`).join("")}
+        </ul>
+      </div>
+      <div id="${detailsId}" class="recipe-ingredient-details" data-ingredient-details hidden>
+        ${mainGroups.length > 1 ? `
+          <div class="recipe-ingredient-columns" aria-label="Ingredient groups">
+            ${balancedColumns.map((column) => `
+              <div class="recipe-ingredient-column">
+                ${column.map(renderGroup).join("")}
+              </div>
+            `).join("")}
+          </div>
+        ` : ""}
+        <div class="recipe-ingredient-groups ${mainGroups.length > 1 ? "recipe-ingredient-groups-linear" : ""}">
+          ${mainGroups.map(renderGroup).join("")}
+        </div>
+        ${pantryStaples.length ? `
+          <section class="recipe-pantry-staples">
+            <h3>Pantry staples</h3>
+            <ul>
+              ${pantryStaples.map((detail) => `<li data-recipe-ingredient-id="${escapeAttr(detail.id)}">${escapeHtml(detail.original || ingredientDisplay(detail))}</li>`).join("")}
+            </ul>
+          </section>
+        ` : ""}
+        ${equipment.length ? renderRecipeEquipment(equipment) : ""}
+      </div>
+      <button type="button" class="recipe-ingredient-toggle" data-toggle-recipe-ingredients aria-expanded="false" aria-controls="${detailsId}" data-ingredient-remaining="${remainingCount}">
+        <span data-ingredient-toggle-label>Show ${remainingCount} more</span>
+        <span class="recipe-ingredient-toggle-icon" aria-hidden="true"></span>
+      </button>
+    </div>
+  `;
+}
+
+function toggleRecipeIngredientOverview(toggle) {
+  const overview = toggle.closest(".recipe-complete-ingredients");
+  const details = overview?.querySelector("[data-ingredient-details]");
+  const preview = overview?.querySelector("[data-ingredient-preview]");
+  const primaryToggle = overview?.querySelector(".recipe-ingredient-toggle");
+  if (!details || !preview || !primaryToggle) return;
+  const willExpand = details.hidden;
+  details.hidden = !willExpand;
+  preview.hidden = willExpand;
+  overview.classList.toggle("ingredients-expanded", willExpand);
+  primaryToggle.setAttribute("aria-expanded", String(willExpand));
+  const label = primaryToggle.querySelector("[data-ingredient-toggle-label]");
+  const remaining = primaryToggle.dataset.ingredientRemaining || "";
+  if (label) label.textContent = willExpand ? "Show less" : `Show ${remaining} more`;
+}
+
+function isRecipePantryStaple(detail) {
+  return Boolean(typeof detail === "object" && detail?.pantryStaple);
+}
+
+function balanceIngredientGroups(ingredientGroups) {
+  if (ingredientGroups.length < 2) return [ingredientGroups, []];
+  const columns = [[], []];
+  const weights = [0, 0];
+  ingredientGroups
+    .map((group, index) => ({ group, index, weight: group.items.length + 1 }))
+    .sort((a, b) => b.weight - a.weight || a.index - b.index)
+    .forEach((entry) => {
+      const columnIndex = weights[0] <= weights[1] ? 0 : 1;
+      columns[columnIndex].push(entry);
+      weights[columnIndex] += entry.weight;
+    });
+  return columns
+    .sort((a, b) => Math.min(...a.map((entry) => entry.index)) - Math.min(...b.map((entry) => entry.index)))
+    .map((column) => column
+      .sort((a, b) => a.index - b.index)
+      .map((entry) => entry.group));
+}
+
+function renderRecipeEquipment(equipment) {
+  return `
+    <section class="recipe-equipment-list">
+      <h3>Equipment</h3>
+      <ul>${equipment.map((item) => `<li>${escapeHtml(item)}</li>`).join("")}</ul>
+    </section>
+  `;
+}
+
+function buildRecipeStages(recipe) {
+  return (recipe.stages || []).map((stage, index) => ({
+    ...stage,
+    id: stage.id || `${recipe.id}-stage-${index + 1}`,
+    title: stage.title || `Stage ${index + 1}`,
+    actions: stage.actions || []
+  }));
+}
+
+function renderRecipeStage(stage, stageIndex, stageCount, recipe) {
+  const ingredientById = new Map((recipe?.ingredientDetails || []).map((detail) => [detail.id, detail]));
+  const ingredientUses = (Array.isArray(stage.ingredientUses) ? stage.ingredientUses : [])
+    .filter((use) => {
+      if (!use.ingredientId) return true;
+      const ingredient = ingredientById.get(use.ingredientId);
+      return !isRecipePantryStaple(ingredient) || use.showIfPantry === true;
+    });
+  const actions = Array.isArray(stage.actions) ? stage.actions : [];
+  const actionsMarkup = actions.map(renderRecipeAction).join("");
+
+  return `
+    <section class="recipe-stage" id="${escapeAttr(stage.id)}" data-recipe-stage="${escapeAttr(stage.id)}" data-stage-index="${stageIndex}" aria-labelledby="${escapeAttr(stage.id)}-heading">
+      <header class="recipe-stage-heading">
+        <span class="recipe-stage-number" aria-hidden="true">${String(stageIndex + 1).padStart(2, "0")}</span>
+        <div>
+          <p class="recipe-stage-kicker">${escapeHtml(stageProgressLabel(stage, stageIndex, stageCount))}</p>
+          <h3 id="${escapeAttr(stage.id)}-heading">${escapeHtml(stage.title)}</h3>
+        </div>
+      </header>
+
+      ${ingredientUses.length ? `
+        <div class="recipe-stage-support">
+          <div class="recipe-stage-ingredients">
+            <h4>You’ll need</h4>
+            <ul>
+              ${ingredientUses.map((use) => `
+                <li class="${use.optional ? "optional" : ""}">
+                  <span>${escapeHtml(use.display || use.ingredientId || "")}</span>
+                </li>
+              `).join("")}
+            </ul>
+          </div>
+        </div>
+      ` : ""}
+
+      <ol class="recipe-step-list">
+        ${actionsMarkup}
+      </ol>
+      ${stage.safetyNote ? renderStageNote("Safety", stage.safetyNote, "safety") : ""}
+    </section>
+  `;
+}
+
+function renderRecipeAction(action) {
+  return `
+    <li id="${escapeAttr(action.id)}" class="recipe-action-row">
+      ${action.title ? `<h4>${escapeHtml(action.title)}</h4>` : ""}
+      <p>${escapeHtml(action.instruction || action.text || "")}</p>
+    </li>
+  `;
+}
+
+function renderStageNote(label, text, tone) {
+  return `
+    <aside class="recipe-stage-note tone-${escapeAttr(tone)}">
+      <strong>${escapeHtml(label)}</strong>
+      <p>${escapeHtml(text)}</p>
+    </aside>
+  `;
+}
+
+function groupRecipeIngredients(ingredients, stages = [], recipe = null) {
+  const groups = new Map();
+  ingredients.forEach((ingredient, ingredientIndex) => {
+    const name = ingredient.component || "Ingredients";
+    if (!groups.has(name)) groups.set(name, { name, items: [], ingredientIndex });
+    groups.get(name).items.push(ingredient);
+  });
+
+  const componentOrder = new Map();
+  const authoredComponents = recipe?.ingredientComponentOrder
+    || Object.values(recipe?.ingredientComponents || {});
+  authoredComponents.forEach((component) => {
+    if (!componentOrder.has(component)) componentOrder.set(component, componentOrder.size);
+  });
+
+  if (componentOrder.size) {
+    return [...groups.values()].sort((a, b) =>
+      (componentOrder.get(a.name) ?? Number.MAX_SAFE_INTEGER)
+      - (componentOrder.get(b.name) ?? Number.MAX_SAFE_INTEGER)
+      || a.ingredientIndex - b.ingredientIndex
+    );
+  }
+
+  const firstUse = new Map();
+  stages.forEach((stage, stageIndex) => {
+    (stage.ingredientUses || []).forEach((use) => {
+      if (!firstUse.has(use.ingredientId)) firstUse.set(use.ingredientId, stageIndex);
+    });
+  });
+
+  return [...groups.values()].sort((a, b) => {
+    const aStage = Math.min(...a.items.map((item) => firstUse.get(item.id) ?? Number.MAX_SAFE_INTEGER));
+    const bStage = Math.min(...b.items.map((item) => firstUse.get(item.id) ?? Number.MAX_SAFE_INTEGER));
+    return aStage - bStage || a.ingredientIndex - b.ingredientIndex;
+  });
+}
+
+function displayIngredientInGroup(ingredient, groupName) {
+  const display = ingredient.original || ingredientDisplay(ingredient);
+  if (!normalKey(groupName).startsWith("optional")) return display;
+  return display
+    .replace(/,?\s+optional(?:\s+for\s+adults)?$/i, "")
+    .replace(/\s+for\s+adults,?$/i, "");
+}
+
+function aggregateRecipeEquipment(stages) {
+  const commonTools = new Set([
+    "wooden spoon",
+    "whisk",
+    "plate",
+    "shallow bowl",
+    "small mixing bowl",
+    "mixing bowl",
+    "two mixing bowls",
+    "salad bowl",
+    "small saucepan",
+    "tongs"
+  ]);
+  const seen = new Set();
+  return stages.flatMap((stage) => stage.equipment || []).filter((item) => {
+    const key = normalKey(item);
+    if (!key || commonTools.has(key) || seen.has(key)) return false;
+    seen.add(key);
+    return true;
+  });
+}
+
+function stageProgressLabel(stage, index, total) {
+  const progress = total === 1 ? "Instructions" : `Stage ${index + 1} of ${total}`;
+  return stage?.durationMinutes ? `${progress} · About ${stage.durationMinutes} min` : progress;
+}
+
+function recipePlacementLabel(recipeId, plan) {
+  const day = plan.slots.find((slot) => slot.recipeId === recipeId)?.day;
+  if (day) return `Planned for ${day}`;
+  if ((plan.unscheduled || []).includes(recipeId)) return "Added to this week";
+  return "";
+}
+
+function ingredientDisplay(detail) {
+  const amount = detail.quantity === null || detail.quantity === undefined
+    ? ""
+    : (typeof detail.quantity === "number" ? formatNumber(detail.quantity) : String(detail.quantity));
+  return [amount, detail.unit, detail.genericIngredient].filter(Boolean).join(" ");
 }
 
 function lastCookedLabel(recipe) {
@@ -677,7 +1014,7 @@ function renderGrocerySection(section, items) {
 }
 
 function renderPantry() {
-  els.pantryTags.innerHTML = pantryStaples.map(tag).join("");
+  els.pantryTags.innerHTML = recipePantryStaples.map(tag).join("");
   els.ingredientCatalog.innerHTML = renderIngredientCatalog();
 }
 
@@ -909,7 +1246,7 @@ function assignRecipeToDay(index, recipeId, options = {}) {
   plan.slots[index].recipeId = recipeId;
   recipePickDayIndex = null;
   saveState();
-  if (options.returnToPlanner) setView("planner");
+  if (options.returnToPlanner) navigateToView("planner");
   renderAll();
 }
 
@@ -949,12 +1286,7 @@ function plannedRecipeIds(plan) {
 }
 
 function viewRecipe(recipeId) {
-  const recipe = recipeById.get(recipeId);
-  if (!recipe) return;
-  recipeSearchText = recipe.title.toLowerCase();
-  if (els.recipeSearch) els.recipeSearch.value = recipe.title;
-  setView("recipes");
-  renderRecipes();
+  openRecipeDetail(recipeId, { pushHistory: true });
 }
 
 function dragPayload(event) {
@@ -1198,35 +1530,43 @@ function defaultActiveWeekIndex() {
   return today.getDay() >= 4 ? 1 : 0;
 }
 
-function mergeRecipes(baseRecipes, externalRecipes) {
-  const seen = new Set();
-  return [...baseRecipes, ...externalRecipes].map(normalizeRecipeRecord).filter((recipe) => {
-    const key = normalKey(recipe.title);
-    if (seen.has(key)) return false;
-    seen.add(key);
-    return true;
-  });
-}
-
 function normalizeRecipeRecord(recipe) {
   const id = recipe.id || slugify(recipe.title);
-  const ingredientDetails = (recipe.ingredientDetails?.length ? recipe.ingredientDetails : (recipe.ingredients || []).map((ingredient) => ingredientDetail(ingredient, null, "", "Other")))
-    .map((detail) => ({
+  const recipeIngredients = recipe.ingredients || [];
+  const rawIngredientDetails = (recipe.ingredientDetails?.length
+    ? recipe.ingredientDetails
+    : recipeIngredients.map((ingredient) => typeof ingredient === "string"
+      ? ingredientDetail(ingredient, null, "", "Other")
+      : ingredient));
+  const ingredientIdCounts = new Map();
+  const optionalIngredientIds = new Set(recipe.optionalIngredientIds || []);
+  const ingredientDetails = rawIngredientDetails.map((detail) => {
+    const baseId = detail.id || slugify(detail.genericIngredient || detail.original || "ingredient");
+    const occurrence = (ingredientIdCounts.get(baseId) || 0) + 1;
+    ingredientIdCounts.set(baseId, occurrence);
+    const id = occurrence === 1 ? baseId : `${baseId}-${occurrence}`;
+    const genericIngredient = canonicalIngredient(detail.genericIngredient || detail.original);
+    return {
       ...detail,
-      genericIngredient: canonicalIngredient(detail.genericIngredient || detail.original),
-      section: normalizedSection(detail.section)
-    }));
-  const ingredients = recipe.ingredients?.length
-    ? recipe.ingredients.map(canonicalIngredient)
+      id,
+      genericIngredient,
+      section: normalizedSection(detail.section),
+      component: detail.component || recipe.ingredientComponents?.[id] || recipe.ingredientComponents?.[baseId] || "Ingredients",
+      optional: detail.optional ?? optionalIngredientIds.has(id) ?? false,
+      pantryStaple: recipePantryStapleKeys.has(normalKey(genericIngredient))
+    };
+  });
+  const ingredients = recipeIngredients.length
+    ? recipeIngredients.map((ingredient) => canonicalIngredient(typeof ingredient === "string" ? ingredient : ingredient.genericIngredient || ingredient.original))
     : ingredientDetails.map((detail) => detail.genericIngredient);
-  const imageData = recipeImages[id] || {};
   const metadata = inferRecipeMetadata({
     ...recipe,
     id,
+    revision: recipe.revision || 1,
     ingredients,
     ingredientDetails,
-    image: recipe.image || imageData.image || "",
-    imageAlt: recipe.imageAlt || imageData.imageAlt || recipe.title
+    image: recipe.image || "",
+    imageAlt: recipe.imageAlt || recipe.title
   });
 
   return {
@@ -1257,16 +1597,20 @@ function normalizeRecipeRecord(recipe) {
     repeatCooldownWeeks: metadata.repeatCooldownWeeks,
     recommendationSignals: metadata.recommendationSignals,
     base: recipe.base || "Dinner",
-    image: recipe.image || imageData.image || "",
-    imageUrl: recipe.image || imageData.image || "",
-    imageAlt: recipe.imageAlt || imageData.imageAlt || recipe.title,
+    image: recipe.image || "",
+    imageUrl: recipe.image || "",
+    imageAlt: recipe.imageAlt || recipe.title,
     overview: recipe.overview || "",
     tags: metadata.tags,
     ingredients: [...new Set(ingredients.filter(Boolean))],
     ingredientDetails,
+    ingredientComponentOrder: recipe.ingredientComponentOrder?.length
+      ? [...recipe.ingredientComponentOrder]
+      : [...new Set(Object.values(recipe.ingredientComponents || {}))],
     reusePotential: recipe.reusePotential || [],
     kidFlex: recipe.kidFlex || "",
     steps: recipe.steps || [],
+    stages: recipe.stages || [],
     sourceLinks: recipe.sourceLinks || [],
     needsReview: recipe.needsReview || false,
     notes: recipe.notes || []
@@ -1286,7 +1630,7 @@ function inferRecipeMetadata(recipe) {
   const base = controlledBase(recipe.base || "", text);
   const cuisine = controlledCuisine(text);
   const difficulty = recipe.difficulty || (totalMinutes <= 25 ? "very easy" : totalMinutes >= 45 ? "medium" : "easy");
-  const pantryFriendly = pantryStaples.filter((item) => text.includes(normalKey(item))).length >= 2
+  const pantryFriendly = recipePantryStaples.filter((item) => text.includes(normalKey(item))).length >= 2
     || ["Rice", "Pasta", "Tortillas", "Potatoes"].includes(base);
   const kidFriendly = Boolean(recipe.kidFlex) || totalMinutes <= 30 || text.includes("kid");
   const goodLeftovers = ["Pasta", "Rice", "Potatoes"].includes(base) || text.includes("leftover") || text.includes("batch");
@@ -1457,7 +1801,7 @@ function shouldIgnoreIngredient(name) {
 }
 
 function pantryHas(name) {
-  return pantryStaples.some((item) => normalKey(item) === normalKey(name));
+  return recipePantryStapleKeys.has(normalKey(name));
 }
 
 function addQuantity(item, detail) {
@@ -1701,6 +2045,10 @@ function normalKey(value) {
 
 function slugify(value) {
   return normalKey(value).replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+}
+
+function titleCase(value) {
+  return String(value || "").replace(/\b\w/g, (letter) => letter.toUpperCase());
 }
 
 function escapeHtml(value) {
