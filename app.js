@@ -7,6 +7,7 @@ const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Frida
 const productCatalog = window.WeeknightTableData?.groceryProducts || [];
 const catalogByIngredient = new Map(productCatalog.map((product) => [normalKey(product.genericIngredient), product]));
 const storageKey = "weeknight-table-planner-v1";
+const recipeViewPreferenceKey = "rowta-recipe-view-v1";
 const recipeLibrary = (window.WeeknightTableData?.recipes || []).map(normalizeRecipeRecord);
 const recipeById = new Map(recipeLibrary.map((recipe) => [recipe.id, recipe]));
 const weeks = buildWeeks();
@@ -16,7 +17,7 @@ let sectionFilter = "all";
 let recipePickDayIndex = null;
 let recipeVisibleCount = 12;
 let recipeSortMode = "recommended";
-let recipeViewMode = "list";
+let recipeViewMode = loadRecipeViewPreference();
 let activeRecipeCollection = "";
 let activeRecipeId = "";
 let recipeReturnView = "recipes";
@@ -66,6 +67,7 @@ const els = {
   deliveryPreview: document.querySelector("#deliveryPreview"),
   recipeSearch: document.querySelector("#recipeSearch"),
   recommendedGrid: document.querySelector("#recommendedGrid"),
+  recipePickContext: document.querySelector("#recipePickContext"),
   recipeResultCount: document.querySelector("#recipeResultCount"),
   recipeSort: document.querySelector("#recipeSort"),
   recipeGrid: document.querySelector("#recipeGrid"),
@@ -251,7 +253,7 @@ document.addEventListener("click", (event) => {
   const viewModeButton = event.target.closest("[data-recipe-view]");
   if (viewModeButton) {
     recipeViewMode = viewModeButton.dataset.recipeView;
-    document.querySelectorAll("[data-recipe-view]").forEach((button) => button.classList.toggle("active", button === viewModeButton));
+    saveRecipeViewPreference(recipeViewMode);
     renderRecipes();
     return;
   }
@@ -365,9 +367,18 @@ document.addEventListener("drop", (event) => {
 
 function setView(viewName) {
   if (viewName !== "planner") clearPlannerUndo();
-  if (!['recipes', 'recipe-detail'].includes(viewName)) recipePickDayIndex = null;
+  if (!['recipes', 'recipe-detail'].includes(viewName)) {
+    recipePickDayIndex = null;
+    document.body.classList.remove("recipe-pick-active");
+  }
   document.querySelectorAll("[data-view]").forEach((view) => view.classList.toggle("active", view.dataset.view === viewName));
-  document.querySelectorAll("[data-view-button]").forEach((button) => button.classList.toggle("active", button.dataset.viewButton === viewName));
+  const activeNavigationView = viewName === "recipe-detail" ? "recipes" : viewName;
+  document.querySelectorAll("[data-view-button]").forEach((button) => {
+    const active = button.dataset.viewButton === activeNavigationView;
+    button.classList.toggle("active", active);
+    if (active) button.setAttribute("aria-current", "page");
+    else button.removeAttribute("aria-current");
+  });
   document.body.dataset.activeView = viewName;
 }
 
@@ -797,18 +808,26 @@ function renderRecipes() {
   const selectedIds = plannedRecipeIds(plan);
   const pickingDay = recipePickDayIndex !== null ? plan.slots[recipePickDayIndex] : null;
   const recommended = recommendedRecipes(plan).slice(0, 6);
-  const recommendationReasons = recommendationReasonsForShelf(recommended, plan);
   const recipes = sortRecipes(recipeLibrary.filter((recipe) => recipeMatches(recipe, selectedIds)), plan);
   const visibleRecipes = recipes.slice(0, recipeVisibleCount);
+  document.body.classList.toggle("recipe-pick-active", Boolean(pickingDay));
 
-  els.recommendedGrid.innerHTML = recommended.map((recipe) => renderRecipeCard(recipe, selectedIds, pickingDay, recommendationReasons.get(recipe.id), "recommended")).join("")
+  els.recommendedGrid.innerHTML = recommended.map((recipe) => renderRecipeCard(recipe, selectedIds, pickingDay, "recommended")).join("")
     || `<p class="empty-state">Add a few recipes to the library to unlock recommendations.</p>`;
+  if (els.recipePickContext) {
+    els.recipePickContext.hidden = !pickingDay;
+    els.recipePickContext.textContent = pickingDay ? `Choosing dinner for ${pickingDay.day}` : "";
+  }
   if (els.recipeResultCount) els.recipeResultCount.textContent = `${recipes.length} recipe${recipes.length === 1 ? "" : "s"}`;
   els.recipeGrid.classList.toggle("list-view", recipeViewMode === "list");
-  document.querySelectorAll("[data-recipe-view]").forEach((button) => button.classList.toggle("active", button.dataset.recipeView === recipeViewMode));
+  document.querySelectorAll("[data-recipe-view]").forEach((button) => {
+    const active = button.dataset.recipeView === recipeViewMode;
+    button.classList.toggle("active", active);
+    button.setAttribute("aria-pressed", String(active));
+  });
   const recipeResultsMarkup = recipeViewMode === "list"
     ? renderRecipeList(visibleRecipes, selectedIds, pickingDay)
-    : visibleRecipes.map((recipe) => renderRecipeCard(recipe, selectedIds, pickingDay, catalogStatusBadge(recipe, selectedIds), "catalog")).join("");
+    : visibleRecipes.map((recipe) => renderRecipeCard(recipe, selectedIds, pickingDay, "catalog")).join("");
   els.recipeGrid.innerHTML = recipeResultsMarkup || `<p class="empty-state">No recipes match those filters.</p>`;
   els.loadMoreRecipes.hidden = visibleRecipes.length >= recipes.length;
 }
@@ -819,7 +838,16 @@ function recipeActionLabel(recipe, selected, pickingDay) {
   return { text: "+ Add", aria: `Add ${recipe.title} to this week` };
 }
 
-function renderRecipeCard(recipe, selectedIds, pickingDay, reason = "", context = "catalog") {
+function recipeBrowseCopy(recipe) {
+  return `
+    <div class="recipe-browse-copy">
+      <h3><button type="button" class="recipe-title-button" data-view-recipe="${escapeAttr(recipe.id)}">${escapeHtml(recipe.title)}</button></h3>
+      <p class="recipe-poem" title="${escapeAttr(recipe.plannerDescription)}">${escapeHtml(recipe.plannerDescription)}</p>
+    </div>
+  `;
+}
+
+function renderRecipeCard(recipe, selectedIds, pickingDay, context = "catalog") {
   const selected = selectedIds.has(recipe.id);
   const actionLabel = recipeActionLabel(recipe, selected, pickingDay);
   return `
@@ -828,12 +856,8 @@ function renderRecipeCard(recipe, selectedIds, pickingDay, reason = "", context 
         ${recipe.image ? `<img src="${escapeAttr(recipe.image)}" alt="">` : recipePlaceholder(recipe)}
       </button>
       <div class="recipe-card-body">
-        ${reason ? `<p class="recommendation-reason">${escapeHtml(reason)}</p>` : ""}
-        <div class="recipe-card-title">
-          <div>
-            <h3><button type="button" class="recipe-title-button" data-view-recipe="${escapeAttr(recipe.id)}">${escapeHtml(recipe.title)}</button></h3>
-            <p class="recipe-meta-line">${recipe.totalMinutes} min - ${escapeHtml(recipe.primaryProtein || "Flex")} - ${escapeHtml(recipe.format || compactBaseLabel(recipe.base))}</p>
-          </div>
+        ${recipeBrowseCopy(recipe)}
+        <div class="recipe-card-action-row">
           <button type="button" class="recipe-action" data-add-recipe="${escapeAttr(recipe.id)}" aria-label="${escapeAttr(actionLabel.aria)}">${actionLabel.text}</button>
         </div>
       </div>
@@ -868,31 +892,16 @@ function ratingControl(recipe) {
 function renderRecipeList(recipes, selectedIds, pickingDay) {
   if (!recipes.length) return "";
   return `
-    <div class="recipe-list-table" role="table" aria-label="Recipe results">
-      <div class="recipe-list-head" role="row">
-        <span></span>
-        <span>Recipe</span>
-        <span>Time</span>
-        <span>Protein</span>
-        <span>Format</span>
-        <span>Rating</span>
-        <span>Last cooked</span>
-        <span>Action</span>
-      </div>
+    <div class="recipe-list" role="list" aria-label="Recipe results">
       ${recipes.map((recipe) => {
         const selected = selectedIds.has(recipe.id);
         const actionLabel = recipeActionLabel(recipe, selected, pickingDay);
         return `
-          <article class="recipe-list-row ${selected ? "selected" : ""}" role="row">
+          <article class="recipe-list-row ${selected ? "selected" : ""}" role="listitem">
             <button type="button" class="recipe-list-thumb-button" data-view-recipe="${escapeAttr(recipe.id)}" aria-label="View ${escapeAttr(recipe.title)} recipe">
               ${recipe.image ? `<img class="recipe-list-thumb" src="${escapeAttr(recipe.image)}" alt="">` : `<span class="recipe-list-thumb recipe-thumb">${initials(recipe.title)}</span>`}
             </button>
-            <strong><button type="button" class="recipe-title-button" data-view-recipe="${escapeAttr(recipe.id)}">${escapeHtml(recipe.title)}</button></strong>
-            <span>${recipe.totalMinutes} min</span>
-            <span>${escapeHtml(recipe.primaryProtein)}</span>
-            <span>${escapeHtml(recipe.format)}</span>
-            ${ratingControl(recipe)}
-            <span>${escapeHtml(lastCookedLabel(recipe))}</span>
+            ${recipeBrowseCopy(recipe)}
             <button type="button" class="recipe-action" data-add-recipe="${escapeAttr(recipe.id)}" aria-label="${escapeAttr(actionLabel.aria)}">${actionLabel.text}</button>
           </article>
         `;
@@ -1559,6 +1568,7 @@ function assignRecipeToDay(index, recipeId, options = {}) {
   saveState();
   if (options.returnToPlanner) navigateToView("planner");
   renderAll();
+  if (options.returnToPlanner && recipeId) focusPlannedRecipeAction(recipeId);
 }
 
 function removeRecipeFromDay(index) {
@@ -1936,6 +1946,22 @@ function normalizeSavedPlans(plans) {
 
 function saveState() {
   localStorage.setItem(storageKey, JSON.stringify(state));
+}
+
+function loadRecipeViewPreference() {
+  try {
+    return localStorage.getItem(recipeViewPreferenceKey) === "list" ? "list" : "grid";
+  } catch {
+    return "grid";
+  }
+}
+
+function saveRecipeViewPreference(viewMode) {
+  try {
+    localStorage.setItem(recipeViewPreferenceKey, viewMode);
+  } catch {
+    // The view still works when storage is unavailable.
+  }
 }
 
 function buildWeeks() {

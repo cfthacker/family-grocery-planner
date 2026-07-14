@@ -24,6 +24,7 @@
     <main class="app-shell">
       <section class="week-bar" aria-label="Planning weeks">
         <h1 id="weekTitle" class="sr-only">Rowta planning calendar</h1>
+        <button type="button" class="workflow-back" data-close-recipe>Back to recipes</button>
         <div class="week-context" aria-label="Week navigation">
           <div id="weekTabs" class="week-tabs" role="tablist" aria-label="Primary week choices"></div>
           <details class="week-picker">
@@ -36,17 +37,17 @@
           </details>
         </div>
         <nav class="app-nav" aria-label="Selected week sections">
-          <button type="button" class="active" data-view-button="planner">
+          <button type="button" class="active workflow-primary" data-view-button="planner">
             <span class="nav-icon-wrap" aria-hidden="true"><svg class="icon nav-icon nav-icon-regular" focusable="false"><use href="assets/rowta-icons.svg#icon-calendar-check-regular"></use></svg><svg class="icon nav-icon nav-icon-fill" focusable="false"><use href="assets/rowta-icons.svg#icon-calendar-check-fill"></use></svg></span>
             <span>Week</span>
           </button>
-          <button type="button" data-view-button="recipes">
-            <span class="nav-icon-wrap" aria-hidden="true"><svg class="icon nav-icon nav-icon-regular" focusable="false"><use href="assets/rowta-icons.svg#icon-cooking-pot-regular"></use></svg><svg class="icon nav-icon nav-icon-fill" focusable="false"><use href="assets/rowta-icons.svg#icon-cooking-pot-fill"></use></svg></span>
-            <span>Recipes</span>
-          </button>
-          <button id="groceryNavButton" type="button" data-view-button="groceries">
+          <button id="groceryNavButton" type="button" class="workflow-primary" data-view-button="groceries">
             <span class="nav-icon-wrap" aria-hidden="true"><svg class="icon nav-icon nav-icon-regular" focusable="false"><use href="assets/rowta-icons.svg#icon-basket-regular"></use></svg><svg class="icon nav-icon nav-icon-fill" focusable="false"><use href="assets/rowta-icons.svg#icon-basket-fill"></use></svg><span id="groceryNavBadge" class="nav-count-badge" hidden></span></span>
             <span>Groceries</span>
+          </button>
+          <button type="button" class="workflow-secondary" data-view-button="recipes">
+            <span class="nav-icon-wrap" aria-hidden="true"><svg class="icon nav-icon nav-icon-regular" focusable="false"><use href="assets/rowta-icons.svg#icon-cooking-pot-regular"></use></svg><svg class="icon nav-icon nav-icon-fill" focusable="false"><use href="assets/rowta-icons.svg#icon-cooking-pot-fill"></use></svg></span>
+            <span>Recipes</span>
           </button>
         </nav>
       </section>
@@ -95,6 +96,7 @@
             <p class="eyebrow">Recipe library</p>
             <h2>Find the right dinner</h2>
             <p>Start with a thoughtful recommendation or browse the full collection.</p>
+            <p id="recipePickContext" class="recipe-pick-context" hidden></p>
           </div>
           <dl class="view-intro-stats" aria-label="Recipe library summary">
             <div><dt>Library</dt><dd id="recipeResultCount">0 recipes</dd></div>
@@ -120,8 +122,8 @@
             </div>
             <div class="catalog-actions">
               <div class="view-toggle" aria-label="Recipe view">
-                <button type="button" class="active" data-recipe-view="list">List</button>
-                <button type="button" data-recipe-view="grid">Grid</button>
+                <button type="button" data-recipe-view="list" aria-pressed="false">List</button>
+                <button type="button" class="active" data-recipe-view="grid" aria-pressed="true">Grid</button>
               </div>
             </div>
           </div>
