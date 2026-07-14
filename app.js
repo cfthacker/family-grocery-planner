@@ -9,6 +9,14 @@ const catalogByIngredient = new Map(productCatalog.map((product) => [normalKey(p
 const storageKey = "weeknight-table-planner-v1";
 const recipeLibrary = (window.WeeknightTableData?.recipes || []).map(normalizeRecipeRecord);
 const recipeById = new Map(recipeLibrary.map((recipe) => [recipe.id, recipe]));
+const plannerMenuDescriptions = new Map([
+  ["beef-tacos-with-yellow-rice", "seasoned ground beef, yellow rice, crunchy and soft taco shells, shredded cheese, lettuce, and sour cream"],
+  ["chicken-piccata", "golden chicken cutlets, lemon-caper butter sauce, garlic, and silky strands of pasta"],
+  ["weeknight-chicken-fried-rice", "browned chicken, jasmine rice, egg, peas and carrots, scallions, and soy-garlic-ginger sauce"],
+  ["orecchiette-with-sausage-and-broccoli-rabe", "browned Italian sausage, broccoli rabe, orecchiette, and a buttery shallot pan sauce"],
+  ["steak-frites-with-air-fryer-fries", "seared steak, crisp frites, garlic butter, and a rich beef jus"],
+  ["pork-sausage-peppers-onions-skillet", "Italian pork sausage, sweet peppers, onions, garlic, tomato-balsamic sauce, and a crisp side salad"]
+]);
 const weeks = buildWeeks();
 let state = loadState();
 let recipeSearchText = "";
@@ -23,6 +31,13 @@ let recipeReturnView = "recipes";
 let recipeReturnScroll = 0;
 let recipeCanGoBack = false;
 let recipeReturnFocus = null;
+let mealActionDayIndex = null;
+let mealActionRecipeId = "";
+let mealActionFromUnscheduled = false;
+let mealActionReturnFocus = null;
+let plannerUndo = null;
+let plannerToastTimer = null;
+let iconSpriteReady = false;
 const recipeFacets = {
   time: "all",
   protein: "all",
@@ -45,7 +60,14 @@ const recipeFacets = {
 const els = {
   weekTitle: document.querySelector("#weekTitle"),
   weekTabs: document.querySelector("#weekTabs"),
-  weekStats: document.querySelector("#weekStats"),
+  weekMenu: document.querySelector("#weekMenu"),
+  weekPickerLabel: document.querySelector("#weekPickerLabel"),
+  plannerMealCount: document.querySelector("#plannerMealCount"),
+  plannerWeekLabel: document.querySelector("#plannerWeekLabel"),
+  plannerGroceryCount: document.querySelector("#plannerGroceryCount"),
+  plannerAverageTime: document.querySelector("#plannerAverageTime"),
+  groceryNavButton: document.querySelector("#groceryNavButton"),
+  groceryNavBadge: document.querySelector("#groceryNavBadge"),
   unscheduledTray: document.querySelector("#unscheduledTray"),
   daySlots: document.querySelector("#daySlots"),
   deliverySummary: document.querySelector("#deliverySummary"),
@@ -58,15 +80,40 @@ const els = {
   loadMoreRecipes: document.querySelector("#loadMoreRecipes"),
   recipeDetail: document.querySelector("#recipeDetail"),
   groceryHeading: document.querySelector("#groceryHeading"),
+  groceryNeedCount: document.querySelector("#groceryNeedCount"),
+  groceryEstimatedTotal: document.querySelector("#groceryEstimatedTotal"),
   groceryDeliveries: document.querySelector("#groceryDeliveries"),
   ingredientCatalog: document.querySelector("#ingredientCatalog"),
-  pantryTags: document.querySelector("#pantryTags")
+  pantryTags: document.querySelector("#pantryTags"),
+  ingredientCatalogCount: document.querySelector("#ingredientCatalogCount"),
+  pantryAssumptionCount: document.querySelector("#pantryAssumptionCount"),
+  mealActionDialog: document.querySelector("#mealActionDialog"),
+  mealActionTitle: document.querySelector("#mealActionTitle"),
+  mealActionMenu: document.querySelector("#mealActionMenu"),
+  mealQuickMove: document.querySelector("#mealQuickMove"),
+  mealEarlierHint: document.querySelector("#mealEarlierHint"),
+  mealLaterHint: document.querySelector("#mealLaterHint"),
+  mealMoveMenu: document.querySelector("#mealMoveMenu"),
+  mealMoveDays: document.querySelector("#mealMoveDays"),
+  plannerToast: document.querySelector("#plannerToast"),
+  plannerToastMessage: document.querySelector("#plannerToastMessage")
 };
 
+initializeIconSprite();
 renderAll();
 syncRecipeRoute({ initial: true });
 
 document.querySelector("#printBtn").addEventListener("click", () => window.print());
+
+els.mealActionDialog.addEventListener("close", () => {
+  document.body.classList.remove("meal-sheet-open");
+  const returnFocus = mealActionReturnFocus;
+  mealActionDayIndex = null;
+  mealActionRecipeId = "";
+  mealActionFromUnscheduled = false;
+  mealActionReturnFocus = null;
+  returnFocus?.focus?.({ preventScroll: true });
+});
 
 document.querySelectorAll("[data-view-button]").forEach((button) => {
   button.addEventListener("click", () => navigateToView(button.dataset.viewButton));
@@ -121,6 +168,12 @@ document.querySelectorAll("[data-section-filter]").forEach((button) => {
 });
 
 document.addEventListener("click", (event) => {
+  const activeDropdown = event.target.closest(".week-picker, .meal-menu");
+  closeOpenDropdowns(activeDropdown);
+  if (event.target.closest(".week-picker-menu button, .meal-menu button")) {
+    activeDropdown?.removeAttribute("open");
+  }
+
   const ingredientToggle = event.target.closest("[data-toggle-recipe-ingredients]");
   if (ingredientToggle) {
     toggleRecipeIngredientOverview(ingredientToggle);
@@ -129,16 +182,58 @@ document.addEventListener("click", (event) => {
 
   const weekButton = event.target.closest("[data-week-key]");
   if (weekButton) {
+    clearPlannerUndo();
     state.activeWeek = weekButton.dataset.weekKey;
+    weekButton.closest(".week-picker")?.removeAttribute("open");
     ensurePlan(state.activeWeek);
     saveState();
     renderAll();
     return;
   }
 
-  const weekShiftButton = event.target.closest("[data-week-shift]");
-  if (weekShiftButton) {
-    shiftWeek(Number(weekShiftButton.dataset.weekShift));
+  const shiftMealButton = event.target.closest("[data-move-meal-offset]");
+  if (shiftMealButton) {
+    moveMealByOffset(Number(shiftMealButton.dataset.dayIndex), Number(shiftMealButton.dataset.moveMealOffset));
+    return;
+  }
+
+  const chooseMealDayButton = event.target.closest("[data-choose-meal-day]");
+  if (chooseMealDayButton) {
+    openMealMoveDialog(Number(chooseMealDayButton.dataset.chooseMealDay), chooseMealDayButton);
+    return;
+  }
+
+  const mealActionButton = event.target.closest("[data-open-meal-actions]");
+  if (mealActionButton) {
+    openMealActionSheet(Number(mealActionButton.dataset.openMealActions), mealActionButton);
+    return;
+  }
+
+  const planUnscheduledButton = event.target.closest("[data-plan-unscheduled]");
+  if (planUnscheduledButton) {
+    openUnscheduledMealSheet(planUnscheduledButton.dataset.planUnscheduled, planUnscheduledButton);
+    return;
+  }
+
+  if (event.target.closest("[data-close-meal-actions]")) {
+    closeMealActionSheet();
+    return;
+  }
+
+  if (event.target.closest("[data-undo-planner-move]")) {
+    undoPlannerMove();
+    return;
+  }
+
+  const sheetActionButton = event.target.closest("[data-meal-action]");
+  if (sheetActionButton) {
+    handleMealSheetAction(sheetActionButton.dataset.mealAction);
+    return;
+  }
+
+  const moveMealButton = event.target.closest("[data-move-meal-day]");
+  if (moveMealButton) {
+    moveMealFromSheet(Number(moveMealButton.dataset.moveMealDay));
     return;
   }
 
@@ -222,6 +317,22 @@ document.addEventListener("click", (event) => {
   }
 });
 
+document.addEventListener("keydown", (event) => {
+  if (event.key !== "Escape" || els.mealActionDialog.open) return;
+  const openDropdowns = [...document.querySelectorAll(".week-picker[open], .meal-menu[open]")];
+  const dropdown = openDropdowns.at(-1);
+  if (!dropdown) return;
+  event.preventDefault();
+  dropdown.removeAttribute("open");
+  dropdown.querySelector("summary")?.focus({ preventScroll: true });
+});
+
+function closeOpenDropdowns(except = null) {
+  document.querySelectorAll(".week-picker[open], .meal-menu[open]").forEach((dropdown) => {
+    if (dropdown !== except) dropdown.removeAttribute("open");
+  });
+}
+
 document.addEventListener("dragstart", (event) => {
   const draggable = event.target.closest("[data-drag-recipe]");
   if (!draggable) return;
@@ -254,16 +365,18 @@ document.addEventListener("drop", (event) => {
   const payload = dragPayload(event);
   if (!payload?.recipeId) return;
   if (dayTarget) {
-    moveRecipeToDay(payload, Number(dayTarget.dataset.dayDrop));
+    moveRecipeToDay(payload, Number(dayTarget.dataset.dayDrop), { allowUndo: true, focusRecipeId: payload.recipeId });
   } else {
-    moveRecipeToUnscheduled(payload);
+    moveRecipeToUnscheduled(payload, { allowUndo: true, focusRecipeId: payload.recipeId });
   }
 });
 
 function setView(viewName) {
+  if (viewName !== "planner") clearPlannerUndo();
   if (!['recipes', 'recipe-detail'].includes(viewName)) recipePickDayIndex = null;
   document.querySelectorAll("[data-view]").forEach((view) => view.classList.toggle("active", view.dataset.view === viewName));
   document.querySelectorAll("[data-view-button]").forEach((button) => button.classList.toggle("active", button.dataset.viewButton === viewName));
+  document.body.dataset.activeView = viewName;
 }
 
 function navigateToView(viewName, options = {}) {
@@ -344,15 +457,6 @@ function syncRecipeRoute(options = {}) {
   }
 }
 
-function shiftWeek(delta) {
-  const currentIndex = weeks.findIndex((week) => week.key === state.activeWeek);
-  const nextIndex = Math.max(0, Math.min(weeks.length - 1, currentIndex + delta));
-  state.activeWeek = weeks[nextIndex].key;
-  ensurePlan(state.activeWeek);
-  saveState();
-  renderAll();
-}
-
 function renderAll() {
   ensurePlan(state.activeWeek);
   renderWeekTabs();
@@ -364,12 +468,22 @@ function renderAll() {
 }
 
 function renderWeekTabs() {
-  els.weekTabs.innerHTML = weeks.map((week, index) => `
+  const activeIndex = weeks.findIndex((week) => week.key === state.activeWeek);
+  els.weekTabs.innerHTML = weeks.slice(0, 2).map((week, index) => `
     <button type="button" class="${week.key === state.activeWeek ? "active" : ""}" data-week-key="${week.key}">
       <span>${weekTabLabel(index)}</span>
       <strong>${formatRange(week.start, week.end)}</strong>
     </button>
   `).join("");
+  els.weekMenu.innerHTML = weeks.slice(2).map((week, offset) => `
+    <button type="button" class="${week.key === state.activeWeek ? "active" : ""}" data-week-key="${week.key}">
+      <span>${weekTabLabel(offset + 2)}</span>
+      <strong>${formatRange(week.start, week.end)}</strong>
+    </button>
+  `).join("");
+  const selectedLaterWeek = activeIndex >= 2 ? weeks[activeIndex] : null;
+  els.weekPickerLabel.textContent = selectedLaterWeek ? formatRange(selectedLaterWeek.start, selectedLaterWeek.end) : "More weeks";
+  document.querySelector(".week-picker")?.classList.toggle("active", Boolean(selectedLaterWeek));
 }
 
 function renderPlanner() {
@@ -382,7 +496,14 @@ function renderPlanner() {
     : 0;
 
   els.weekTitle.textContent = `Rowta planning calendar for ${formatRange(week.start, week.end)}`;
-  els.weekStats.innerHTML = compactWeekSummary(plannedIds.length, groceries.neededCount, averageMinutes || "-");
+  if (els.plannerWeekLabel) {
+    const activeIndex = weeks.findIndex((item) => item.key === state.activeWeek);
+    els.plannerWeekLabel.textContent = activeIndex < 2 ? weekTabLabel(activeIndex) : formatRange(week.start, week.end);
+  }
+  if (els.plannerMealCount) els.plannerMealCount.textContent = `${plannedIds.length} dinner${plannedIds.length === 1 ? "" : "s"}`;
+  if (els.plannerGroceryCount) els.plannerGroceryCount.textContent = `${groceries.neededCount} item${groceries.neededCount === 1 ? "" : "s"}`;
+  if (els.plannerAverageTime) els.plannerAverageTime.textContent = `${averageMinutes || "-"} min average`;
+  renderGroceryNavBadge(groceries.neededCount);
 
   els.unscheduledTray.innerHTML = renderUnscheduledTray(plan);
   els.daySlots.innerHTML = plan.slots.map((slot, index) => renderDaySlot(slot, index, week)).join("");
@@ -400,12 +521,10 @@ function renderDaySlot(slot, index, week) {
   const recipe = recipeById.get(slot.recipeId);
   const date = addDays(week.start, index);
   return `
-    <article class="day-card ${recipe ? "has-meal" : "empty"}">
+    <article class="day-card ${recipe ? "has-meal" : "empty"}" data-day-index="${index}" data-day-name="${escapeAttr(slot.day)}">
       <div class="day-card-date">
-        <div>
-          <p>${shortDayName(slot.day)}</p>
-          <strong>${formatShortDate(date)}</strong>
-        </div>
+        <span class="day-card-day">${shortDayName(slot.day)}</span>
+        <time datetime="${formatDateInputValue(date)}">${formatShortDate(date)}</time>
       </div>
       <div class="day-content" data-day-drop="${index}">
         ${recipe ? renderSlotRecipe(recipe, index) : renderAddRecipePrompt(slot, index)}
@@ -415,35 +534,220 @@ function renderDaySlot(slot, index, week) {
 }
 
 function renderSlotRecipe(recipe, index) {
+  const previousDay = index > 0 ? dayNames[index - 1] : "";
+  const nextDay = index < dayNames.length - 1 ? dayNames[index + 1] : "";
+  const menuDescription = plannerMenuDescriptions.get(recipe.id) || recipe.overview || recipe.description || "";
   return `
-    <div class="slot-recipe" draggable="true" data-drag-recipe="${escapeAttr(recipe.id)}" data-drag-day="${index}">
-      <span class="drag-handle" aria-hidden="true"></span>
+    <div class="slot-recipe" data-slot-recipe-id="${escapeAttr(recipe.id)}">
+      <span class="drag-handle" draggable="true" data-drag-recipe="${escapeAttr(recipe.id)}" data-drag-day="${index}" aria-hidden="true">${iconMarkup("dots-six-vertical-regular")}</span>
       <button type="button" class="recipe-thumb-button" data-view-recipe="${escapeAttr(recipe.id)}" aria-label="View ${escapeAttr(recipe.title)} recipe">
         ${recipe.image ? `<img src="${escapeAttr(recipe.image)}" alt="">` : `<span class="recipe-thumb">${initials(recipe.title)}</span>`}
       </button>
-      <div>
+      <div class="slot-recipe-body">
         <h3><button type="button" class="recipe-title-button" data-view-recipe="${escapeAttr(recipe.id)}">${escapeHtml(recipe.title)}</button></h3>
-        <div class="slot-recipe-footer">
-          <div class="meal-meta" aria-label="Meal details">
-            <span>${recipe.totalMinutes} min</span>
-            <span>${escapeHtml(recipe.primaryProtein || "Flex")}</span>
-            <span>${escapeHtml(recipe.normalizedBase || compactBaseLabel(recipe.base))}</span>
-          </div>
-          ${mealMenu(recipe, index)}
-        </div>
+        <p class="meal-description" title="${escapeAttr(menuDescription)}">${escapeHtml(menuDescription)}</p>
+      </div>
+      <div class="slot-recipe-actions">
+        <button type="button" class="meal-shift-button" data-day-index="${index}" data-move-meal-offset="-1" aria-label="${index === 0 ? "Move earlier unavailable" : `Move ${escapeAttr(recipe.title)} to ${previousDay}`}" ${index === 0 ? "disabled" : ""}>${iconMarkup("caret-up-regular", "icon-control")}</button>
+        <button type="button" class="meal-shift-button" data-day-index="${index}" data-move-meal-offset="1" aria-label="${index === dayNames.length - 1 ? "Move later unavailable" : `Move ${escapeAttr(recipe.title)} to ${nextDay}`}" ${index === dayNames.length - 1 ? "disabled" : ""}>${iconMarkup("caret-down-regular", "icon-control")}</button>
+        ${mealMenu(recipe, index)}
+        <button type="button" class="mobile-meal-actions" data-open-meal-actions="${index}" aria-label="Manage ${escapeAttr(recipe.title)}">${iconMarkup("dots-three-regular", "icon-control")}</button>
       </div>
     </div>
   `;
 }
 
+function iconMarkup(name, className = "") {
+  const classes = ["icon", className].filter(Boolean).join(" ");
+  const href = iconSpriteReady ? `#icon-${name}` : `assets/rowta-icons.svg#icon-${name}`;
+  return `<svg class="${classes}" viewBox="0 0 256 256" aria-hidden="true" focusable="false"><use href="${href}"></use></svg>`;
+}
+
+async function initializeIconSprite() {
+  try {
+    const response = await fetch("assets/rowta-icons.svg");
+    if (!response.ok) return;
+    const container = document.createElement("div");
+    container.innerHTML = (await response.text()).trim();
+    const sprite = container.querySelector("svg");
+    if (!sprite) return;
+    sprite.classList.add("inline-icon-sprite");
+    sprite.setAttribute("aria-hidden", "true");
+    sprite.setAttribute("focusable", "false");
+    document.body.prepend(sprite);
+    iconSpriteReady = true;
+    document.querySelectorAll('use[href^="assets/rowta-icons.svg#"]').forEach((use) => {
+      const symbolId = use.getAttribute("href")?.split("#")[1];
+      if (symbolId) use.setAttribute("href", `#${symbolId}`);
+    });
+    document.querySelectorAll("svg.icon").forEach((icon) => {
+      icon.setAttribute("viewBox", "0 0 256 256");
+    });
+  } catch {
+    // Keep the external sprite references as a functional fallback.
+  }
+}
+
+function formatDateInputValue(date) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+}
+
+function renderGroceryNavBadge(neededCount) {
+  const count = Math.max(0, Number(neededCount) || 0);
+  els.groceryNavBadge.hidden = count === 0;
+  els.groceryNavBadge.textContent = count > 99 ? "99+" : String(count);
+  els.groceryNavButton.setAttribute("aria-label", count === 0 ? "Groceries" : `Groceries, ${count} item${count === 1 ? "" : "s"} to buy`);
+}
+
+function openMealActionSheet(dayIndex, trigger) {
+  const recipe = recipeById.get(activePlan().slots[dayIndex]?.recipeId);
+  if (!recipe) return;
+  mealActionDayIndex = dayIndex;
+  mealActionRecipeId = recipe.id;
+  mealActionFromUnscheduled = false;
+  mealActionReturnFocus = trigger || document.activeElement;
+  els.mealActionTitle.textContent = recipe.title;
+  showMealActionMenu();
+  els.mealActionMenu.querySelector('[data-meal-action="change"]').hidden = false;
+  els.mealQuickMove.hidden = false;
+  updateQuickMoveActions(dayIndex);
+  document.body.classList.add("meal-sheet-open");
+  if (!els.mealActionDialog.open) els.mealActionDialog.showModal();
+}
+
+function openUnscheduledMealSheet(recipeId, trigger) {
+  const recipe = recipeById.get(recipeId);
+  if (!recipe) return;
+  mealActionDayIndex = null;
+  mealActionRecipeId = recipe.id;
+  mealActionFromUnscheduled = true;
+  mealActionReturnFocus = trigger || document.activeElement;
+  els.mealActionTitle.textContent = recipe.title;
+  showMealActionMenu();
+  els.mealActionMenu.querySelector('[data-meal-action="change"]').hidden = true;
+  els.mealQuickMove.hidden = true;
+  document.body.classList.add("meal-sheet-open");
+  if (!els.mealActionDialog.open) els.mealActionDialog.showModal();
+}
+
+function closeMealActionSheet() {
+  if (els.mealActionDialog.open) els.mealActionDialog.close();
+}
+
+function showMealActionMenu() {
+  els.mealActionMenu.hidden = false;
+  els.mealMoveMenu.hidden = true;
+}
+
+function handleMealSheetAction(action) {
+  const dayIndex = mealActionDayIndex;
+  const recipeId = mealActionRecipeId;
+  const fromUnscheduled = mealActionFromUnscheduled;
+  if (!recipeId) {
+    closeMealActionSheet();
+    return;
+  }
+  if (action === "back") {
+    showMealActionMenu();
+    return;
+  }
+  if (action === "move") {
+    renderMealMoveChoices(dayIndex);
+    els.mealActionMenu.hidden = true;
+    els.mealMoveMenu.hidden = false;
+    return;
+  }
+  if (action === "earlier" || action === "later") {
+    const offset = action === "earlier" ? -1 : 1;
+    closeMealActionSheet();
+    window.setTimeout(() => moveMealByOffset(dayIndex, offset), 0);
+    return;
+  }
+  closeMealActionSheet();
+  if (action === "view") {
+    window.setTimeout(() => viewRecipe(recipeId), 0);
+    return;
+  }
+  if (action === "change") {
+    window.setTimeout(() => {
+      recipePickDayIndex = dayIndex;
+      navigateToView("recipes");
+      renderRecipes();
+    }, 0);
+    return;
+  }
+  if (action === "remove" && fromUnscheduled) window.setTimeout(() => removeUnscheduledRecipe(recipeId), 0);
+  if (action === "remove" && !fromUnscheduled) window.setTimeout(() => removeRecipeFromDay(dayIndex), 0);
+}
+
+function updateQuickMoveActions(dayIndex) {
+  const plan = activePlan();
+  [
+    { action: "earlier", offset: -1, hint: els.mealEarlierHint },
+    { action: "later", offset: 1, hint: els.mealLaterHint }
+  ].forEach(({ action, offset, hint }) => {
+    const targetIndex = dayIndex + offset;
+    const button = els.mealQuickMove.querySelector(`[data-meal-action="${action}"]`);
+    const unavailable = targetIndex < 0 || targetIndex >= plan.slots.length;
+    button.disabled = unavailable;
+    if (unavailable) {
+      hint.textContent = "Unavailable";
+      return;
+    }
+    const occupyingRecipe = recipeById.get(plan.slots[targetIndex].recipeId);
+    hint.textContent = `${occupyingRecipe ? "Swap with" : "Move to"} ${dayNames[targetIndex]}`;
+  });
+}
+
+function openMealMoveDialog(dayIndex, trigger) {
+  openMealActionSheet(dayIndex, trigger);
+  renderMealMoveChoices(dayIndex);
+  els.mealActionMenu.hidden = true;
+  els.mealMoveMenu.hidden = false;
+}
+
+function renderMealMoveChoices(fromIndex) {
+  const plan = activePlan();
+  els.mealMoveDays.innerHTML = plan.slots.map((slot, index) => {
+    if (index === fromIndex) return "";
+    const occupyingRecipe = recipeById.get(slot.recipeId);
+    return `
+      <button type="button" data-move-meal-day="${index}">
+        <strong>${escapeHtml(slot.day)}</strong>
+        <span>${occupyingRecipe ? `Swap with ${escapeHtml(occupyingRecipe.title)}` : "Open night"}</span>
+      </button>
+    `;
+  }).join("");
+}
+
+function moveMealFromSheet(targetIndex) {
+  const fromIndex = mealActionDayIndex;
+  const recipeId = mealActionRecipeId;
+  const fromUnscheduled = mealActionFromUnscheduled;
+  if (!recipeId) {
+    closeMealActionSheet();
+    return;
+  }
+  closeMealActionSheet();
+  window.setTimeout(() => moveRecipeToDay(
+    { recipeId, fromDay: fromUnscheduled ? "" : String(fromIndex), fromUnscheduled: fromUnscheduled ? "true" : "" },
+    targetIndex,
+    { allowUndo: true, focusRecipeId: recipeId }
+  ), 0);
+}
+
 function renderAddRecipePrompt(slot, index) {
   return `
     <button type="button" class="add-recipe-tile" data-open-recipe-picker="${index}" aria-label="Add dinner for ${slot.day}">
-      <span class="add-icon" aria-hidden="true">+</span>
+      <span class="add-icon" aria-hidden="true">${iconMarkup("calendar-plus-regular", "icon-control")}</span>
       <span class="add-copy">
-        <strong>Add dinner</strong>
-        <em>Drop recipe here</em>
+        <strong>Choose dinner</strong>
+        <em>Drop a recipe here or browse</em>
       </span>
+      <span class="add-dinner-decoration" aria-hidden="true">${iconMarkup("fork-knife-duotone", "icon-empty")}</span>
     </button>
   `;
 }
@@ -453,14 +757,17 @@ function renderUnscheduledTray(plan) {
   if (!items.length) return "";
   return `
     <section class="unscheduled-panel" data-unscheduled-drop="true" aria-label="Unscheduled meals">
-      <div>
-        <p class="eyebrow">Unscheduled meals</p>
-        <strong>Drag onto a day</strong>
+      <div class="unscheduled-heading">
+        <span class="unscheduled-heading-icon" aria-hidden="true">${iconMarkup("tray-regular", "icon-control")}</span>
+        <div>
+          <p class="eyebrow">Unscheduled meals</p>
+          <strong><span class="desktop-drag-copy">Drag onto a day</span><span class="mobile-plan-copy">Choose a day below</span></strong>
+        </div>
       </div>
       <div class="unscheduled-list">
         ${items.map((recipe) => `
-          <article class="unscheduled-meal" draggable="true" data-drag-recipe="${escapeAttr(recipe.id)}" data-drag-unscheduled="true">
-            <span class="drag-handle" aria-hidden="true"></span>
+          <article class="unscheduled-meal">
+            <span class="drag-handle" draggable="true" data-drag-recipe="${escapeAttr(recipe.id)}" data-drag-unscheduled="true" aria-hidden="true">${iconMarkup("dots-six-vertical-regular")}</span>
             <button type="button" class="recipe-thumb-button" data-view-recipe="${escapeAttr(recipe.id)}" aria-label="View ${escapeAttr(recipe.title)} recipe">
               ${recipe.image ? `<img src="${escapeAttr(recipe.image)}" alt="">` : `<span class="recipe-thumb">${initials(recipe.title)}</span>`}
             </button>
@@ -468,7 +775,8 @@ function renderUnscheduledTray(plan) {
               <strong><button type="button" class="recipe-title-button" data-view-recipe="${escapeAttr(recipe.id)}">${escapeHtml(recipe.title)}</button></strong>
               <span>${recipe.totalMinutes} min - ${escapeHtml(recipe.primaryProtein || "Flex")}</span>
             </div>
-            <button type="button" data-remove-unscheduled="${escapeAttr(recipe.id)}" aria-label="Remove ${escapeAttr(recipe.title)}">⋯</button>
+            <button type="button" data-remove-unscheduled="${escapeAttr(recipe.id)}" aria-label="Remove ${escapeAttr(recipe.title)}">${iconMarkup("trash-regular", "icon-control")}</button>
+            <button type="button" class="mobile-plan-unscheduled" data-plan-unscheduled="${escapeAttr(recipe.id)}">Choose day</button>
           </article>
         `).join("")}
       </div>
@@ -479,11 +787,14 @@ function renderUnscheduledTray(plan) {
 function mealMenu(recipe, index) {
   return `
     <details class="meal-menu">
-      <summary aria-label="Meal actions">⋯</summary>
+      <summary aria-label="Actions for ${escapeAttr(recipe.title)}">${iconMarkup("dots-three-regular", "icon-control")}</summary>
       <div>
-        <button type="button" data-open-recipe-picker="${index}">Change recipe</button>
-        <button type="button" data-remove-day="${index}">Remove from week</button>
-        <button type="button" data-view-recipe="${escapeAttr(recipe.id)}">View recipe</button>
+        <button type="button" data-view-recipe="${escapeAttr(recipe.id)}">${iconMarkup("book-open-text-regular", "icon-inline")}View recipe</button>
+        <button type="button" data-open-recipe-picker="${index}">${iconMarkup("arrows-clockwise-regular", "icon-inline")}Change dinner</button>
+        <button type="button" data-day-index="${index}" data-move-meal-offset="-1" ${index === 0 ? "disabled" : ""}>${iconMarkup("caret-up-regular", "icon-inline")}Move earlier</button>
+        <button type="button" data-day-index="${index}" data-move-meal-offset="1" ${index === dayNames.length - 1 ? "disabled" : ""}>${iconMarkup("caret-down-regular", "icon-inline")}Move later</button>
+        <button type="button" data-choose-meal-day="${index}">${iconMarkup("calendar-blank-regular", "icon-inline")}Choose another day</button>
+        <button type="button" class="danger-action" data-remove-day="${index}">${iconMarkup("trash-regular", "icon-inline")}Remove from week</button>
       </div>
     </details>
   `;
@@ -969,7 +1280,11 @@ function catalogStatusBadge(recipe, selectedIds) {
 function renderGroceries() {
   const week = activeWeek();
   const groceries = generateGroceries(activePlan(), week);
+  const neededItems = groceries.deliveries.flatMap((delivery) => delivery.items).filter((item) => item.status !== "have");
+  const estimatedTotal = neededItems.reduce((sum, item) => sum + item.estimatedCost, 0);
   els.groceryHeading.textContent = "Shopping list";
+  if (els.groceryNeedCount) els.groceryNeedCount.textContent = `${neededItems.length} item${neededItems.length === 1 ? "" : "s"}`;
+  if (els.groceryEstimatedTotal) els.groceryEstimatedTotal.textContent = `$${estimatedTotal.toFixed(2)}`;
   els.groceryDeliveries.innerHTML = groceries.deliveries.map(renderDelivery).join("");
 }
 
@@ -1014,12 +1329,14 @@ function renderGrocerySection(section, items) {
 }
 
 function renderPantry() {
+  const rows = ingredientCatalogRows();
   els.pantryTags.innerHTML = recipePantryStaples.map(tag).join("");
-  els.ingredientCatalog.innerHTML = renderIngredientCatalog();
+  els.ingredientCatalog.innerHTML = renderIngredientCatalog(rows);
+  if (els.ingredientCatalogCount) els.ingredientCatalogCount.textContent = `${rows.length} tracked`;
+  if (els.pantryAssumptionCount) els.pantryAssumptionCount.textContent = `${recipePantryStaples.length} staples`;
 }
 
-function renderIngredientCatalog() {
-  const rows = ingredientCatalogRows();
+function renderIngredientCatalog(rows = ingredientCatalogRows()) {
   return `
     <table class="catalog-table">
       <thead>
@@ -1034,7 +1351,7 @@ function renderIngredientCatalog() {
         ${rows.map((row) => `
           <tr>
             <td><strong>${escapeHtml(row.name)}</strong></td>
-            <td>${escapeHtml(sectionLabel(row.section))}</td>
+            <td><span class="catalog-section-badge tone-${escapeAttr(sectionTone(row.section))}">${escapeHtml(sectionLabel(row.section))}</span></td>
             <td>${row.recipes.length}</td>
             <td>${escapeHtml(row.quantity || "varies")}</td>
           </tr>
@@ -1225,6 +1542,7 @@ function rateRecipe(recipeId, rating) {
 }
 
 function chooseRecipe(recipeId) {
+  clearPlannerUndo();
   if (recipePickDayIndex !== null) {
     assignRecipeToDay(recipePickDayIndex, recipeId, { returnToPlanner: true });
     return;
@@ -1241,8 +1559,9 @@ function chooseRecipe(recipeId) {
 }
 
 function assignRecipeToDay(index, recipeId, options = {}) {
+  clearPlannerUndo();
   const plan = activePlan();
-  if (recipeId) removeRecipeFromWeek(recipeId);
+  if (recipeId) removeRecipeFromWeek(recipeId, { preserveUndo: true });
   plan.slots[index].recipeId = recipeId;
   recipePickDayIndex = null;
   saveState();
@@ -1251,26 +1570,30 @@ function assignRecipeToDay(index, recipeId, options = {}) {
 }
 
 function removeRecipeFromDay(index) {
+  clearPlannerUndo();
   const plan = activePlan();
   plan.slots[index].recipeId = "";
   saveState();
   renderAll();
 }
 
-function addUnscheduledRecipe(recipeId) {
+function addUnscheduledRecipe(recipeId, options = {}) {
+  if (!options.preserveUndo) clearPlannerUndo();
   const plan = activePlan();
   plan.unscheduled = plan.unscheduled || [];
   if (!plan.unscheduled.includes(recipeId)) plan.unscheduled.push(recipeId);
 }
 
 function removeUnscheduledRecipe(recipeId) {
+  clearPlannerUndo();
   const plan = activePlan();
   plan.unscheduled = (plan.unscheduled || []).filter((id) => id !== recipeId);
   saveState();
   renderAll();
 }
 
-function removeRecipeFromWeek(recipeId) {
+function removeRecipeFromWeek(recipeId, options = {}) {
+  if (!options.preserveUndo) clearPlannerUndo();
   const plan = activePlan();
   plan.slots.forEach((slot) => {
     if (slot.recipeId === recipeId) slot.recipeId = "";
@@ -1297,30 +1620,140 @@ function dragPayload(event) {
   }
 }
 
-function moveRecipeToDay(payload, targetIndex) {
+function moveMealByOffset(fromIndex, offset) {
+  const targetIndex = fromIndex + offset;
+  if (!Number.isInteger(fromIndex) || ![-1, 1].includes(offset)) return;
+  if (targetIndex < 0 || targetIndex >= activePlan().slots.length) return;
+  const recipeId = activePlan().slots[fromIndex]?.recipeId;
+  if (!recipeId) return;
+  moveRecipeToDay(
+    { recipeId, fromDay: String(fromIndex), fromUnscheduled: "" },
+    targetIndex,
+    { allowUndo: true, focusRecipeId: recipeId, preferredOffset: offset }
+  );
+}
+
+function snapshotPlannerUndo(recipeId, fromIndex, targetIndex) {
+  const plan = activePlan();
+  clearPlannerUndo();
+  plannerUndo = {
+    weekKey: state.activeWeek,
+    slots: plan.slots.map((slot) => slot.recipeId),
+    unscheduled: [...(plan.unscheduled || [])],
+    recipeId,
+    fromIndex,
+    targetIndex
+  };
+}
+
+function moveRecipeToDay(payload, targetIndex, options = {}) {
   const plan = activePlan();
   const fromIndex = payload.fromDay === "" ? -1 : Number(payload.fromDay);
   const targetRecipeId = plan.slots[targetIndex]?.recipeId || "";
 
   if (fromIndex === targetIndex) return;
+  if (options.allowUndo) snapshotPlannerUndo(payload.recipeId, fromIndex, targetIndex);
   if (fromIndex >= 0) {
     plan.slots[fromIndex].recipeId = targetRecipeId;
   } else {
     plan.unscheduled = (plan.unscheduled || []).filter((id) => id !== payload.recipeId);
-    if (targetRecipeId) addUnscheduledRecipe(targetRecipeId);
+    if (targetRecipeId) addUnscheduledRecipe(targetRecipeId, { preserveUndo: true });
   }
   plan.slots[targetIndex].recipeId = payload.recipeId;
   saveState();
   renderAll();
+  if (options.focusRecipeId) focusPlannedRecipeAction(options.focusRecipeId, options.preferredOffset);
+  if (options.allowUndo) showPlannerMoveToast(payload.recipeId, targetIndex);
 }
 
-function moveRecipeToUnscheduled(payload) {
+function moveRecipeToUnscheduled(payload, options = {}) {
   const plan = activePlan();
   const fromIndex = payload.fromDay === "" ? -1 : Number(payload.fromDay);
+  if (fromIndex < 0) return;
+  if (options.allowUndo) snapshotPlannerUndo(payload.recipeId, fromIndex, -1);
   if (fromIndex >= 0) plan.slots[fromIndex].recipeId = "";
-  addUnscheduledRecipe(payload.recipeId);
+  addUnscheduledRecipe(payload.recipeId, { preserveUndo: true });
   saveState();
   renderAll();
+  if (options.focusRecipeId) focusUnscheduledMeal(options.focusRecipeId);
+  if (options.allowUndo) showPlannerMoveToast(payload.recipeId, -1);
+}
+
+function focusPlannedRecipeAction(recipeId, preferredOffset = null) {
+  const restoreFocus = () => {
+    const card = [...document.querySelectorAll("[data-slot-recipe-id]")].find((item) => item.dataset.slotRecipeId === recipeId);
+    if (!card) return;
+    const preferredCandidates = preferredOffset === null
+      ? card.querySelectorAll("[data-open-meal-actions], .meal-menu summary")
+      : card.querySelectorAll(`[data-move-meal-offset="${preferredOffset}"]:not(:disabled), [data-open-meal-actions], .meal-menu summary`);
+    const preferred = [...preferredCandidates].find((item) => item.getClientRects().length);
+    const fallback = [...card.querySelectorAll("[data-view-recipe]")].find((item) => item.getClientRects().length);
+    (preferred || fallback)?.focus({ preventScroll: true });
+  };
+  requestAnimationFrame(restoreFocus);
+  window.setTimeout(() => {
+    if (document.activeElement === document.body) restoreFocus();
+  }, 0);
+}
+
+function focusUnscheduledMeal(recipeId) {
+  const restoreFocus = () => {
+    const card = [...document.querySelectorAll(".unscheduled-meal")]
+      .find((item) => item.querySelector("[data-drag-recipe]")?.dataset.dragRecipe === recipeId);
+    if (!card) return;
+    const mobileAction = card.querySelector("[data-plan-unscheduled]");
+    const preferred = mobileAction && mobileAction.getClientRects().length ? mobileAction : null;
+    (preferred || card.querySelector("[data-view-recipe]"))?.focus({ preventScroll: true });
+  };
+  requestAnimationFrame(restoreFocus);
+  window.setTimeout(() => {
+    if (document.activeElement === document.body) restoreFocus();
+  }, 0);
+}
+
+function showPlannerMoveToast(recipeId, targetIndex) {
+  const recipe = recipeById.get(recipeId);
+  if (!recipe) return;
+  window.clearTimeout(plannerToastTimer);
+  els.plannerToastMessage.textContent = targetIndex < 0
+    ? `${recipe.title} moved to Unscheduled.`
+    : `${recipe.title} moved to ${dayNames[targetIndex]}.`;
+  els.plannerToast.querySelector("[data-undo-planner-move]").hidden = false;
+  els.plannerToast.hidden = false;
+  plannerToastTimer = window.setTimeout(clearPlannerUndo, 6000);
+}
+
+function clearPlannerUndo() {
+  window.clearTimeout(plannerToastTimer);
+  plannerToastTimer = null;
+  plannerUndo = null;
+  if (els.plannerToast) els.plannerToast.hidden = true;
+  if (els.plannerToastMessage) els.plannerToastMessage.textContent = "";
+}
+
+function undoPlannerMove() {
+  if (!plannerUndo || plannerUndo.weekKey !== state.activeWeek) {
+    clearPlannerUndo();
+    return;
+  }
+  const undo = plannerUndo;
+  const plan = activePlan();
+  plan.slots.forEach((slot, index) => {
+    slot.recipeId = undo.slots[index] || "";
+  });
+  plan.unscheduled = [...undo.unscheduled];
+  clearPlannerUndo();
+  saveState();
+  renderAll();
+  els.plannerToastMessage.textContent = "Move undone.";
+  els.plannerToast.querySelector("[data-undo-planner-move]").hidden = true;
+  els.plannerToast.hidden = false;
+  plannerToastTimer = window.setTimeout(() => {
+    els.plannerToast.hidden = true;
+    els.plannerToastMessage.textContent = "";
+  }, 1800);
+  if (undo.fromIndex >= 0) focusPlannedRecipeAction(undo.recipeId);
+  else focusUnscheduledMeal(undo.recipeId);
 }
 
 function toggleHave(itemKey) {

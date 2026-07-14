@@ -15,39 +15,62 @@
         </a>
 
         <nav class="utility-nav" aria-label="Global navigation">
-          <button type="button" data-view-button="pantry"><span class="tab-icon pantry-icon" aria-hidden="true"></span>Catalog</button>
-          <button id="printBtn" type="button"><span class="tab-icon print-icon" aria-hidden="true"></span>Print</button>
+          <button type="button" data-view-button="pantry"><svg class="icon icon-control" aria-hidden="true" focusable="false"><use href="assets/rowta-icons.svg#icon-storefront-regular"></use></svg>Catalog</button>
+          <button id="printBtn" type="button"><svg class="icon icon-control" aria-hidden="true" focusable="false"><use href="assets/rowta-icons.svg#icon-printer-regular"></use></svg>Print</button>
         </nav>
       </div>
     </header>
 
     <main class="app-shell">
       <section class="week-bar" aria-label="Planning weeks">
-        <div class="week-toolbar">
-          <div>
-            <h1 id="weekTitle" class="sr-only">Rowta planning calendar</h1>
-            <p class="eyebrow">Planning calendar</p>
-          </div>
-          <div class="summary-pills" id="weekStats"></div>
-        </div>
-        <div class="week-strip" aria-label="Week navigation">
-          <button type="button" class="week-arrow" data-week-shift="-1" aria-label="Previous week">&lt;</button>
-          <div id="weekTabs" class="week-tabs" role="tablist" aria-label="Week choices"></div>
-          <button type="button" class="week-arrow" data-week-shift="1" aria-label="Next week">&gt;</button>
+        <h1 id="weekTitle" class="sr-only">Rowta planning calendar</h1>
+        <div class="week-context" aria-label="Week navigation">
+          <div id="weekTabs" class="week-tabs" role="tablist" aria-label="Primary week choices"></div>
+          <details class="week-picker">
+            <summary>
+              <svg class="icon icon-control" aria-hidden="true" focusable="false"><use href="assets/rowta-icons.svg#icon-calendar-blank-regular"></use></svg>
+              <span id="weekPickerLabel">More weeks</span>
+              <svg class="icon week-picker-caret" aria-hidden="true" focusable="false"><use href="assets/rowta-icons.svg#icon-caret-down-regular"></use></svg>
+            </summary>
+            <div id="weekMenu" class="week-picker-menu" role="group" aria-label="Other weeks"></div>
+          </details>
         </div>
         <nav class="app-nav" aria-label="Selected week sections">
-          <button type="button" class="active" data-view-button="planner"><span class="tab-icon calendar-icon" aria-hidden="true"></span>Week</button>
-          <button type="button" data-view-button="recipes"><span class="tab-icon book-icon" aria-hidden="true"></span>Recipes</button>
-          <button type="button" data-view-button="groceries"><span class="tab-icon basket-icon" aria-hidden="true"></span>Groceries</button>
+          <button type="button" class="active" data-view-button="planner">
+            <span class="nav-icon-wrap" aria-hidden="true"><svg class="icon nav-icon nav-icon-regular" focusable="false"><use href="assets/rowta-icons.svg#icon-calendar-check-regular"></use></svg><svg class="icon nav-icon nav-icon-fill" focusable="false"><use href="assets/rowta-icons.svg#icon-calendar-check-fill"></use></svg></span>
+            <span>Week</span>
+          </button>
+          <button type="button" data-view-button="recipes">
+            <span class="nav-icon-wrap" aria-hidden="true"><svg class="icon nav-icon nav-icon-regular" focusable="false"><use href="assets/rowta-icons.svg#icon-cooking-pot-regular"></use></svg><svg class="icon nav-icon nav-icon-fill" focusable="false"><use href="assets/rowta-icons.svg#icon-cooking-pot-fill"></use></svg></span>
+            <span>Recipes</span>
+          </button>
+          <button id="groceryNavButton" type="button" data-view-button="groceries">
+            <span class="nav-icon-wrap" aria-hidden="true"><svg class="icon nav-icon nav-icon-regular" focusable="false"><use href="assets/rowta-icons.svg#icon-basket-regular"></use></svg><svg class="icon nav-icon nav-icon-fill" focusable="false"><use href="assets/rowta-icons.svg#icon-basket-fill"></use></svg><span id="groceryNavBadge" class="nav-count-badge" hidden></span></span>
+            <span>Groceries</span>
+          </button>
         </nav>
       </section>
 
       <section id="plannerView" class="app-view active" data-view="planner">
+        <header class="view-intro view-intro-planner">
+          <div class="view-intro-copy">
+            <p id="plannerWeekLabel" class="eyebrow">This week</p>
+            <h2>Dinner plan</h2>
+            <p>Shape a week that feels varied, realistic, and easy to shop.</p>
+          </div>
+          <dl class="view-intro-stats" aria-label="Dinner plan summary">
+            <div><dt>Planned</dt><dd id="plannerMealCount">0 dinners</dd></div>
+            <div><dt>Shopping</dt><dd id="plannerGroceryCount">0 items</dd></div>
+            <div><dt>Pace</dt><dd id="plannerAverageTime">- min average</dd></div>
+          </dl>
+        </header>
+
         <div class="planner-layout">
           <section class="planner-main" aria-label="Weekly dinner plan">
-            <div class="section-heading">
+            <div class="section-heading section-band">
               <div>
                 <p class="eyebrow">Weekly agenda</p>
+                <h2>Dinners by day</h2>
               </div>
             </div>
 
@@ -57,8 +80,7 @@
 
           <aside class="planner-side" aria-label="Generated grocery summary">
             <div class="side-panel">
-              <p class="eyebrow">Generated from recipes</p>
-              <h2>Delivery split</h2>
+              <div class="delivery-heading"><span class="delivery-heading-icon" aria-hidden="true"><svg class="icon" focusable="false"><use href="assets/rowta-icons.svg#icon-truck-regular"></use></svg></span><div><p class="eyebrow">Generated from recipes</p><h2>Delivery split</h2></div></div>
               <p id="deliverySummary" class="muted-copy"></p>
               <div id="deliveryPreview" class="delivery-preview"></div>
               <button type="button" class="primary-action" data-view-jump="groceries">Review groceries</button>
@@ -68,9 +90,22 @@
       </section>
 
       <section id="recipesView" class="app-view" data-view="recipes">
+        <header class="view-intro view-intro-recipes">
+          <div class="view-intro-copy">
+            <p class="eyebrow">Recipe library</p>
+            <h2>Find the right dinner</h2>
+            <p>Start with a thoughtful recommendation or browse the full collection.</p>
+          </div>
+          <dl class="view-intro-stats" aria-label="Recipe library summary">
+            <div><dt>Library</dt><dd id="recipeResultCount">0 recipes</dd></div>
+            <div><dt>Shortlist</dt><dd>6 recommendations</dd></div>
+          </dl>
+        </header>
+
         <section class="recommendation-section" aria-label="Recommended recipes">
-          <div class="section-heading compact-heading">
+          <div class="section-heading compact-heading section-band section-band-apricot">
             <div>
+              <p class="eyebrow">Picked for your week</p>
               <h2>Recommended for this week</h2>
             </div>
           </div>
@@ -80,6 +115,7 @@
         <section class="catalog-panel" aria-label="Browse all recipes">
           <div class="catalog-panel-head">
             <div>
+              <p class="eyebrow">The full collection</p>
               <h2>Browse all recipes</h2>
             </div>
             <div class="catalog-actions">
@@ -100,10 +136,23 @@
       </section>
 
       <section id="groceriesView" class="app-view" data-view="groceries">
-        <div class="section-heading">
-          <div>
+        <header class="view-intro view-intro-groceries">
+          <div class="view-intro-copy">
             <p class="eyebrow">Groceries</p>
             <h2 id="groceryHeading">Shopping list</h2>
+            <p>Everything generated from this week's dinners, grouped for a calmer shop.</p>
+          </div>
+          <dl class="view-intro-stats" aria-label="Shopping list summary">
+            <div><dt>Need</dt><dd id="groceryNeedCount">0 items</dd></div>
+            <div><dt>Estimate</dt><dd id="groceryEstimatedTotal">$0.00</dd></div>
+            <div><dt>Trips</dt><dd>2 deliveries</dd></div>
+          </dl>
+        </header>
+
+        <div class="view-toolbar" aria-label="Shopping list controls">
+          <div>
+            <p class="eyebrow">Shop by section</p>
+            <strong>Filter the list</strong>
           </div>
           <div class="filter-row compact" aria-label="Grocery section filter">
             <button type="button" class="active" data-section-filter="all">All</button>
@@ -118,25 +167,66 @@
       </section>
 
       <section id="pantryView" class="app-view" data-view="pantry">
+        <header class="view-intro view-intro-catalog">
+          <div class="view-intro-copy">
+            <p class="eyebrow">Household groceries</p>
+            <h2>Ingredient catalog</h2>
+            <p>See the ingredients that connect the recipe library and weekly shopping list.</p>
+          </div>
+          <dl class="view-intro-stats" aria-label="Ingredient catalog summary">
+            <div><dt>Ingredients</dt><dd id="ingredientCatalogCount">0 tracked</dd></div>
+            <div><dt>Assumptions</dt><dd id="pantryAssumptionCount">0 staples</dd></div>
+          </dl>
+        </header>
+
         <div class="pantry-layout">
-          <section>
-            <div class="section-heading">
+          <section class="catalog-library">
+            <div class="section-heading section-band">
               <div>
-                <p class="eyebrow">Household groceries</p>
-                <h2>Ingredient catalog</h2>
+                <p class="eyebrow">Recipe-connected groceries</p>
+                <h2>Ingredients used across recipes</h2>
               </div>
             </div>
+            <p class="table-scroll-hint">Swipe to see recipe counts and typical quantities.</p>
             <div id="ingredientCatalog" class="catalog-table-wrap"></div>
           </section>
 
-          <aside class="side-panel">
+          <aside class="side-panel support-callout">
             <p class="eyebrow">Recipe assumptions</p>
             <h2>Recipe pantry staples</h2>
+            <p class="muted-copy">Quiet basics that recipes can assume are already at home.</p>
             <div id="pantryTags" class="tag-cloud"></div>
           </aside>
         </div>
       </section>
     </main>
+
+    <dialog id="mealActionDialog" class="meal-action-dialog" aria-labelledby="mealActionTitle">
+        <header>
+          <div>
+            <p class="eyebrow">Planned dinner</p>
+            <h2 id="mealActionTitle">Dinner actions</h2>
+          </div>
+          <button type="button" class="meal-action-close" data-close-meal-actions aria-label="Close meal actions"><svg class="icon icon-control" aria-hidden="true" focusable="false"><use href="assets/rowta-icons.svg#icon-x-regular"></use></svg></button>
+        </header>
+        <div id="mealActionMenu" class="meal-action-menu">
+          <div id="mealQuickMove" class="meal-quick-move"><button type="button" data-meal-action="earlier"><svg class="icon icon-control" aria-hidden="true" focusable="false"><use href="assets/rowta-icons.svg#icon-caret-up-regular"></use></svg><span><strong>Earlier</strong><em id="mealEarlierHint">Unavailable</em></span></button><button type="button" data-meal-action="later"><svg class="icon icon-control" aria-hidden="true" focusable="false"><use href="assets/rowta-icons.svg#icon-caret-down-regular"></use></svg><span><strong>Later</strong><em id="mealLaterHint">Unavailable</em></span></button></div>
+          <button type="button" data-meal-action="view"><svg class="icon icon-control" aria-hidden="true" focusable="false"><use href="assets/rowta-icons.svg#icon-book-open-text-regular"></use></svg>View recipe</button>
+          <button type="button" data-meal-action="change"><svg class="icon icon-control" aria-hidden="true" focusable="false"><use href="assets/rowta-icons.svg#icon-arrows-clockwise-regular"></use></svg>Change dinner</button>
+          <button type="button" data-meal-action="move"><svg class="icon icon-control" aria-hidden="true" focusable="false"><use href="assets/rowta-icons.svg#icon-calendar-blank-regular"></use></svg>Choose another day</button>
+          <button type="button" class="danger-action" data-meal-action="remove"><svg class="icon icon-control" aria-hidden="true" focusable="false"><use href="assets/rowta-icons.svg#icon-trash-regular"></use></svg>Remove from week</button>
+        </div>
+        <div id="mealMoveMenu" class="meal-move-menu" hidden>
+          <p class="eyebrow">Move dinner to</p>
+          <div id="mealMoveDays"></div>
+          <button type="button" class="meal-action-back" data-meal-action="back">Back to actions</button>
+        </div>
+    </dialog>
+
+    <div id="plannerToast" class="planner-toast" hidden>
+      <span id="plannerToastMessage" role="status" aria-live="polite"></span>
+      <button type="button" data-undo-planner-move><svg class="icon icon-control" aria-hidden="true" focusable="false"><use href="assets/rowta-icons.svg#icon-arrow-counter-clockwise-regular"></use></svg>Undo</button>
+    </div>
 
     <script src="data/grocery-products.js"></script>
     <script src="data/recipe-pantry.js"></script>
