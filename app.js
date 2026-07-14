@@ -55,6 +55,9 @@ const els = {
   weekTabs: document.querySelector("#weekTabs"),
   weekMenu: document.querySelector("#weekMenu"),
   weekPickerLabel: document.querySelector("#weekPickerLabel"),
+  selectedWeekRelative: document.querySelector("#selectedWeekRelative"),
+  selectedWeekRange: document.querySelector("#selectedWeekRange"),
+  weekPickerSummary: document.querySelector(".week-picker summary"),
   plannerMealCount: document.querySelector("#plannerMealCount"),
   plannerWeekLabel: document.querySelector("#plannerWeekLabel"),
   plannerGroceryCount: document.querySelector("#plannerGroceryCount"),
@@ -176,12 +179,20 @@ document.addEventListener("click", (event) => {
 
   const weekButton = event.target.closest("[data-week-key]");
   if (weekButton) {
+    const selectedWeekKey = weekButton.dataset.weekKey;
+    const selectedFromMenu = Boolean(weekButton.closest(".week-picker-menu"));
     clearPlannerUndo();
-    state.activeWeek = weekButton.dataset.weekKey;
+    state.activeWeek = selectedWeekKey;
     weekButton.closest(".week-picker")?.removeAttribute("open");
     ensurePlan(state.activeWeek);
     saveState();
     renderAll();
+    requestAnimationFrame(() => {
+      const focusTarget = selectedFromMenu
+        ? document.querySelector(".week-picker summary")
+        : document.querySelector(`.week-tabs [data-week-key="${CSS.escape(selectedWeekKey)}"]`);
+      focusTarget?.focus({ preventScroll: true });
+    });
     return;
   }
 
@@ -472,15 +483,21 @@ function renderAll() {
 
 function renderWeekTabs() {
   const activeIndex = weeks.findIndex((week) => week.key === state.activeWeek);
+  const selectedWeek = weeks[activeIndex] || weeks[0];
+  const selectedRelativeLabel = weekTabLabel(Math.max(activeIndex, 0));
+  const selectedRange = formatRange(selectedWeek.start, selectedWeek.end);
+  if (els.selectedWeekRelative.textContent !== selectedRelativeLabel) els.selectedWeekRelative.textContent = selectedRelativeLabel;
+  if (els.selectedWeekRange.textContent !== selectedRange) els.selectedWeekRange.textContent = selectedRange;
+  els.weekPickerSummary.setAttribute("aria-label", `Choose week. Currently ${selectedRelativeLabel}, ${selectedRange}`);
   els.weekTabs.innerHTML = weeks.slice(0, 2).map((week, index) => `
-    <button type="button" class="${week.key === state.activeWeek ? "active" : ""}" data-week-key="${week.key}">
+    <button type="button" role="tab" aria-selected="${week.key === state.activeWeek}" class="${week.key === state.activeWeek ? "active" : ""}" data-week-key="${week.key}">
       <span>${weekTabLabel(index)}</span>
       <strong>${formatRange(week.start, week.end)}</strong>
     </button>
   `).join("");
-  els.weekMenu.innerHTML = weeks.slice(2).map((week, offset) => `
-    <button type="button" class="${week.key === state.activeWeek ? "active" : ""}" data-week-key="${week.key}">
-      <span>${weekTabLabel(offset + 2)}</span>
+  els.weekMenu.innerHTML = weeks.map((week, index) => `
+    <button type="button" aria-pressed="${week.key === state.activeWeek}" class="week-menu-option ${index < 2 ? "week-menu-primary" : ""} ${week.key === state.activeWeek ? "active" : ""}" data-week-key="${week.key}">
+      <span>${weekTabLabel(index)}</span>
       <strong>${formatRange(week.start, week.end)}</strong>
     </button>
   `).join("");
@@ -2435,7 +2452,7 @@ function initials(title) {
 function weekTabLabel(index) {
   if (index === 0) return "This week";
   if (index === 1) return "Next week";
-  return "Upcoming";
+  return `In ${index} weeks`;
 }
 
 function shortDayName(day) {

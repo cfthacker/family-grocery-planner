@@ -1769,10 +1769,6 @@ summary {
   display: none;
 }
 
-.recipe-detail-open .week-bar {
-  padding-block: 8px;
-}
-
 .recipe-detail-article {
   --recipe-content-width: 920px;
   display: grid;
@@ -3139,10 +3135,6 @@ body:not([data-active-view="planner"]):not([data-active-view="recipe-detail"]) .
     flex: 1 1 0;
   }
 
-  .recipe-detail-open .week-bar {
-    padding: 7px;
-  }
-
   .recipe-detail-hero {
     grid-template-columns: 1fr;
   }
@@ -3960,32 +3952,6 @@ body:not([data-active-view="planner"]):not([data-active-view="recipe-detail"]) .
   }
 }
 
-@media (min-width: 761px) and (max-width: 980px) {
-  .week-bar,
-  body:not([data-active-view="planner"]):not([data-active-view="recipe-detail"]) .week-bar {
-    grid-template-columns: 1fr;
-  }
-
-  .week-bar .app-nav,
-  body:not([data-active-view="planner"]):not([data-active-view="recipe-detail"]) .week-bar .app-nav {
-    grid-column: 1;
-    grid-row: 1;
-  }
-
-  .week-context {
-    grid-column: 1;
-    grid-row: 2;
-    justify-self: stretch;
-    width: 100%;
-  }
-
-  .week-tabs {
-    flex: 1 1 auto;
-    width: auto;
-    max-width: none;
-  }
-}
-
 @media (max-width: 760px) {
   body {
     padding-bottom: 0;
@@ -3997,108 +3963,6 @@ body:not([data-active-view="planner"]):not([data-active-view="recipe-detail"]) .
 
   .app-shell {
     padding-top: 8px;
-  }
-
-  .recipe-detail-open .week-bar {
-    display: none;
-  }
-
-  .week-bar,
-  body:not([data-active-view="planner"]):not([data-active-view="recipe-detail"]) .week-bar {
-    display: grid;
-    grid-template-columns: minmax(0, 1fr);
-    gap: 7px;
-    margin-bottom: 9px;
-    padding: 7px;
-    border-radius: var(--radius-md);
-  }
-
-  .week-context {
-    grid-column: 1;
-    grid-row: 1;
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    justify-self: stretch;
-    width: 100%;
-    gap: 6px;
-    border: 0;
-    background: transparent;
-    box-shadow: none;
-  }
-
-  .week-tabs {
-    width: auto;
-    max-width: none;
-    border: 1px solid rgba(205, 189, 167, 0.88);
-    border-radius: var(--radius-md);
-    background: rgba(255, 253, 247, 0.64);
-  }
-
-  .week-tabs button,
-  body:not([data-active-view="planner"]):not([data-active-view="recipe-detail"]) .week-tabs button {
-    display: inline-grid;
-    min-width: 0;
-    min-height: 44px;
-    padding: 5px 8px;
-  }
-
-  .week-tabs strong {
-    font-size: 11px;
-  }
-
-  .week-picker summary {
-    width: 44px;
-    min-height: 44px;
-    justify-content: center;
-    padding: 0;
-    border: 1px solid rgba(205, 189, 167, 0.88);
-    border-radius: var(--radius-md);
-  }
-
-  .week-picker summary #weekPickerLabel,
-  .week-picker summary .week-picker-caret {
-    position: absolute;
-    width: 1px;
-    height: 1px;
-    margin: -1px;
-    padding: 0;
-    border: 0;
-    overflow: hidden;
-    clip: rect(0, 0, 0, 0);
-    white-space: nowrap;
-  }
-
-  .week-bar .app-nav,
-  body:not([data-active-view="planner"]):not([data-active-view="recipe-detail"]) .week-bar .app-nav {
-    position: static;
-    grid-column: 1;
-    grid-row: 2;
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    width: 100%;
-    min-height: var(--control-lg);
-    transform: none;
-    border: 1px solid rgba(205, 189, 167, 0.88);
-    border-radius: var(--radius-md);
-    background: rgba(255, 253, 247, 0.72);
-    box-shadow: none;
-    backdrop-filter: none;
-  }
-
-  .week-bar .app-nav button {
-    position: relative;
-    min-height: var(--control-lg);
-    padding: 0 8px;
-    border: 0;
-    border-right: 1px solid rgba(205, 189, 167, 0.7);
-    border-radius: 0;
-  }
-
-  .week-bar .app-nav button:last-child { border-right: 0; }
-
-  .week-bar .app-nav button.active {
-    background: rgba(223, 232, 216, 0.9);
-    color: var(--herb-dark);
   }
 
   .view-intro-planner {
@@ -4482,6 +4346,10 @@ body:not([data-active-view="planner"]):not([data-active-view="recipe-detail"]) .
   font-weight: 700;
 }
 
+.selected-week-status {
+  display: none;
+}
+
 .week-bar .app-nav,
 body:not([data-active-view="planner"]):not([data-active-view="recipe-detail"]) .week-bar .app-nav {
   gap: 0;
@@ -4526,6 +4394,12 @@ body:not([data-active-view="planner"]):not([data-active-view="recipe-detail"]) .
   border-color: rgba(201, 130, 67, 0.62);
   background: rgba(247, 222, 192, 0.76);
   color: var(--apricot-dark);
+}
+
+@media (min-width: 981px) {
+  .week-picker-menu .week-menu-primary {
+    display: none;
+  }
 }
 
 body[data-active-view="recipe-detail"] .week-bar {
@@ -4735,9 +4609,151 @@ body[data-active-view="recipe-detail"] .week-bar .app-nav {
 }
 
 @media (max-width: 980px) {
+  .week-bar,
+  body:not([data-active-view="planner"]):not([data-active-view="recipe-detail"]) .week-bar {
+    display: grid;
+    grid-template-columns: minmax(230px, 0.82fr) minmax(360px, 1.18fr);
+    align-items: center;
+    gap: 6px;
+    min-height: 58px;
+    margin-bottom: 10px;
+    padding: 6px;
+    border-radius: var(--radius-md);
+  }
+
+  .week-context {
+    position: relative;
+    grid-column: 1;
+    grid-row: 1;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) auto;
+    align-items: stretch;
+    justify-self: stretch;
+    width: 100%;
+    min-height: 44px;
+    gap: 0;
+    overflow: visible;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius-md);
+    background: rgba(255, 253, 247, 0.78);
+    box-shadow: none;
+  }
+
+  .selected-week-status {
+    display: grid;
+    align-content: center;
+    gap: 0;
+    min-width: 0;
+    padding: 4px 10px;
+    color: var(--muted);
+    line-height: 1;
+  }
+
+  .selected-week-status span,
+  .selected-week-status strong {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+
+  .selected-week-status span {
+    font-size: 10px;
+    line-height: 13px;
+    font-weight: 650;
+  }
+
+  .selected-week-status strong {
+    color: var(--ink);
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 750;
+  }
+
+  .week-tabs {
+    display: none;
+  }
+
+  .week-picker {
+    position: static;
+  }
+
+  .week-picker summary {
+    min-height: 44px;
+    border: 0;
+    border-left: 1px solid rgba(205, 189, 167, 0.76);
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+    background: transparent;
+  }
+
+  .week-picker.active:not([open]) summary {
+    border-color: rgba(205, 189, 167, 0.76);
+    background: transparent;
+    color: var(--muted);
+  }
+
+  .week-picker-menu {
+    top: calc(100% + 7px);
+    right: auto;
+    left: 0;
+    max-height: min(60vh, 360px);
+    overflow-y: auto;
+  }
+
+  .week-bar .app-nav,
+  body:not([data-active-view="planner"]):not([data-active-view="recipe-detail"]) .week-bar .app-nav {
+    grid-column: 2;
+    grid-row: 1;
+    display: grid;
+    grid-template-columns: minmax(88px, 0.85fr) minmax(116px, 1.1fr) minmax(92px, 0.9fr);
+    justify-self: stretch;
+    width: 100%;
+    min-height: 44px;
+    gap: 0;
+    overflow: visible;
+    border: 1px solid var(--line-strong);
+    border-radius: var(--radius-md);
+    background: rgba(255, 253, 247, 0.78);
+  }
+
+  .week-bar .app-nav button,
+  body:not([data-active-view="planner"]):not([data-active-view="recipe-detail"]) .week-bar .app-nav button {
+    position: relative;
+    min-height: 44px;
+    border: 0;
+    border-right: 1px solid rgba(205, 189, 167, 0.76);
+    border-radius: 0;
+    background: transparent;
+    padding-inline: 10px;
+  }
+
+  .week-bar .app-nav .workflow-primary:first-child,
+  .week-bar .app-nav .workflow-primary:nth-child(2),
+  .week-bar .app-nav .workflow-secondary {
+    border-radius: 0;
+  }
+
+  .week-bar .app-nav .workflow-primary:first-child {
+    border-radius: var(--radius-md) 0 0 var(--radius-md);
+  }
+
+  .week-bar .app-nav .workflow-secondary {
+    margin-left: 0;
+    border-right: 0;
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  }
+
   .recommended-grid,
   .recipe-grid:not(.list-view) {
     grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  body[data-active-view="recipe-detail"] .week-bar {
+    grid-template-columns: auto minmax(0, 1fr);
+  }
+
+  body[data-active-view="recipe-detail"] .week-bar .app-nav {
+    grid-column: 2;
+    grid-row: 1;
   }
 }
 
@@ -4748,40 +4764,43 @@ body[data-active-view="recipe-detail"] .week-bar .app-nav {
 
   .week-bar,
   body:not([data-active-view="planner"]):not([data-active-view="recipe-detail"]) .week-bar {
-    position: sticky;
-    top: 0;
-    gap: 6px;
-    margin-bottom: 10px;
-    padding: 6px;
-    border-radius: var(--radius-md);
+    grid-template-columns: clamp(104px, 36%, 126px) minmax(0, 1fr);
+    min-height: 58px;
   }
 
-  .week-context {
-    gap: 5px;
+  .selected-week-status {
+    padding-inline: 7px;
   }
 
-  .week-tabs button,
-  body:not([data-active-view="planner"]):not([data-active-view="recipe-detail"]) .week-tabs button,
   .week-picker summary {
-    min-height: 42px;
+    width: 44px;
+    min-width: 44px;
+    justify-content: center;
+    padding: 0;
+  }
+
+  .week-picker summary #weekPickerLabel,
+  .week-picker summary .week-picker-caret,
+  .week-bar .app-nav .workflow-secondary-label {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
   }
 
   .week-bar .app-nav,
   body:not([data-active-view="planner"]):not([data-active-view="recipe-detail"]) .week-bar .app-nav {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto;
-    min-height: 44px;
-    border: 0;
-  }
-
-  .week-bar .app-nav button,
-  body:not([data-active-view="planner"]):not([data-active-view="recipe-detail"]) .week-bar .app-nav button {
-    min-height: 44px;
-    border-right: 1px solid var(--line-strong);
+    grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr) 44px;
   }
 
   .week-bar .app-nav .workflow-secondary {
-    margin-left: 6px;
-    padding-inline: 9px;
+    width: 44px;
+    min-width: 44px;
+    padding: 0;
   }
 
   .week-bar .app-nav .workflow-secondary .nav-icon-wrap {
@@ -4804,19 +4823,14 @@ body[data-active-view="recipe-detail"] .week-bar .app-nav {
   }
 
   body[data-active-view="recipe-detail"] .week-bar .app-nav {
-    display: grid;
     grid-column: 2;
     grid-row: 1;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
+    grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr) 44px;
     width: 100%;
   }
 
   body[data-active-view="recipe-detail"] .week-bar .app-nav button {
     padding-inline: 7px;
-  }
-
-  body[data-active-view="recipe-detail"] .week-bar .app-nav .workflow-secondary {
-    margin-left: 5px;
   }
 
   .workflow-back {
@@ -4905,15 +4919,66 @@ body[data-active-view="recipe-detail"] .week-bar .app-nav {
 }
 
 @media (max-width: 360px) {
+  .week-bar,
+  body:not([data-active-view="planner"]):not([data-active-view="recipe-detail"]) .week-bar {
+    grid-template-columns: 104px minmax(0, 1fr);
+    gap: 5px;
+  }
+
+  .selected-week-status {
+    display: flex;
+    align-items: center;
+    padding-inline: 6px;
+  }
+
+  .selected-week-status .selected-week-relative {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+  }
+
+  .selected-week-status strong {
+    font-size: 11px;
+    line-height: 15px;
+  }
+
+  .week-bar .app-nav,
+  body:not([data-active-view="planner"]):not([data-active-view="recipe-detail"]) .week-bar .app-nav {
+    grid-template-columns: minmax(49px, 0.75fr) minmax(72px, 1.1fr) 44px;
+  }
+
+  body[data-active-view="recipe-detail"] .week-bar .app-nav {
+    grid-template-columns: minmax(45px, 0.7fr) minmax(68px, 1.05fr) 44px;
+  }
+
   .week-bar .app-nav button,
   body:not([data-active-view="planner"]):not([data-active-view="recipe-detail"]) .week-bar .app-nav button {
     gap: 4px;
-    padding-inline: 6px;
-    font-size: 11px;
+    padding-inline: 4px;
+    font-size: 12px;
   }
 
-  .week-bar .app-nav .workflow-secondary {
-    padding-inline: 7px;
+  .week-bar .app-nav .workflow-primary .nav-icon {
+    display: none;
+  }
+
+  .week-bar .app-nav .workflow-primary .nav-icon-wrap {
+    width: 0;
+    height: 0;
+  }
+
+  #groceryNavButton .nav-icon-wrap {
+    position: static;
+  }
+
+  #groceryNavButton .nav-count-badge:not([hidden]) {
+    top: -7px;
+    right: 2px;
   }
 
   .recipe-list-row {
