@@ -3733,6 +3733,24 @@ body:not([data-active-view="planner"]):not([data-active-view="recipe-detail"]) .
 
 .nav-icon-wrap { position: relative; display: inline-grid; width: 23px; height: 23px; place-items: center; line-height: 0; }
 .nav-count-badge { display: none; }
+.nav-count-badge:not([hidden]) {
+  position: absolute;
+  top: -7px;
+  right: -10px;
+  display: grid;
+  min-width: 18px;
+  height: 18px;
+  place-items: center;
+  padding: 0 5px;
+  border: 2px solid rgba(255, 252, 246, 0.98);
+  border-radius: 999px;
+  background: var(--tomato);
+  color: #fff;
+  font-size: 10px;
+  line-height: 1;
+  font-weight: 800;
+  font-variant-numeric: tabular-nums;
+}
 
 /* Shared control metrics keep equivalent actions visually and mechanically aligned. */
 .utility-nav button,
@@ -4321,6 +4339,105 @@ body:not([data-active-view="planner"]):not([data-active-view="recipe-detail"]) .
   backdrop-filter: none;
 }
 
+.utility-menu {
+  position: relative;
+  flex: 0 0 auto;
+}
+
+.utility-menu summary {
+  display: inline-flex;
+  min-width: 104px;
+  min-height: 40px;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-md);
+  background: rgba(255, 253, 247, 0.88);
+  color: var(--ink);
+  padding: 0 11px;
+  font-size: var(--text-sm);
+  font-weight: 700;
+  list-style: none;
+  cursor: pointer;
+}
+
+.utility-menu summary::-webkit-details-marker {
+  display: none;
+}
+
+.utility-menu summary:hover,
+.utility-menu[open] summary {
+  border-color: var(--herb);
+  background: var(--card);
+}
+
+.utility-menu.has-active-item summary {
+  border-color: rgba(52, 91, 66, 0.58);
+  color: var(--herb-dark);
+}
+
+.utility-menu-icon {
+  display: grid;
+  width: 18px;
+  gap: 3px;
+}
+
+.utility-menu-icon span {
+  display: block;
+  width: 18px;
+  height: 2px;
+  border-radius: 2px;
+  background: currentColor;
+}
+
+.utility-menu-caret {
+  width: 14px;
+  height: 14px;
+  transition: transform 160ms ease;
+}
+
+.utility-menu[open] .utility-menu-caret {
+  transform: rotate(180deg);
+}
+
+.utility-menu .utility-nav {
+  position: absolute;
+  top: calc(100% + 7px);
+  right: 0;
+  z-index: 30;
+  display: grid;
+  width: 188px;
+  gap: 4px;
+  padding: 6px;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius-md);
+  background: rgba(255, 253, 247, 0.98);
+  box-shadow: 0 14px 32px rgba(75, 59, 39, 0.18);
+}
+
+.utility-menu .utility-nav button {
+  width: 100%;
+  min-height: 42px;
+  flex: none;
+  justify-content: flex-start;
+  border-color: transparent;
+  background: transparent;
+  padding-inline: 11px;
+}
+
+.utility-menu .utility-nav button:hover {
+  border-color: rgba(205, 189, 167, 0.72);
+  background: var(--cream);
+}
+
+.utility-menu .utility-nav button.active {
+  border-color: rgba(52, 91, 66, 0.32);
+  background: var(--sage);
+  color: var(--herb-dark);
+  box-shadow: none;
+}
+
 .week-bar,
 body:not([data-active-view="planner"]):not([data-active-view="recipe-detail"]) .week-bar {
   position: sticky;
@@ -4704,7 +4821,7 @@ body[data-active-view="recipe-detail"] .week-bar .app-nav {
     grid-column: 2;
     grid-row: 1;
     display: grid;
-    grid-template-columns: minmax(88px, 0.85fr) minmax(116px, 1.1fr) minmax(92px, 0.9fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     justify-self: stretch;
     width: 100%;
     min-height: 44px;
@@ -4736,6 +4853,11 @@ body[data-active-view="recipe-detail"] .week-bar .app-nav {
     border-radius: var(--radius-md) 0 0 var(--radius-md);
   }
 
+  .week-bar .app-nav .workflow-primary:last-child {
+    border-right: 0;
+    border-radius: 0 var(--radius-md) var(--radius-md) 0;
+  }
+
   .week-bar .app-nav .workflow-secondary {
     margin-left: 0;
     border-right: 0;
@@ -4758,6 +4880,22 @@ body[data-active-view="recipe-detail"] .week-bar .app-nav {
 }
 
 @media (max-width: 760px) {
+  .header-shell {
+    min-height: 58px;
+    align-items: center;
+    flex-direction: row;
+    padding-block: 7px;
+  }
+
+  .utility-menu summary {
+    min-width: 98px;
+    min-height: 44px;
+  }
+
+  .utility-menu .utility-nav {
+    width: 176px;
+  }
+
   .app-shell {
     padding-top: 8px;
   }
@@ -4794,7 +4932,7 @@ body[data-active-view="recipe-detail"] .week-bar .app-nav {
 
   .week-bar .app-nav,
   body:not([data-active-view="planner"]):not([data-active-view="recipe-detail"]) .week-bar .app-nav {
-    grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr) 44px;
+    grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
   }
 
   .week-bar .app-nav .workflow-secondary {
@@ -4825,7 +4963,7 @@ body[data-active-view="recipe-detail"] .week-bar .app-nav {
   body[data-active-view="recipe-detail"] .week-bar .app-nav {
     grid-column: 2;
     grid-row: 1;
-    grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr) 44px;
+    grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
     width: 100%;
   }
 
@@ -4949,11 +5087,11 @@ body[data-active-view="recipe-detail"] .week-bar .app-nav {
 
   .week-bar .app-nav,
   body:not([data-active-view="planner"]):not([data-active-view="recipe-detail"]) .week-bar .app-nav {
-    grid-template-columns: minmax(49px, 0.75fr) minmax(72px, 1.1fr) 44px;
+    grid-template-columns: minmax(49px, 0.75fr) minmax(72px, 1.1fr);
   }
 
   body[data-active-view="recipe-detail"] .week-bar .app-nav {
-    grid-template-columns: minmax(45px, 0.7fr) minmax(68px, 1.05fr) 44px;
+    grid-template-columns: minmax(45px, 0.7fr) minmax(68px, 1.05fr);
   }
 
   .week-bar .app-nav button,

@@ -58,6 +58,7 @@ const els = {
   selectedWeekRelative: document.querySelector("#selectedWeekRelative"),
   selectedWeekRange: document.querySelector("#selectedWeekRange"),
   weekPickerSummary: document.querySelector(".week-picker summary"),
+  utilityMenu: document.querySelector(".utility-menu"),
   plannerMealCount: document.querySelector("#plannerMealCount"),
   plannerWeekLabel: document.querySelector("#plannerWeekLabel"),
   plannerGroceryCount: document.querySelector("#plannerGroceryCount"),
@@ -100,7 +101,10 @@ initializeIconSprite();
 renderAll();
 syncRecipeRoute({ initial: true });
 
-document.querySelector("#printBtn").addEventListener("click", () => window.print());
+document.querySelector("#printBtn").addEventListener("click", () => {
+  els.utilityMenu?.removeAttribute("open");
+  window.print();
+});
 
 els.mealActionDialog.addEventListener("close", () => {
   document.body.classList.remove("meal-sheet-open");
@@ -113,7 +117,10 @@ els.mealActionDialog.addEventListener("close", () => {
 });
 
 document.querySelectorAll("[data-view-button]").forEach((button) => {
-  button.addEventListener("click", () => navigateToView(button.dataset.viewButton));
+  button.addEventListener("click", () => {
+    button.closest(".utility-menu")?.removeAttribute("open");
+    navigateToView(button.dataset.viewButton);
+  });
 });
 
 document.querySelectorAll("[data-view-jump]").forEach((button) => {
@@ -165,7 +172,7 @@ document.querySelectorAll("[data-section-filter]").forEach((button) => {
 });
 
 document.addEventListener("click", (event) => {
-  const activeDropdown = event.target.closest(".week-picker, .meal-menu");
+  const activeDropdown = event.target.closest(".week-picker, .meal-menu, .utility-menu");
   closeOpenDropdowns(activeDropdown);
   if (event.target.closest(".week-picker-menu button, .meal-menu button")) {
     activeDropdown?.removeAttribute("open");
@@ -324,7 +331,7 @@ document.addEventListener("click", (event) => {
 
 document.addEventListener("keydown", (event) => {
   if (event.key !== "Escape" || els.mealActionDialog.open) return;
-  const openDropdowns = [...document.querySelectorAll(".week-picker[open], .meal-menu[open]")];
+  const openDropdowns = [...document.querySelectorAll(".week-picker[open], .meal-menu[open], .utility-menu[open]")];
   const dropdown = openDropdowns.at(-1);
   if (!dropdown) return;
   event.preventDefault();
@@ -333,7 +340,7 @@ document.addEventListener("keydown", (event) => {
 });
 
 function closeOpenDropdowns(except = null) {
-  document.querySelectorAll(".week-picker[open], .meal-menu[open]").forEach((dropdown) => {
+  document.querySelectorAll(".week-picker[open], .meal-menu[open], .utility-menu[open]").forEach((dropdown) => {
     if (dropdown !== except) dropdown.removeAttribute("open");
   });
 }
@@ -390,6 +397,13 @@ function setView(viewName) {
     if (active) button.setAttribute("aria-current", "page");
     else button.removeAttribute("aria-current");
   });
+  const utilityMenuNavigation = activeNavigationView === "recipes" || activeNavigationView === "pantry";
+  els.utilityMenu?.classList.toggle("has-active-item", utilityMenuNavigation);
+  const utilityMenuSummary = els.utilityMenu?.querySelector("summary");
+  if (utilityMenuSummary) {
+    const currentOption = activeNavigationView === "recipes" ? "Recipes" : activeNavigationView === "pantry" ? "Catalog" : "";
+    utilityMenuSummary.setAttribute("aria-label", currentOption ? `Open options menu. Current section: ${currentOption}` : "Open options menu");
+  }
   document.body.dataset.activeView = viewName;
 }
 

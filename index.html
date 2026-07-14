@@ -14,10 +14,18 @@
           <img class="brand-logo" src="assets/rowta-logo.png" alt="Rowta">
         </a>
 
-        <nav class="utility-nav" aria-label="Global navigation">
-          <button type="button" data-view-button="pantry"><svg class="icon icon-control" aria-hidden="true" focusable="false"><use href="assets/rowta-icons.svg#icon-storefront-regular"></use></svg>Catalog</button>
-          <button id="printBtn" type="button"><svg class="icon icon-control" aria-hidden="true" focusable="false"><use href="assets/rowta-icons.svg#icon-printer-regular"></use></svg>Print</button>
-        </nav>
+        <details class="utility-menu">
+          <summary aria-label="Open options menu">
+            <span class="utility-menu-icon" aria-hidden="true"><span></span><span></span><span></span></span>
+            <span>Menu</span>
+            <svg class="icon utility-menu-caret" aria-hidden="true" focusable="false"><use href="assets/rowta-icons.svg#icon-caret-down-regular"></use></svg>
+          </summary>
+          <nav class="utility-nav" aria-label="Options menu">
+            <button type="button" data-view-button="recipes"><svg class="icon icon-control" aria-hidden="true" focusable="false"><use href="assets/rowta-icons.svg#icon-cooking-pot-regular"></use></svg><span>Recipes</span></button>
+            <button type="button" data-view-button="pantry"><svg class="icon icon-control" aria-hidden="true" focusable="false"><use href="assets/rowta-icons.svg#icon-storefront-regular"></use></svg><span>Catalog</span></button>
+            <button id="printBtn" type="button"><svg class="icon icon-control" aria-hidden="true" focusable="false"><use href="assets/rowta-icons.svg#icon-printer-regular"></use></svg><span>Print</span></button>
+          </nav>
+        </details>
       </div>
     </header>
 
@@ -48,10 +56,6 @@
           <button id="groceryNavButton" type="button" class="workflow-primary" data-view-button="groceries">
             <span class="nav-icon-wrap" aria-hidden="true"><svg class="icon nav-icon nav-icon-regular" focusable="false"><use href="assets/rowta-icons.svg#icon-basket-regular"></use></svg><svg class="icon nav-icon nav-icon-fill" focusable="false"><use href="assets/rowta-icons.svg#icon-basket-fill"></use></svg><span id="groceryNavBadge" class="nav-count-badge" hidden></span></span>
             <span class="nav-label">Groceries</span>
-          </button>
-          <button type="button" class="workflow-secondary" data-view-button="recipes" aria-label="Browse recipes">
-            <span class="nav-icon-wrap" aria-hidden="true"><svg class="icon nav-icon nav-icon-regular" focusable="false"><use href="assets/rowta-icons.svg#icon-cooking-pot-regular"></use></svg><svg class="icon nav-icon nav-icon-fill" focusable="false"><use href="assets/rowta-icons.svg#icon-cooking-pot-fill"></use></svg></span>
-            <span class="nav-label workflow-secondary-label">Recipes</span>
           </button>
         </nav>
       </section>
