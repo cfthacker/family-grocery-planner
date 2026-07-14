@@ -9,14 +9,6 @@ const catalogByIngredient = new Map(productCatalog.map((product) => [normalKey(p
 const storageKey = "weeknight-table-planner-v1";
 const recipeLibrary = (window.WeeknightTableData?.recipes || []).map(normalizeRecipeRecord);
 const recipeById = new Map(recipeLibrary.map((recipe) => [recipe.id, recipe]));
-const plannerMenuDescriptions = new Map([
-  ["beef-tacos-with-yellow-rice", "seasoned ground beef, yellow rice, crunchy and soft taco shells, shredded cheese, lettuce, and sour cream"],
-  ["chicken-piccata", "golden chicken cutlets, lemon-caper butter sauce, garlic, and silky strands of pasta"],
-  ["weeknight-chicken-fried-rice", "browned chicken, jasmine rice, egg, peas and carrots, scallions, and soy-garlic-ginger sauce"],
-  ["orecchiette-with-sausage-and-broccoli-rabe", "browned Italian sausage, broccoli rabe, orecchiette, and a buttery shallot pan sauce"],
-  ["steak-frites-with-air-fryer-fries", "seared steak, crisp frites, garlic butter, and a rich beef jus"],
-  ["pork-sausage-peppers-onions-skillet", "Italian pork sausage, sweet peppers, onions, garlic, tomato-balsamic sauce, and a crisp side salad"]
-]);
 const weeks = buildWeeks();
 let state = loadState();
 let recipeSearchText = "";
@@ -536,7 +528,7 @@ function renderDaySlot(slot, index, week) {
 function renderSlotRecipe(recipe, index) {
   const previousDay = index > 0 ? dayNames[index - 1] : "";
   const nextDay = index < dayNames.length - 1 ? dayNames[index + 1] : "";
-  const menuDescription = plannerMenuDescriptions.get(recipe.id) || recipe.overview || recipe.description || "";
+  const menuDescription = recipe.plannerDescription;
   return `
     <div class="slot-recipe" data-slot-recipe-id="${escapeAttr(recipe.id)}">
       <span class="drag-handle" draggable="true" data-drag-recipe="${escapeAttr(recipe.id)}" data-drag-day="${index}" aria-hidden="true">${iconMarkup("dots-six-vertical-regular")}</span>
@@ -2006,6 +1998,7 @@ function normalizeRecipeRecord(recipe) {
     id,
     title: recipe.title,
     shortTitle: recipe.shortTitle || recipe.title,
+    plannerDescription: recipe.plannerDescription,
     description: recipe.description || recipe.overview || "",
     minutes: recipe.minutes || 30,
     totalMinutes: recipe.totalMinutes || recipe.minutes || 30,

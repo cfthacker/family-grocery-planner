@@ -51,6 +51,9 @@
   --space-8: 40px;
   --control-sm: 32px;
   --control-md: 38px;
+  --control-lg: 44px;
+  --icon-sm: 16px;
+  --icon-md: 20px;
   --surface-flat: rgba(255, 253, 247, 0.72);
   --surface-card: var(--card);
   --surface-tinted: rgba(223, 232, 216, 0.42);
@@ -3909,8 +3912,91 @@ body:not([data-active-view="planner"]):not([data-active-view="recipe-detail"]) .
 .app-nav button.active .nav-icon-regular { display: none; }
 .app-nav button.active .nav-icon-fill { display: block; }
 
-.nav-icon-wrap { position: relative; display: inline-grid; place-items: center; }
+.nav-icon-wrap { position: relative; display: inline-grid; width: 23px; height: 23px; place-items: center; line-height: 0; }
 .nav-count-badge { display: none; }
+
+/* Shared control metrics keep equivalent actions visually and mechanically aligned. */
+.utility-nav button,
+.collection-row button,
+.filter-row button,
+.view-toggle button,
+.more-filters summary,
+.facet-check,
+.catalog-actions select,
+.facet-panel select,
+.search-box input,
+.recipe-action,
+.grocery-row button,
+.planner-toast button {
+  min-height: 36px;
+}
+
+.utility-nav button,
+.collection-row button,
+.filter-row button,
+.view-toggle button,
+.recipe-action,
+.grocery-row button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.recipe-card-title .recipe-title-button,
+.recipe-list-row .recipe-title-button {
+  display: flex;
+  min-height: var(--control-lg) !important;
+  align-items: center;
+  padding-block: 3px;
+  text-align: left;
+}
+
+.recipe-card-title {
+  align-items: center;
+}
+
+.recipe-card-title .recipe-action,
+.recipe-list-row .recipe-action {
+  min-height: 36px;
+  align-self: center;
+}
+
+.rating-control {
+  gap: 2px;
+}
+
+.rating-control button {
+  width: 30px;
+  height: 30px;
+  border-radius: 7px;
+  font-size: 17px;
+}
+
+.recipe-list-thumb-button {
+  min-height: var(--control-lg);
+}
+
+.meal-shift-button,
+.meal-menu summary {
+  width: 36px;
+  height: 36px;
+}
+
+.week-picker-menu button,
+.meal-action-close {
+  min-height: var(--control-lg);
+}
+
+.meal-action-close {
+  width: var(--control-lg);
+  height: var(--control-lg);
+  padding: 0;
+}
+
+.catalog-table-wrap:focus-visible {
+  outline: 3px solid rgba(201, 130, 67, 0.35);
+  outline-offset: 2px;
+}
 
 .meal-action-dialog {
   position: fixed;
@@ -4077,26 +4163,34 @@ body:not([data-active-view="planner"]):not([data-active-view="recipe-detail"]) .
 
 @media (max-width: 760px) {
   body {
-    padding-bottom: 84px;
+    padding-bottom: 0;
   }
 
   body[data-active-view="planner"] {
-    padding-bottom: 150px;
+    padding-bottom: 0;
   }
 
   .app-shell {
     padding-top: 8px;
   }
 
+  .recipe-detail-open .week-bar {
+    display: none;
+  }
+
   .week-bar,
   body:not([data-active-view="planner"]):not([data-active-view="recipe-detail"]) .week-bar {
-    display: block;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 7px;
     margin-bottom: 9px;
     padding: 7px;
     border-radius: var(--radius-md);
   }
 
   .week-context {
+    grid-column: 1;
+    grid-row: 1;
     display: grid;
     grid-template-columns: minmax(0, 1fr) auto;
     justify-self: stretch;
@@ -4151,28 +4245,31 @@ body:not([data-active-view="planner"]):not([data-active-view="recipe-detail"]) .
 
   .week-bar .app-nav,
   body:not([data-active-view="planner"]):not([data-active-view="recipe-detail"]) .week-bar .app-nav {
-    position: fixed;
-    left: 50%;
-    bottom: max(10px, env(safe-area-inset-bottom));
-    z-index: 60;
+    position: static;
+    grid-column: 1;
+    grid-row: 2;
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    width: min(calc(100% - 24px), 430px);
-    min-height: 58px;
-    transform: translateX(-50%);
-    border: 1px solid rgba(255, 255, 255, 0.72);
-    border-radius: 18px;
-    background: rgba(255, 250, 241, 0.84);
-    box-shadow: 0 10px 36px rgba(41, 35, 29, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.82);
-    backdrop-filter: blur(22px) saturate(1.18);
+    width: 100%;
+    min-height: var(--control-lg);
+    transform: none;
+    border: 1px solid rgba(205, 189, 167, 0.88);
+    border-radius: var(--radius-md);
+    background: rgba(255, 253, 247, 0.72);
+    box-shadow: none;
+    backdrop-filter: none;
   }
 
   .week-bar .app-nav button {
-    min-height: 56px;
-    padding: 4px 8px;
+    position: relative;
+    min-height: var(--control-lg);
+    padding: 0 8px;
     border: 0;
-    border-radius: 14px;
+    border-right: 1px solid rgba(205, 189, 167, 0.7);
+    border-radius: 0;
   }
+
+  .week-bar .app-nav button:last-child { border-right: 0; }
 
   .week-bar .app-nav button.active {
     background: rgba(223, 232, 216, 0.9);
@@ -4255,7 +4352,7 @@ body:not([data-active-view="planner"]):not([data-active-view="recipe-detail"]) .
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    min-height: 42px;
+    min-height: var(--control-lg);
     padding: 0 10px;
     border: 1px solid var(--line);
     border-radius: var(--radius-sm);
@@ -4292,25 +4389,41 @@ body:not([data-active-view="planner"]):not([data-active-view="recipe-detail"]) .
 }
 
 @media (max-width: 760px) {
-  body,
-  body[data-active-view="planner"] { padding-bottom: calc(86px + env(safe-area-inset-bottom)); }
+  .nav-count-badge:not([hidden]) { position: absolute; top: -7px; right: -10px; display: grid; place-items: center; min-width: 18px; height: 18px; padding: 0 5px; border: 2px solid rgba(255, 252, 246, 0.98); border-radius: 999px; background: var(--tomato); color: #fff; font-size: 10px; line-height: 1; font-weight: 800; font-variant-numeric: tabular-nums; }
 
-  body::after {
-    content: "";
-    position: fixed;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 50;
-    height: calc(112px + env(safe-area-inset-bottom));
-    pointer-events: none;
-    background: linear-gradient(180deg, rgba(243, 234, 220, 0) 0%, rgba(243, 234, 220, 0.7) 48%, rgba(243, 234, 220, 0.96) 100%);
+  .utility-nav button,
+  .collection-row button,
+  .filter-row button,
+  .view-toggle button,
+  .more-filters summary,
+  .facet-check,
+  .catalog-actions select,
+  .facet-panel select,
+  .search-box input,
+  .recipe-action,
+  .grocery-row button,
+  .recipe-list-thumb-button {
+    min-height: var(--control-lg);
   }
 
-  .week-bar .app-nav { min-height: 62px; border-color: rgba(255, 255, 255, 0.92); border-radius: 20px; background: rgba(255, 252, 246, 0.96); box-shadow: 0 -10px 30px rgba(41, 35, 29, 0.16), 0 12px 30px rgba(41, 35, 29, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.94); backdrop-filter: blur(24px) saturate(1.16); -webkit-backdrop-filter: blur(24px) saturate(1.16); isolation: isolate; }
-  .week-bar .app-nav button { position: relative; }
-  .week-bar .app-nav button.active { background: rgba(223, 232, 216, 0.96); color: var(--herb-dark); box-shadow: inset 0 0 0 1px rgba(47, 93, 70, 0.1); }
-  .nav-count-badge:not([hidden]) { position: absolute; top: -8px; right: -12px; display: grid; place-items: center; min-width: 18px; height: 18px; padding: 0 5px; border: 2px solid rgba(255, 252, 246, 0.98); border-radius: 999px; background: var(--tomato); color: #fff; font-size: 10px; line-height: 1; font-weight: 800; font-variant-numeric: tabular-nums; }
+  .rating-control button {
+    width: 36px;
+    height: 36px;
+    font-size: 18px;
+  }
+
+  .recipe-card-title .recipe-title-button,
+  .recipe-list-row .recipe-title-button {
+    min-height: var(--control-lg) !important;
+  }
+
+  .recipe-back-button,
+  .recipe-detail-primary,
+  .recipe-print-button,
+  .recipe-ingredient-toggle,
+  .meal-action-close {
+    min-height: var(--control-lg);
+  }
 
   .day-card { grid-template-columns: 50px minmax(0, 1fr); gap: 8px; min-height: 104px; padding: 8px; border-radius: 13px; }
   .day-card.empty { min-height: 68px; }
@@ -4330,7 +4443,7 @@ body:not([data-active-view="planner"]):not([data-active-view="recipe-detail"]) .
   .slot-recipe:hover { transform: none; }
   .add-recipe-tile { min-height: 68px; }
 
-  .planner-toast { bottom: calc(max(10px, env(safe-area-inset-bottom)) + 68px); width: min(calc(100% - 32px), 390px); }
+  .planner-toast { bottom: max(16px, env(safe-area-inset-bottom)); width: min(calc(100% - 32px), 390px); }
   .planner-toast span { min-width: 0; }
   .meal-action-dialog { width: min(100%, 560px); max-height: 78vh; margin: auto auto 0; }
 }
@@ -4375,8 +4488,7 @@ body:not([data-active-view="planner"]):not([data-active-view="recipe-detail"]) .
   .meal-action-dialog,
   .planner-toast,
   .slot-recipe-actions,
-  .drag-handle,
-  body::after {
+  .drag-handle {
     display: none !important;
   }
 

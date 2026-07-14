@@ -4,6 +4,7 @@ window.WeeknightTableData.recipes = [
   {
     "id": "beef-tacos-with-yellow-rice",
     "title": "Beef Tacos with Yellow Rice",
+    "plannerDescription": "Seasoned ground beef, yellow rice, crunchy and soft taco shells, shredded cheese, lettuce, and sour cream",
     "shortTitle": "Beef Tacos with Yellow Rice",
     "minutes": 25,
     "totalMinutes": 25,
@@ -514,6 +515,7 @@ window.WeeknightTableData.recipes = [
   {
     "id": "chicken-piccata",
     "title": "Chicken Piccata",
+    "plannerDescription": "Golden chicken cutlets, lemon-caper butter sauce, garlic, and silky strands of pasta",
     "shortTitle": "Chicken Piccata",
     "minutes": 35,
     "totalMinutes": 35,
@@ -991,6 +993,7 @@ window.WeeknightTableData.recipes = [
   {
     "id": "weeknight-chicken-fried-rice",
     "title": "Weeknight Chicken Fried Rice",
+    "plannerDescription": "Browned chicken, jasmine rice, egg, peas and carrots, scallions, and soy-garlic-ginger sauce",
     "shortTitle": "Weeknight Chicken Fried Rice",
     "minutes": 25,
     "totalMinutes": 25,
@@ -1513,6 +1516,7 @@ window.WeeknightTableData.recipes = [
   {
     "id": "orecchiette-with-sausage-and-broccoli-rabe",
     "title": "Orecchiette with Sausage and Broccoli Rabe",
+    "plannerDescription": "Browned Italian sausage, broccoli rabe, orecchiette, and a buttery shallot pan sauce",
     "shortTitle": "Orecchiette with Sausage and Broccoli Rabe",
     "minutes": 35,
     "totalMinutes": 35,
@@ -2083,6 +2087,7 @@ window.WeeknightTableData.recipes = [
   {
     "id": "steak-frites-with-air-fryer-fries",
     "title": "Steak Frites with Air-Fryer Fries",
+    "plannerDescription": "Seared steak, crisp frites, garlic butter, and a rich beef jus",
     "shortTitle": "Steak Frites with Air-Fryer Fries",
     "minutes": 30,
     "totalMinutes": 30,
@@ -2611,6 +2616,7 @@ window.WeeknightTableData.recipes = [
   {
     "id": "pork-sausage-peppers-onions-skillet",
     "title": "Pork Sausage, Peppers, and Onions Skillet",
+    "plannerDescription": "Italian pork sausage, sweet peppers, onions, garlic, tomato-balsamic sauce, and a crisp side salad",
     "shortTitle": "Pork Sausage, Peppers, and Onions Skillet",
     "minutes": 30,
     "totalMinutes": 30,
@@ -3344,6 +3350,7 @@ window.WeeknightTableData.recipes = [
   {
     "id": "teriyaki-chicken-and-broccoli-skillet",
     "title": "Teriyaki Chicken and Broccoli Skillet",
+    "plannerDescription": "Seared chicken, crisp-tender broccoli, jasmine rice, teriyaki sauce, garlic, and ginger",
     "shortTitle": "Teriyaki Chicken and Broccoli Skillet",
     "minutes": 25,
     "totalMinutes": 25,
@@ -3861,6 +3868,7 @@ window.WeeknightTableData.recipes = [
   {
     "id": "mediterranean-chicken-tomatoes-olives-feta",
     "title": "Mediterranean Chicken with Tomatoes, Olives, and Feta",
+    "plannerDescription": "Lemon-oregano chicken, rice, burst tomatoes, briny olives, feta, and cucumber",
     "shortTitle": "Mediterranean Chicken with Tomatoes, Olives, and Feta",
     "minutes": 35,
     "totalMinutes": 35,
@@ -4435,6 +4443,7 @@ window.WeeknightTableData.recipes = [
   {
     "id": "chicken-satay-rice-bowls",
     "title": "Chicken Satay Rice Bowls with Peanut Sauce and Carrot-Cucumber Slaw",
+    "plannerDescription": "Curry-marinated chicken, jasmine rice, creamy peanut sauce, and carrot-cucumber slaw",
     "shortTitle": "Chicken Satay Rice Bowls with Peanut Sauce and Carrot-Cucumber Slaw",
     "minutes": 35,
     "totalMinutes": 35,
@@ -5074,6 +5083,7 @@ window.WeeknightTableData.recipes = [
   {
     "id": "mini-meatballs-with-tomato-sauce-over-orzo",
     "title": "Mini Meatballs with Tomato Sauce Over Orzo",
+    "plannerDescription": "Tender mini beef meatballs, tomato sauce, wilted spinach, Parmesan, and buttery orzo",
     "shortTitle": "Mini Meatballs with Tomato Sauce Over Orzo",
     "minutes": 35,
     "totalMinutes": 35,
@@ -5644,6 +5654,7 @@ window.WeeknightTableData.recipes = [
   {
     "id": "ground-beef-sesame-noodles",
     "title": "Ground Beef Sesame Noodles",
+    "plannerDescription": "Browned ground beef, sesame-soy noodles, cucumber, carrots, scallions, and optional chili crisp",
     "shortTitle": "Ground Beef Sesame Noodles",
     "minutes": 25,
     "totalMinutes": 25,
@@ -6305,6 +6316,7 @@ window.WeeknightTableData.recipes = [
   {
     "id": "garlic-butter-chicken-with-green-beans-or-asparagus",
     "title": "Garlic-Butter Chicken with Green Beans or Asparagus",
+    "plannerDescription": "Golden chicken cutlets, green beans or asparagus, rice, garlic butter, lemon, and Parmesan",
     "shortTitle": "Garlic-Butter Chicken with Green Beans or Asparagus",
     "minutes": 30,
     "totalMinutes": 30,
@@ -6831,6 +6843,7 @@ window.WeeknightTableData.recipes = [
   {
     "id": "chicken-stir-fry-with-rice",
     "title": "Chicken Stir-Fry with Rice",
+    "plannerDescription": "Seared chicken, jasmine rice, broccoli, sweet peppers, scallions, and savory stir-fry sauce",
     "shortTitle": "Chicken Stir-Fry with Rice",
     "minutes": 30,
     "totalMinutes": 30,
@@ -7313,6 +7326,7 @@ window.WeeknightTableData.recipes = [
   {
     "id": "shortcut-spaghetti-and-meatballs",
     "title": "Shortcut Spaghetti and Meatballs",
+    "plannerDescription": "Tender meatballs, spaghetti, garlicky marinara, Parmesan, and a crisp side salad",
     "shortTitle": "Shortcut Spaghetti and Meatballs",
     "minutes": 30,
     "totalMinutes": 30,
@@ -7756,6 +7770,7 @@ window.WeeknightTableData.recipes = [
   {
     "id": "greek-lemon-chicken-one-pan-pasta",
     "title": "Greek Lemon Chicken One-Pan Pasta",
+    "plannerDescription": "Lemon-oregano chicken, creamy orzo, spinach, tomatoes, feta, and Kalamata olives",
     "shortTitle": "Greek Lemon Chicken One-Pan Pasta",
     "minutes": 35,
     "totalMinutes": 35,
@@ -8320,6 +8335,7 @@ window.WeeknightTableData.recipes = [
   {
     "id": "crispy-buffalo-chicken-with-side-salad-and-broccoli",
     "title": "Crispy Buffalo Chicken with Side Salad and Broccoli",
+    "plannerDescription": "Crisp panko chicken, tangy buffalo sauce, broccoli, fresh salad, and ranch or blue cheese dressing",
     "shortTitle": "Crispy Buffalo Chicken with Side Salad and Broccoli",
     "minutes": 35,
     "totalMinutes": 35,
@@ -8976,6 +8992,7 @@ window.WeeknightTableData.recipes = [
   {
     "id": "moroccan-style-chicken-and-couscous",
     "title": "Moroccan-Style Chicken & Couscous",
+    "plannerDescription": "Warm-spiced chicken thighs, fluffy couscous, carrots, chickpeas, dried fruit, lemon, and green olives",
     "shortTitle": "Moroccan-Style Chicken & Couscous",
     "minutes": 35,
     "totalMinutes": 35,
@@ -9616,6 +9633,7 @@ window.WeeknightTableData.recipes = [
   {
     "id": "asian-chicken-lettuce-cups-with-rice",
     "title": "Hoisin Chicken Lettuce Cups with Rice",
+    "plannerDescription": "Saucy hoisin chicken, rice, crisp lettuce cups, water chestnuts, carrots, and scallions",
     "shortTitle": "Hoisin Chicken Lettuce Cups with Rice",
     "minutes": 30,
     "totalMinutes": 30,
@@ -10235,6 +10253,7 @@ window.WeeknightTableData.recipes = [
   {
     "id": "pesto-tortellini-red-pepper-sauce",
     "title": "Pesto Tortellini in Red Pepper Sauce",
+    "plannerDescription": "Cheese tortellini, roasted red pepper cream sauce, basil pesto, spinach, garlic, and Parmesan",
     "shortTitle": "Pesto Tortellini in Red Pepper Sauce",
     "minutes": 25,
     "totalMinutes": 25,
@@ -10759,6 +10778,7 @@ window.WeeknightTableData.recipes = [
   {
     "id": "bang-bang-chicken-rice-bowls",
     "title": "Bang Bang Chicken Rice Bowls",
+    "plannerDescription": "Crisp chicken strips, rice, crunchy cucumber-cabbage slaw, scallions, and creamy sweet-chili sauce",
     "shortTitle": "Bang Bang Chicken Rice Bowls",
     "minutes": 30,
     "totalMinutes": 30,
@@ -11289,6 +11309,7 @@ window.WeeknightTableData.recipes = [
   {
     "id": "chicken-tostadas-refried-beans-guacamole",
     "title": "Chicken Tostadas with Refried Beans and Guacamole",
+    "plannerDescription": "Crunchy tostadas, seasoned chicken, refried beans, guacamole, lettuce, cheese, and fresh salsa",
     "shortTitle": "Chicken Tostadas with Refried Beans and Guacamole",
     "minutes": 25,
     "totalMinutes": 25,
@@ -11897,6 +11918,7 @@ window.WeeknightTableData.recipes = [
   {
     "id": "summer-pesto-pancetta-ravioli",
     "title": "Summer Pesto & Pancetta Ravioli",
+    "plannerDescription": "Cheese ravioli, crisp pancetta, zucchini, sweet corn, basil pesto, ricotta, and lemon",
     "shortTitle": "Summer Pesto & Pancetta Ravioli",
     "minutes": 30,
     "totalMinutes": 30,
@@ -12399,6 +12421,7 @@ window.WeeknightTableData.recipes = [
   {
     "id": "chicken-red-pepper-romesco-orzo-zucchini",
     "title": "Chicken & Red Pepper Romesco with Creamy Parmesan Orzo & Zucchini",
+    "plannerDescription": "Seared chicken, creamy Parmesan orzo, zucchini, smoky romesco, roasted peppers, and lemon",
     "shortTitle": "Chicken & Red Pepper Romesco with Creamy Parmesan Orzo & Zucchini",
     "minutes": 40,
     "totalMinutes": 40,
@@ -12998,6 +13021,7 @@ window.WeeknightTableData.recipes = [
   {
     "id": "mexican-style-beef-rice-bowls",
     "title": "Mexican-Style Beef Rice Bowls",
+    "plannerDescription": "Taco-seasoned beef, rice, sautéed peppers, corn, salsa, cheese, sour cream, and guacamole",
     "shortTitle": "Mexican-Style Beef Rice Bowls",
     "minutes": 30,
     "totalMinutes": 30,
@@ -13544,6 +13568,7 @@ window.WeeknightTableData.recipes = [
   {
     "id": "sweet-spicy-beef-noodles-bok-choy-carrots",
     "title": "Sweet & Spicy Beef Noodles with Bok Choy & Shredded Carrots",
+    "plannerDescription": "Saucy beef noodles, bok choy, carrots, scallions, gochujang, and savory black bean sauce",
     "shortTitle": "Sweet & Spicy Beef Noodles with Bok Choy & Shredded Carrots",
     "minutes": 25,
     "totalMinutes": 25,
@@ -14127,6 +14152,7 @@ window.WeeknightTableData.recipes = [
   {
     "id": "crispy-chicken-cutlets-with-quick-salad",
     "title": "Crispy Chicken Cutlets with Quick Salad",
+    "plannerDescription": "Crisp panko chicken cutlets, lemony salad greens, cherry tomatoes, and shaved Parmesan",
     "shortTitle": "Crispy Chicken Cutlets with Quick Salad",
     "minutes": 30,
     "totalMinutes": 30,
@@ -14644,6 +14670,7 @@ window.WeeknightTableData.recipes = [
   {
     "id": "cajun-chicken-pasta",
     "title": "Cajun Chicken Pasta",
+    "plannerDescription": "Cajun-spiced chicken, pasta, sweet peppers, mushrooms, scallions, and Parmesan cream sauce",
     "shortTitle": "Cajun Chicken Pasta",
     "minutes": 30,
     "totalMinutes": 30,
@@ -15188,6 +15215,7 @@ window.WeeknightTableData.recipes = [
   {
     "id": "chicken-marsala-over-egg-noodles",
     "title": "Chicken Marsala Over Egg Noodles",
+    "plannerDescription": "Golden chicken cutlets, egg noodles, mushrooms, parsley, and a savory Marsala pan sauce",
     "shortTitle": "Chicken Marsala Over Egg Noodles",
     "minutes": 30,
     "totalMinutes": 30,
@@ -15670,6 +15698,7 @@ window.WeeknightTableData.recipes = [
   {
     "id": "chinese-pepper-steak-with-microwave-rice",
     "title": "Chinese Pepper Steak with Microwave Rice",
+    "plannerDescription": "Seared sirloin, sweet peppers, red onion, tomatoes, soy-ginger sauce, and fluffy rice",
     "shortTitle": "Chinese Pepper Steak with Microwave Rice",
     "minutes": 30,
     "totalMinutes": 30,
@@ -16127,6 +16156,7 @@ window.WeeknightTableData.recipes = [
   {
     "id": "cacio-e-pepe-with-caesar-salad-kit",
     "title": "Cacio e Pepe with Caesar Salad Kit",
+    "plannerDescription": "Pecorino Romano, black pepper, silky spaghetti, and a crisp Caesar salad",
     "shortTitle": "Cacio e Pepe with Caesar Salad Kit",
     "minutes": 25,
     "totalMinutes": 25,
@@ -16487,6 +16517,7 @@ window.WeeknightTableData.recipes = [
   {
     "id": "chicken-leek-and-brown-rice-stir-fry",
     "title": "Chicken, Leek & Brown Rice Stir-Fry",
+    "plannerDescription": "Chicken, smoky chorizo, brown rice, leeks, sweet peppers, kale, and a soy-vinegar glaze",
     "shortTitle": "Chicken, Leek & Brown Rice Stir-Fry",
     "minutes": 20,
     "totalMinutes": 20,
@@ -16925,6 +16956,7 @@ window.WeeknightTableData.recipes = [
   {
     "id": "balsamic-garlic-chicken-with-potatoes",
     "title": "Balsamic Garlic Chicken with Potatoes",
+    "plannerDescription": "Golden chicken cutlets, baby potatoes, mushrooms, garlic, thyme, and balsamic pan sauce",
     "shortTitle": "Balsamic Garlic Chicken with Potatoes",
     "minutes": 30,
     "totalMinutes": 30,
@@ -17399,6 +17431,7 @@ window.WeeknightTableData.recipes = [
   {
     "id": "asian-beef-with-snow-peas-and-rice",
     "title": "Asian Beef with Snow Peas and Rice",
+    "plannerDescription": "Soy-ginger beef, crisp snow peas, garlic, rice, and a glossy stir-fry sauce",
     "shortTitle": "Asian Beef with Snow Peas and Rice",
     "minutes": 20,
     "totalMinutes": 20,
@@ -17878,6 +17911,7 @@ window.WeeknightTableData.recipes = [
   {
     "id": "chicken-tender-parmesan-with-angel-hair",
     "title": "Chicken Tender Parmesan with Angel Hair",
+    "plannerDescription": "Crisp chicken tenders, angel hair pasta, marinara, mozzarella, Parmesan, and parsley",
     "shortTitle": "Chicken Tender Parmesan with Angel Hair",
     "minutes": 25,
     "totalMinutes": 25,
@@ -18332,6 +18366,7 @@ window.WeeknightTableData.recipes = [
   {
     "id": "20-minute-sausage-and-pepper-ravioli-skillet",
     "title": "20-Minute Sausage & Pepper Ravioli Skillet",
+    "plannerDescription": "Sausage ravioli, sweet peppers, red onion, garlic, tomato sauce, provolone, and basil",
     "shortTitle": "20-Minute Sausage & Pepper Ravioli Skillet",
     "minutes": 20,
     "totalMinutes": 20,
@@ -18773,6 +18808,7 @@ window.WeeknightTableData.recipes = [
   {
     "id": "classic-shrimp-scampi-with-linguine",
     "title": "Classic Shrimp Scampi with Linguine",
+    "plannerDescription": "Garlicky shrimp, linguine, lemon, butter, parsley, and a white wine or chicken broth pan sauce",
     "shortTitle": "Classic Shrimp Scampi with Linguine",
     "minutes": 30,
     "totalMinutes": 30,

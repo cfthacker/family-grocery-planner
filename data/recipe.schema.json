@@ -4,7 +4,7 @@
   "title": "Rowta Recipe",
   "type": "object",
   "additionalProperties": false,
-  "required": ["id", "revision", "title", "overview", "minutes", "activeMinutes", "servings", "ingredientDetails", "ingredientComponentOrder", "stages"],
+  "required": ["id", "revision", "title", "plannerDescription", "overview", "minutes", "activeMinutes", "servings", "ingredientDetails", "ingredientComponentOrder", "stages"],
   "properties": {
     "id": {
       "type": "string",
@@ -17,6 +17,7 @@
     },
     "title": { "type": "string", "minLength": 1 },
     "shortTitle": { "type": "string", "minLength": 1 },
+    "plannerDescription": { "type": "string", "minLength": 40, "maxLength": 160, "pattern": "^[A-Z0-9]" },
     "overview": { "type": "string" },
     "minutes": { "type": "number", "minimum": 1 },
     "totalMinutes": { "type": "number", "minimum": 1 },

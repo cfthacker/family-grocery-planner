@@ -91,6 +91,10 @@ recipes.forEach((recipe) => {
   schemaErrors(recipe, recipeSchema).forEach((message) => addError(recipe.id || "<missing-id>", message));
   if (!kebabCase.test(recipe.id || "")) addError(recipe.id || "<missing-id>", "invalid recipe ID");
   if (!Number.isInteger(recipe.revision) || recipe.revision < 1) addError(recipe.id, "revision must be a positive integer");
+  if (!recipe.plannerDescription?.trim()) addError(recipe.id, "missing planner description");
+  if (recipe.plannerDescription !== recipe.plannerDescription?.trim()) addError(recipe.id, "planner description has leading or trailing whitespace");
+  if (!/^[A-Z0-9]/.test(recipe.plannerDescription || "")) addError(recipe.id, "planner description must begin in sentence case");
+  if ((recipe.plannerDescription || "").length > 160) addError(recipe.id, "planner description exceeds 160 characters");
   if (!recipe.overview?.trim()) addError(recipe.id, "missing overview");
   if (!Array.isArray(recipe.ingredientDetails) || !recipe.ingredientDetails.length) addError(recipe.id, "missing ingredient details");
   if (!Array.isArray(recipe.ingredientComponentOrder) || !recipe.ingredientComponentOrder.length) addError(recipe.id, "missing component order");
