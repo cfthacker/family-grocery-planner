@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Rowta</title>
     <link rel="icon" type="image/png" href="assets/rowta-mark.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
@@ -51,7 +54,7 @@
         <nav class="app-nav" aria-label="Selected week sections">
           <button type="button" class="active workflow-primary" data-view-button="planner">
             <span class="nav-icon-wrap" aria-hidden="true"><svg class="icon nav-icon nav-icon-regular" focusable="false"><use href="assets/rowta-icons.svg#icon-calendar-check-regular"></use></svg><svg class="icon nav-icon nav-icon-fill" focusable="false"><use href="assets/rowta-icons.svg#icon-calendar-check-fill"></use></svg></span>
-            <span class="nav-label">Week</span>
+            <span class="nav-label">Dinners</span>
           </button>
           <button id="groceryNavButton" type="button" class="workflow-primary" data-view-button="groceries">
             <span class="nav-icon-wrap" aria-hidden="true"><svg class="icon nav-icon nav-icon-regular" focusable="false"><use href="assets/rowta-icons.svg#icon-basket-regular"></use></svg><svg class="icon nav-icon nav-icon-fill" focusable="false"><use href="assets/rowta-icons.svg#icon-basket-fill"></use></svg><span id="groceryNavBadge" class="nav-count-badge" hidden></span></span>
@@ -76,13 +79,6 @@
 
         <div class="planner-layout">
           <section class="planner-main" aria-label="Weekly dinner plan">
-            <div class="section-heading section-band">
-              <div>
-                <p class="eyebrow">Weekly agenda</p>
-                <h2>Dinners by day</h2>
-              </div>
-            </div>
-
             <div id="unscheduledTray" class="unscheduled-tray"></div>
             <div id="daySlots" class="day-slots"></div>
           </section>
@@ -159,20 +155,6 @@
           </dl>
         </header>
 
-        <div class="view-toolbar" aria-label="Shopping list controls">
-          <div>
-            <p class="eyebrow">Shop by section</p>
-            <strong>Filter the list</strong>
-          </div>
-          <div class="filter-row compact" aria-label="Grocery section filter">
-            <button type="button" class="active" data-section-filter="all">All</button>
-            <button type="button" data-section-filter="Protein">Protein</button>
-            <button type="button" data-section-filter="Produce">Produce</button>
-            <button type="button" data-section-filter="Dairy">Dairy</button>
-            <button type="button" data-section-filter="Dry Goods">Dry goods</button>
-          </div>
-        </div>
-
         <div id="groceryDeliveries" class="grocery-deliveries"></div>
       </section>
 
@@ -197,7 +179,7 @@
                 <h2>Ingredients used across recipes</h2>
               </div>
             </div>
-            <p class="table-scroll-hint">Swipe to see recipe counts and typical quantities.</p>
+            <p class="table-scroll-hint">Recipe counts and typical quantities are shown with each ingredient.</p>
             <div id="ingredientCatalog" class="catalog-table-wrap" role="region" aria-label="Recipe-connected ingredient catalog" tabindex="0"></div>
           </section>
 

@@ -13,7 +13,6 @@ const recipeById = new Map(recipeLibrary.map((recipe) => [recipe.id, recipe]));
 const weeks = buildWeeks();
 let state = loadState();
 let recipeSearchText = "";
-let sectionFilter = "all";
 let recipePickDayIndex = null;
 let recipeVisibleCount = 12;
 let recipeSortMode = "recommended";
@@ -161,14 +160,6 @@ els.recipeSort?.addEventListener("change", () => {
   recipeSortMode = els.recipeSort.value;
   clearActiveCollection();
   renderRecipes();
-});
-
-document.querySelectorAll("[data-section-filter]").forEach((button) => {
-  button.addEventListener("click", () => {
-    sectionFilter = button.dataset.sectionFilter;
-    document.querySelectorAll("[data-section-filter]").forEach((item) => item.classList.toggle("active", item === button));
-    renderGroceries();
-  });
 });
 
 document.addEventListener("click", (event) => {
@@ -954,6 +945,8 @@ function renderRecipeDetail(recipe) {
   const ingredients = recipe.ingredientDetails || [];
   const returnLabel = recipeReturnView === "planner" ? "Back to week" : "Back to recipes";
   const ingredientGroups = groupRecipeIngredients(ingredients, stages, recipe);
+  const workflowBack = document.querySelector(".workflow-back");
+  if (workflowBack) workflowBack.textContent = returnLabel;
 
   els.recipeDetail.innerHTML = `
     <article class="recipe-detail-article">
@@ -1321,9 +1314,8 @@ function renderGroceries() {
 }
 
 function renderDelivery(delivery) {
-  const filtered = sectionFilter === "all" ? delivery.items : delivery.items.filter((item) => item.section === sectionFilter);
-  const grouped = groupBySection(filtered);
-  const total = filtered.reduce((sum, item) => sum + (item.status === "have" ? 0 : item.estimatedCost), 0);
+  const grouped = groupBySection(delivery.items);
+  const total = delivery.items.reduce((sum, item) => sum + (item.status === "have" ? 0 : item.estimatedCost), 0);
 
   return `
     <section class="delivery-card ${escapeAttr(delivery.id)}" style="--delivery-accent: ${deliveryAccent(delivery.id)}">
@@ -1335,7 +1327,7 @@ function renderDelivery(delivery) {
         </div>
         <strong>$${total.toFixed(2)}</strong>
       </header>
-      ${filtered.length ? sectionOrder.map((section) => renderGrocerySection(section, grouped.get(section) || [])).join("") : `<p class="empty-state">No grocery items for this filter.</p>`}
+      ${delivery.items.length ? sectionOrder.map((section) => renderGrocerySection(section, grouped.get(section) || [])).join("") : `<p class="empty-state">No grocery items in this delivery.</p>`}
     </section>
   `;
 }
@@ -1352,8 +1344,8 @@ function renderGrocerySection(section, items) {
             <p>${escapeHtml(item.quantityText)} - ${escapeHtml(item.genericIngredient)}</p>
             <span>${escapeHtml(item.recipes.join(", "))}</span>
           </div>
-          <button type="button" data-toggle-have="${escapeAttr(item.key)}">${item.status === "have" ? "Have" : "Need"}</button>
-          <em>${item.status === "have" ? "Pantry" : `$${item.estimatedCost.toFixed(2)}`}</em>
+          <button type="button" aria-pressed="${item.status === "have"}" aria-label="${item.status === "have" ? "Restore" : "Remove"} ${escapeAttr(item.recommendedProductName)}" data-toggle-have="${escapeAttr(item.key)}">${item.status === "have" ? "Restore" : "Remove"}</button>
+          <em>${item.status === "have" ? "Removed" : `$${item.estimatedCost.toFixed(2)}`}</em>
         </article>
       `).join("")}
     </div>
@@ -1382,10 +1374,10 @@ function renderIngredientCatalog(rows = ingredientCatalogRows()) {
       <tbody>
         ${rows.map((row) => `
           <tr>
-            <td><strong>${escapeHtml(row.name)}</strong></td>
-            <td><span class="catalog-section-badge tone-${escapeAttr(sectionTone(row.section))}">${escapeHtml(sectionLabel(row.section))}</span></td>
-            <td>${row.recipes.length}</td>
-            <td>${escapeHtml(row.quantity || "varies")}</td>
+            <td data-label="Ingredient"><strong>${escapeHtml(row.name)}</strong></td>
+            <td data-label="Section"><span class="catalog-section-badge tone-${escapeAttr(sectionTone(row.section))}">${escapeHtml(sectionLabel(row.section))}</span></td>
+            <td data-label="Recipes">${row.recipes.length}</td>
+            <td data-label="Typical need">${escapeHtml(row.quantity || "varies")}</td>
           </tr>
         `).join("")}
       </tbody>
